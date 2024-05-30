@@ -1,6 +1,23 @@
 :root {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: calc(0.5em + 1vm);
-    background-color: black;
-    color: gray;
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #709b90;
+    font-family:  Helvetica, Arial, sans-serif;
+}
+
+body * + * {
+    margin-top: 1.5em;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
 }

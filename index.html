@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="1_lib/css/reset.css" type="text/css">
-    <link rel="stylesheet" href="1_lib/css/main.css" type="text/css">
+    <link rel="stylesheet" href="style/css/baze.css" type="text/css">
+    <link rel="stylesheet" href="style/css/nav.css">
     <title>LinuxGik</title>
 </head>
 <body>
@@ -13,12 +13,13 @@
         <h1>Linuxgik</h1>
     </header>
     <nav>
-        <ul>
-          <li><a href="pages/mygit">Git</a></li>
-          <li><a href="pages/vim.html">Vim</a></li>
-          <li><a href="pages/lynx.html">Lynx</a></li>
-          <li><a href="pages/qemu.html">Qemu/KVM</a>
-          <li><a href="#">Контакты</a></li>
+        <ul class="site-nav">
+          <li><a href="pages/Programming">Программирование</a></li>
+          <li><a href="pages/Browsers/lynx.html">Браузеры</a></li>
+          <li><a href="pages/VirtualMachines/qemu.html">Виртуальные машины</a>
+          <li class="nav-right">
+            <a href="#">О нас</a>
+        </li>
         </ul>
     <aside>
         <article>
@@ -39,7 +40,7 @@
     <main>
         <articel>
             <h2>Мой софт</h2>
-            <p>Заметки - sticky <code>$] cargo install sticky</code>
+            <p>Заметки - sticky <code>$] cargo install sticky</code></p>
         </articel>
         <article>
             <h2>Vagrant</h2>

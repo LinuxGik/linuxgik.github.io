@@ -1,0 +1,29 @@
+:root {
+	box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+	box-sizing: inherit;
+}
+
+@font-face {
+	font-family: "mazda";
+	src: url(../fonts/Mazda.woff2);
+}
+
+body {
+	font-family: mazda;
+	background-color: black;
+	color: gray;
+}
+
+body * + * {
+	margin-top: 1.5em;
+}
+
+.container {
+	max-width: 1080px;
+	margin: 0 auto;
+}
