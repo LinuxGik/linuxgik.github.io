@@ -1,0 +1,28 @@
+- term: "Объявление"
+  definition:  "Состоит из свойства (color) и значения (black)"
+  example: "color: black"
+  details:
+    property: "color"
+    value: "black"
+  
+- term: "Блок объявлений"
+  definition: "Группа объявлений внутри фигурных скобок"
+  example: |
+    {
+    color: black;
+    font-family: Helvetica;
+    } 
+
+- term: "Селектор"
+  definition: "Указывает, к какому элементу HTML применяются стили (например, `body`)."
+
+- term: "Набор правил"
+  definition: "Состоит из селектора и блока объявлений."
+  example: |
+    body {
+        color: black;
+        font-family: Helvetica;
+    }
+
+- term: "@правила" 
+  definition: "Языковые конструкции, начинающиеся с символа @, такие как запросы @Importal или @media
