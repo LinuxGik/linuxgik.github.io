@@ -17,17 +17,8 @@ a:link {
     text-decoration: none;
 }
 
-a:visited {
-    color: rgb(3, 31, 21);
-}
 
-a:hover {
-    text-decoration: underline;
-}
 
-a:active {
-    color: rebeccapurple;
-}
 /* Подключение шрифтов */
 
 @font-face {
@@ -36,26 +27,20 @@ a:active {
 }
 
 @font-face {
+    font-family: "open";
+    src: url(../fonts/open-sans.woff2);
+}
+
+@font-face {
     font-family: "Larson";
     src: url(../fonts/Larson.woff2);
 }
 /* Основной цвет, фон, шрифт */
 body {
-    background-color: #f7eadf;
+    background-color: #fafafa;
     font-family: "Inter";
     font-size: 16px;
     line-height: 1.5;
     color: #333;
     margin: 0;
 }
-
-h1 {
-    background-color: rgb(207, 207, 2);
-    font-family: "Larson";
-    color: black;
-    font-size: 1.5em;
-}
-
-/* body * + * {
-    margin: 0;
-} */

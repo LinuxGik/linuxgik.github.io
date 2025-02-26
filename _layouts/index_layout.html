@@ -6,10 +6,15 @@
     <meta name="author" content="Linuxgik" />
     <meta name="description" content="Быстрый помощник в информационном мире. Мы ценим ваше время." />
     <meta name="keywords" content="Linux, Windows, CSS, PowerShell, настройка сервера, SSH, Apache, Nginx, Ruby, jekyll" />
-    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/navigation.css" type="text/css">
     <title>{{ page.title  | capitalize }} - LinuxGik</title>
 </head>
 <body>
+    {% include navigation.html %}
     {{ content }}
+    <footer>
+        <a href="https://www.w3.org/"><img src="/assets/images/brands/w3c-no-bars.svg" alt="Консорциум всемирной паутины"></a>
+    </footer>
 </body>
 </html>

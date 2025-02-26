@@ -1,0 +1,56 @@
+
+.lgik-nav-container {
+    display: flex;
+    padding-left: .5em;
+    background-color: darkgreen;
+}
+
+.lgik-nav-container > .lgik-menu-box {
+    margin-left: auto;
+}
+
+.lgik-nav-brandbox {
+    background-color: #000000;
+    color: white;
+}
+
+.lgik-menu-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.lgik-nav-second {
+    display: flex;
+}
+.lgik-nav-menu {
+    display: flex;
+    padding-left: .5em;
+    background-color: #000000;
+    list-style-type: none;
+    margin: 0;
+}
+
+.lgik-nav-menu > li {
+
+    margin-top: 0;
+}
+
+.lgik-nav-menu > li > a {
+    display: block;
+    padding: 3px 1em;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    font-family: "open";
+    font-size: 13px;
+
+}
+
+.lgik-nav-menu > li + li {
+    margin-left: auto;
+}
+
+
+.lgik-nav-search {
+    background-color: #000000;
+}
