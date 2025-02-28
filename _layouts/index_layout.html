@@ -11,8 +11,13 @@
     <title>{{ page.title  | capitalize }} - LinuxGik</title>
 </head>
 <body>
-    {% include navigation.html %}
-    {{ content }}
+    <header class="page-header">
+        {% include navigation.html %}
+        <h1 class="title">{{ page.h1 }}</h1>
+    </header>
+    <main>
+        {{ content }}
+    </main>
     <footer>
         <a href="https://www.w3.org/"><img src="/assets/images/brands/w3c-no-bars.svg" alt="Консорциум всемирной паутины"></a>
     </footer>
