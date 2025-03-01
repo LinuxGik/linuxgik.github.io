@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>LinuxGik/Web</title>
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+
+	<body>
+		<header>
+			<nav class="topnav">
+				    <a href="index.html">Home</a>
+                    <a href="apache.html">Apache</a>
+                    <a href="rsync.html">rsync</a>
+                    <a class="active" href="#webworck.html">Web</a>
+				    <a href="#abaut">About</a>
+			</nav>
+			<h1>LinuxGik/Web</h1>
+		</header>
+        <main>
+
+            <h2>Конвертация png в svg</h2>
+            <p>~]$ dnf install potrace</p>
+            <p>]$ convert stiven_Born.jpg stive_born.pnm</p>
+            <p>]$ potrace stive_born.pnm -s -o stive_born.svg</p>
+            <p>Готова svg но без цвета. Чтобы сохраить цвет ипортируем image.pnm в Inkscape и сохраняем в.svg </p>
+            <p>В Inkscape нужно подгнать размер страницы под изображение. Заходим в меню Файл-Свойства документа. Там нажимаем кнопку "Resize to content" </p>
+
+            <section>
+
+							<article>
+								<h2>Подсказки</h2>
+								<p>teg=css общее. (*) - универсальный селектор, предназначен для всех элемнтов на странице.
+								<pre><code>
+								:root {
+									box-sizing: border-box; /* --- применение к коренвому элементу.
+								}
+
+								*,
+								::before,
+								::after {
+									box-sizing: inherit;
+								}
+								</code></pre>
+                                <p>box-sizing по умолчанию content-box. content-box - размер контента. border-box - рамер всего бокса (контента, отступов и границ).</p>
+							</article>
+                <article>
+                    <h2>О дизайне веб-сайта</h2>
+                        <article>
+                            <h3>ВВЕДЕНИЕ</h3>
+                                <p>Люди не любят ждать когда страница долго грузиться.</p>
+                                <p>Для большинства Сеть это библиотека а не место для развлечений.</p>
+                                <p>Акцентироваться на информации а не на графике</p>
+                                <p>Дизайн должен быть простой, незаграмажденный, стандартизирован и помогать найти нужную информацию.</p>
+                                <p>Компановка страницы должна облегчать чтение.</p>
+                                <p>Без вычурной графики и мультимедиа.</p>
+                        </article>
+                        <article>
+                            <h3>ВОПРОС &mdash; ОТВЕТ</h3>
+                            <article>
+                                <h4>Что такое дизайн веб-сайта?</h4>
+                                    <p>
+                                        В первую очередь это дизайн ниформации. Это такая организация контента, чтобы можно
+                                        было легко найти и прочитать нужные сведения.
+                                    </p>
+                            </article>
+                            <article>
+                                <h4>Что в основном, делают люди в Сети?</h4>
+                                    <p>Ищут информацию а потом читают ее.</p>
+                            </article>
+                            <p>
+                                В дизайне веб-сайта нужно избегать чрезмерно изощренных цветовых схем, мелких шрифтов,
+                                непродуманную компановку страницы.
+                            </p>
+                        </article>
+                        <article>
+                            <h3>ЧТО НУЖНО ДЕЛАТЬ</h3>
+                                <h4>Дизайн с ориентацией на читателя</h4>
+                                <p>Ориентироваться нужно на запросы посетителей, на то зачем люди пришли на ваш сайта.
+                                    Помните, человек который зашел на ваш сайт:
+                                    <ul>
+                                        <li>хочет найти какую-то информацию;</li>
+                                        <li>будет читать <i>по диагонали</i>, быстро пермещаться с одного фрагмента текста на другой;</li>
+                                        <li>обычно огрнаничен во времени и ему непонравиться долго ждать загрузку страницы;</li>
+                                        <li>иногда настроен скептически из-за своего предыдущего отрицательного опыта, ожидая увидеть
+                                            массу безполезного материала.
+                                        </li>
+                                    </ul>
+                                </p>
+                        </article>
+
+                </article>
+                <article>
+                    <h2>Подкючение шрифта</h2>
+                    <p>
+                        <code>@font-face { font-family: "myFont"; src: url("myFont.woff"); }</code> - указывает шрифты для загрузки.
+                        Размещаем его в начале css-кода.
+                    </p>
+                    <p>Теперь его можно использовать. <code>html {font-family: "myFont", "Bitstream Vera Serif", serif;}</code></p>
+                    <p>Так можно подключать несколько шрифтов, но для каждого надо создвать свой @font-face</p>
+                    <a href="https://developer.mozilla.org/ru/docs/Learn/CSS/Styling_text/Web_fonts">более подробно тут.</a>
+                    <p>Скачать нужный формат Гугловых шрифтов можно
+                        <a href="https://google-webfonts-helper.herokuapp.com/fonts"> https://google-webfonts-helper.herokuapp.com/fonts</a> <br />
+                        Еще можно попробовать поискать шрифты <a href="https://fontstorage.com/ru/">https://fontstorage.com/ru/</a>
+                     </p>
+                        <article>
+                            <h3>Про woff2</h3>
+                            <p>
+                                Работа со шрифтами. Мне помогла программ FontForge. <a href="https://fontforge.org/en-US/">Перейти на
+                                сайт FontForge</a>
+                            </p>
+                            <p><a href="https://www.w3.org/TR/WOFF2/">Перейти на сайт W3C чтобы просмотреть пецификацию woff2</a></p>
+                        </article>
+                </article>
+                <article>
+                    <h2>Познавательные ресуры</h2>
+                        <ul>
+                            <li>
+                                <a href="https://developer.mozilla.org/ru/">MDN Web Docs</a> - на сегодня
+                                 будем считать это за сымый авторитетный источник.
+                            </li>
+                            <li><a href="https://doka.guide/">Дока</a> - пожалуй лучшая шпаргалка.</li>
+                            <li><a href="https://code.mu/ru/">code.mu</a> - можно взглянуть</li>
+                        </ul>
+                </article>
+								<article>
+									<h2>Мои расширения для Atom</h2>
+										<ul>
+											<li><b>atom-live-serve</b> - живой сервер</li>
+											<li><b>font-preview</b> - показывает шрифты</li>
+											<li><b>file-icons</b> - иконки</li>
+											<li><b>pigments</b> - показывает цвета в css-коде</li>
+										</ul>
+								</article>
+            </section>
+        </main>
+    </body>
+</html>

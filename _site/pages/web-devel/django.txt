@@ -1,0 +1,75 @@
+Установка виртульного окружения
+$ python3 -m venv name
+Запуск виртуального окружение
+$ source .name/bin/activate
+Выход 
+$ deactivete
+(name)$ pip install django
+Список команд ядра
+$ django-admin
+Список команд ядра
+$ django-admin
+Список команд ядра
+$ django-admin
+
+Создать сайт (проект)
+$ django-admin startprojeet dkdl
+$ django-admin
+Запускаем сервер
+$ python3 manage.py runserve 4000 - можно не укзывать порт
+Создать приложение 
+dkdl/$ python3 manage.py startaap index
+Зарегестрировать приложение
+vim dkdk/dkdl/settings.py
+добавить в список INSTALLED_APPS 
+Можно просто прописать 'index' Джанго обращаясь к этому пакету index, находит в нем
+файл apps.py и обращается к классу IndexConfig
+Лучше прописать 'index.apps.IndexConfig'
+
+Создадим обработчик главной страницы сайта. Для этого нужно определеть представление
+это страницы. Представалния можно релизовывать функциями или классами
+Все представления прописываются в файлу dkdl/index/views.py Прописываем в нем функцию 
+представлени для нашей страницы
+def index_name(request):
+    return HttpResponse("Страница приложения index")
+В начале файла импортируем функцию
+from django.http import HttpResponse
+
+Теперь нужно связать эту функцию с url
+В пакете конфигурации файл urls.py
+добавим в список 
+urlpatterns
+маршурут 
+path('index/', index_name),
+Теперь надо импортировать функцию index_name
+Над urlpatterns прописываем
+from index.views import index_name
+
+Добавляем фунцию include чтобы можно было без проблем импортировать приложени
+В пакете конфигурации в файле urls.py вместо from index.views import index_name
+вызываем функцию include
+from django.urls import path, include
+в urlpatterns
+path('index/', include('index.urls')), Передаем путь к файлу в котором буду маршруты приложения
+в index/ создаем файл urls.py
+Содержимое файла:
+1) импортируем стандартную функцию path
+from django.urls import path
+2) импортируем все функии представления из пакет index
+from .views import *
+3) определяем коллекцию маршрутов
+urlpattrns = [
+path('', index_name),
+]
+
+path('cats/<int:catid>/', categories),
+Перемную сatid добавить в функцию представления, там г
+def categories(request, catid):
+    return HttpResponse(f"<h1>Категории</h1><p>{catid}")
+типы 
+str любая не пустая строка, исключая '/'
+int положительное число
+slug -слаг, т.е латиница ASCII таблицы
+uuid цифры, малые латинские, дефис
+path любая не пустая строка
+

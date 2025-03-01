@@ -1,0 +1,107 @@
+1) Ускорить работу dnf
+Добавить две строчки в конце файла /etc/dnf/dnf.conf
+____________________________
+fastestmirror=True
+max_parallel_downloads=10
+____________________________
+2) подключить RPM Fusion
+https://rpmfusion.org/Configuration
+
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+3) Кодеки
+group install multimedia sound-and-video
+
+4/ flatpak
+https://flatpak.org/setup/Fedora
+
+5) Cистема обращается к fedoraproject.org каждые 5 минут
+С целью сохранения приватности возможно отключить это поведение.
+sudo dnf remove NetworkManager-config-connectivity-fedora
+sudo systemctl restart NetworkManager.service
+
+Подстраиваем Gnome
+Перезагружать оболочку ALT+F2 там набираем r и вводим
+Немоного раскрасим гномовский терминал
+https://github.com/Gogh-Co/Gogh - качаем, распаковываем, переходим в распакованый архив, в Gogh-master/themes/ - тут запускаем bash-скрипт нужной раскраски. 
+
+flatpak install flathub com.mattjakeman.ExtensionManager
+
+sudo dnf install gnome-tweaks
+
+На сайт Gnome-look скачиваем нужные темы и иконки. Создаем в домашней директории пользователя папки “.themes” и “.icons” куда и распаковываем скачанные темы и иконки. 
+но достаточно установить из терминала dnf install yaru-theme
+
+Немоного раскрасим гномовский терминал
+https://github.com/Gogh-Co/Gogh - качаем, распаковываем, переходим в распакованый архив, в Gogh-master/themes/ - тут запускаем bash-скрипт нужной раскраски. 
+
+Шрифты
+
+sudo dnf install jetbrains-mono-fonts-all - эти из терминала ставить. 
+mkdir ~/.fonts
+fc-cache -f -v - эта командо типо-того что перечитывает кеш шрифтов. в общем без вредная. она занесет эту папку ~/.fonts к себе в кеш, как я понял. Наверно у нее прописано 
+заносить в кеш к себе определенные пути.
+https://fonts.google.com/specimen/Ubuntu
+В гуглефонтс качаем шрифт убунту, распаковываем архив и все фалы с .ttf перебрасываем в ~/.fonts
+далее в гноме-твике меняем шрифты на шрифты ubuntu. будет так как на снимке 1.
+В мазиле в настройках тоже можно поменять шрифты на убуновские
+
+Расширения
+Adds AppIndicator KStatusNotifierItem Support - трей
+User Themes
+freen - показывает температру в системе
+vitalis - инфа о использовании железа в реальтайме
+Bring Out Submenu Of Power Off.. зделает раскрытым меню выклчить	
+
+DNF
+https://dnf.readthedocs.io/en/latest/index.html
+Информация о пакетах
+dnf info foo - информация о пакете
+Чтобы отобразить информацию обо всех доступных пакетах, как установленных, так и доступных из репозитория, используйте следующую команду:
+dnf repoquery package_name --info
+Sound input Output ..... чтобы менять выбор между наушникамили или колонками
+
+
+ dnf repoquery ––requires ––resolve <имя_пакета>
+	Вывод списка пакетов, которые необходимы для удовлетворения зависимостей
+
+Снапшоты
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

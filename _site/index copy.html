@@ -17,43 +17,83 @@
 				<li><a href="pages/web-devel.html">Веб-разработка</a></li>
 				<li><a href="textide.html" title="Текстовый редакторы">Текстовые редакоторы/IDE</a></li>
 				<li><a href="webworck.html" title="E-бизнес">E-Бизнес</a></li>
-				<li><a href="/pages/programmer.html">Программирование</a></li>
-				<li><a href="/pages/my_notes.html">Мои записки</a></li>
 			</ul>
+			<form>
+				<input type="search" name="q" placeholder="Search query">
+				<input type="submit" value="Go!">
+			  </form>
 		</nav>	
-		
+		<p>Вы находитесь на главной странице портала</p>	
 		<header>
 			<p>Популяризатор GNU Linux</p>
 			<h1>Справочный портал в мире информационных технологий</h1>
 		</header>
 	<main>
-		<p>Вы находитесь на главной странице портала</p>	
-    <section >
-		<article> <!--Карта сайта-->
-			<h2>Карта сайта</h2>
-		</article><!--Закрытие Карта сайта-->
-		<article class="article-box"> <!--rsync-->
-			<h2>rsync</h2>
-			<p>Должна быть установлена на всех машинах.</p>
-			<p>В <span class="rsync">rsync</span> всегда, сначала указываем <span class="rsync">источник</span>, а потом <span class="rsync">место назначения</span>, т.е сначало что копируем, а потом куда копируем.<br>
-			Всегда используйте <span class="rsync">параметр -nv перед прогоном.</span> rsync может натворить огромную головную боль если что то не так сделать.</p>
-<!-- h3 "Завершающий слеш"--> <h3>Завершающий слеш /</h3> 
-				<p>Источник<span class="sync2"> без завершающего слеша скопирует сам каталог </span> /path/dir в удаленный каталог /dest_dir :<br>
-				<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a /path/dir user@host:dest_dir</code></p>
-				<p>Путь к каталогу источнику <span class="sync2">с косой чертой в конце </span>скопирует <span class="sync2">не сам каталог</span> /path/dir, а все содержимое в удаленный каталог dest_dir</span> :<br>
-				<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a path/dir/ user@host:dest_dir</code></p>
-<!--Cl h3 "Завершающий слеш"-->
-<!--h3 Небольшая инструкция по синхронизации--> <h3>Небольшая инструкция по синхронизации</h3> 
-				<p>1. Сихронизируем локальный каталог с удаленным сервером:<br>
-				<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" html/ user@host:html/</code><br>
-				прим: -e "ssh -p 7967" указывает коннектиться по определенному порту.</p>
-				<p>2. На удаленной машине синхронизируем каталоги:<br>
-				<code class="code-box"><span style="color: #ef2929;font-weight: bold;">remote</span>]<span style="color:royalblue;">$</span> rsync -a html/ /var/www/html/</code></p>
-<!--Cl h3 Небольшая инструкция по синхронизации-->
-<!--h3 Исключить каталог из операции переноса--> <h3>Исключить каталог из операции переноса</h3> 
-				<p><code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/</code></p>
-<!--CL h3 Исключить каталог из операции переноса-->
-		</article> <!-- закрытие rsync-->
+    	<section >
+			<article>
+				<h2>Карта сайта</h2>
+					
+			</article>
+			<article class="article-box"> <!--rsync-->
+				<h2>rsync</h2>
+				<p>
+					Должна быть установлена на всех машинах.
+				</p>
+				<p>
+					В 
+					<span class="rsync">
+						rsync
+					</span> 
+					всегда, сначала указываем 
+					<span class="rsync">
+						источник
+					</span>
+					, а потом 
+						<span class="rsync">
+							место назначения
+						</span>
+					, т.е сначало что копируем, а потом куда копируем.<br>
+					Всегда используйте 
+					<span class="rsync">
+						параметр -nv перед прогоном.
+					</span>
+					rsync может натворить огромную головную боль если что то не так сделать.
+				</p>
+					<h3>Завершающий слеш /</h3>
+					<p>
+						Источник<span class="sync2"> без завершающего слеша скопирует сам каталог </span> /path/dir в удаленный каталог /dest_dir :
+					</p>
+					<code class="code-box">
+						<span style="color: #3bd11c;font-weight: bold;">
+							local
+						</span>]
+						<span style="color:royalblue;">
+							$
+						</span>
+					 	rsync -a /path/dir user@host:dest_dir
+					</code>
+					<p>Путь к каталогу источнику <span class="sync2">с косой чертой в конце </span>скопирует <span class="sync2">не сам каталог</span> /path/dir, а все содержимое
+						в удаленный каталог dest_dir</span> :
+					</p>
+					<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a path/dir/ user@host:dest_dir
+					</code>
+					<!-- h3 "Завершающий слеш"-->
+						<h3>Небольшая инструкция по синхронизации</h3>
+							<p>1. Сихронизируем локальный каталог с удаленным сервером:
+								<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" html/ user@host:html/
+								</code>
+								<br>прим: -e "ssh -p 7967" указывает коннектиться по определенному порту.
+							</p>
+							<p>2. На удаленной машине синхронизируем каталоги:
+								<code class="code-box"><span style="color: #ef2929;font-weight: bold;">remote</span>]<span style="color:royalblue;">$</span> rsync -a html/ /var/www/html/
+								</code>
+							</p>
+						<h3>Исключить каталог из операции переноса</h3>
+							<p><code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" --exclude 
+									'res/header' html/ user@host:html/
+								</code>
+							</p>
+			</article> <!-- закрытие rsync-->
 
 			<article class="article-box"> 
 				<h2>Команда scp</h2>
@@ -92,15 +132,13 @@
 							<li>Далее нужно обновить политику SeLinux чтобы разрешить использование этого порта:
 								<ul>
 									<li><code>~]# yum install policycoreutils-python-utils</code></li>
-									<li><code>~]# semanage port -a -t ssh_port_t -p tcp 2233</code></li>
-									<li><code>~]# semanage port -l | grep ssh</code></li>
+									<li><code>~]# semanage port -a -t ssh_port_t -p tcp #номер</code></li>
 								</ul>
 							</li>
 							<li>Открываем порт в firewall
 								<ul>
-									<li># firewall-cmd --add-port 2233/tcp</li>
+									<li># firewall-cmd --add-port #номер/tcp</li>
 									<li># firewall-cmd --runtime-to-permanent</li>
-									<code># firewall-cmd --reload</code>
 								</ul>
 							</li>
 						</ul>
@@ -108,24 +146,9 @@
 						<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>
 							ssh -p 2233 username@ip_address
 					   	</code>	
-						<p>или можно ставить в конце <code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>
-							ssh username@ip_address -p 2233
-					   	</code></p>
 						<!--h3 "2. Настройка SSH"-->
-						<h3>3. Установка web-серевера Apache</h3><!--Установка web-серевера Apache-->
-							<ul>
-								<li><code>~]# yum install <i>httpd</i></code></li>
-								<li><code>~]$ sudo systemctl enable httpd --now</code></li>
-								<li><code>~]# firewall-cmd --zone=public --add-service=http --permanent</code></li>
-								<li><code>~]# firewall-cmd --reload</code></li>
-							</ul>
-						<p>Готово</p>
-						<!--Установка web-серевера Apache-->
-						<h3>4. Настройка записей DNS</h3><!--h3 Настройка записей DNS-->
-						<p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
-						<!--h3 Настройка записей DNS-->
-						</article> <!--close Инструкция по настройке сервера.-->
-			<article class="article-box"> <!--Как использовать ключи ssh-->
+				</article> <!--close Инструкция по настройке сервера.-->
+			<article class="article-box">
 				<h2>Как использовать sss-ключи</h2>
 					<p>
 						Команда <code>~] $ssh-keygen</code> - помещает сгенерированные ключи <b>id_rsa</b> 
@@ -136,8 +159,18 @@
 						пару ключей.
 						Обязательно выставляем этой паре ключей нужные права <code>~]$ chmod 600 id_rsa  id_rsa.pub </code>
 					</p>
-					<p>Добавит открытый ключ на удаленный хост: <br> <code>~]$ ssh-copy-id user_name@host_name</code><br>Открытые ключи заисываются в файл ~/.ssh/authorized_keys</p>
-			</article> <!--close Как использовать sss-ключи-->
+			</article> <!--Как использовать sss-ключи-->
+					
+			<article class="article-box">
+				<h2>Инструкция по уcтановке web-серевера Apache</h2>
+					<ul>
+						<li><code>~]# yum install <i>httpd</i></code></li>
+						<li><code>~]$ sudo systemctl enable httpd --now</code></li>
+						<li><code>~]# firewall-cmd --zone=public --add-service=http --permanent</code></li>
+						<li><code>~]# firewall-cmd --reload</code></li>
+					</ul>
+					<p>Готово</p>
+			</article> <!--Инструкция по уcтановке web-серевера Apache-->
 		</section>
 				<a href="https://www.w3.org/">Перейти на главную страницу W3C Консорциум всемирной паутины. </a>	
 		</div>	<!--Close middle-box <= body-box-->

@@ -1,0 +1,32 @@
+Index: _includes/navigation.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"lgik-nav-container\">\r\n\r\n    <div class=\"lgik-nav-brandbox\">\r\n        <p>LinuxGik</p>\r\n    </div>\r\n\r\n    <div class=\"lgik-menu-box\">\r\n        <nav>\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n        </nav>\r\n\r\n        <nav class=\"lgik-nav-second\">\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n            <form class=\"lgik-nav-search\">\r\n                <input type=\"search\" name=\"q\" placeholder=\"Search query\">\r\n                <input type=\"submit\" value=\"Go!\">\r\n            </form>\r\n        </nav>\r\n    </div>\r\n\r\n</div>\r\n
+===================================================================
+diff --git a/_includes/navigation.html b/_includes/navigation.html
+--- a/_includes/navigation.html	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/_includes/navigation.html	(date 1740787537429)
+@@ -1,11 +1,11 @@
+-<div class="lgik-nav-container">
++<div class="flex"> <!-- flex -->
+ 
+-    <div class="lgik-nav-brandbox">
++    <div class="lgik-nav-brandbox titel-nav">
+         <p>LinuxGik</p>
+     </div>
+ 
+     <div class="lgik-menu-box">
+-        <nav>
++        <nav class="titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+@@ -14,7 +14,7 @@
+             </ul>
+         </nav>
+ 
+-        <nav class="lgik-nav-second">
++        <nav class="lgik-nav-second titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>

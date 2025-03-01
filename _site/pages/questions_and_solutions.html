@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HVS</title>
+</head>
+<body>
+    <header>
+        <h1>Решения</h1>
+    </header>
+    <main>
+        <article>
+            <h2>Возникшая трудность</h2>
+                <p>Система: Windows. WSL забыл пароль пользователя.</p>
+            <h2>Решение</h2>
+                <p>Заходим под root: <code>wsl --user root</code> и сбрасываем пароль</p>
+        </article>
+        <article>
+
+        <h2>Трудность</h2>
+        <p>Система: GNU/LINUX Ubuntu. yt-dlp не скаичивает. Выводит следующие ошибки:</p>
+            <pre>
+                <code>
+                Traceback (most recent call last):
+                    File "/usr/bin/yt-dlp", line 6, in <module>
+                    from pkg_resources import load_entry_point
+                    File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 3254, in <module>
+                    def _initialize_master_working_set():
+                    File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 3237, in _call_aside
+                    f(*args, **kwargs)
+                    File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 3266, in _initialize_master_working_set
+                    working_set = WorkingSet._build_master()
+                    File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 584, in _build_master
+                    ws.require(__requires__)
+                    File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 901, in require
+                    needed = self.resolve(parse_requirements(requirements))
+                    File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 787, in resolve
+                    raise DistributionNotFound(req, requirers)
+                pkg_resources.DistributionNotFound: The 'brotli' distribution was not found and is required by yt-dlp
+                </code>
+            </pre>
+        <h2>Решение</h2>
+        <code>apt install python3-brotli</code>
+        </article>
+        <article>
+            <h2>Трудность</h2>
+                <p>Нужно скачать плейлист с Ютуба в MP3</p>
+            <h2>Решение</h2>
+                <code>yt-dlp -f 'ba' -x --audio-format mp3 https://www.youtube.com/watch?v=1La4Qz</code>
+        </article>
+				<article>
+                <h2>Консольный браузер lynx не переходит по ссылкам.</h2>
+                    <p>
+                        Детальное описание проблемы: Разрабатываю сайт в VSCode. Через live-server все сыслки работают, но через бразер Lynx ссылки не открывается, выдает
+                        ошибку "Внимание: ошибка доступа к документу".
+                    </p>
+                    <p>Возможное решение: Открыть lynx c портом live-servera. <code>~] lynx 127.0.0.1:5500/index.html</code></p>
+            </article>
+            <article>
+                <h2>Как только в директории изменяется файл, он должен быть автоматически скопирован в другую директорию.</h2>
+                    <p>
+                        Детальное описание проблемы: Возникла необходимость, после любого изменения файлов в директории, копировать эти изменения в другую деректорию
+                        для резервного хранения изменений.
+                    </p>
+            </article>
+                <h2>В Ubuntu 22.04 LTS возникла проблема с установкой плагинов в neo-vim</h2>
+                    <p>
+                        Описание: установил nvim, создал файл ~/.config.nvim/init.vim. <a href="#">Перейти по ссылки чтобы
+                        посмотреть содержание файла init.vim</a>, перезапускаю и сразу получаю первую ошибку 
+                        <i>[vim-plug] `git` executable not found. Most commands will not be available. To suppress this message, 
+                        prepend `silent!` to `call plug#begin(...)`.</i> 
+                    </p>
+                    <p>Решение: <code>~$ apt install git</code> Оказывается на Ubunta 22.04 он не установлен. Проблема решена установкой git</p>
+                <h2></h2>
+                <h2>Терминал Foot выдает ошибки при запуске:
+                    <p>После установки работает без ошибок. Когда добвил файл 
+
+
+                    </p>
+                    <p><code>erro: .config/foot/foot.ini:38: [environment]: invalid section name: environment</code>
+                        <code>error: .config/foot/foot.ini:183: [text-bindings]: invalid section name: text-bindings</code>
+                    <p>
+                    <p>Мое решение закоментировать эти строки. Ошибки пропали после этого.</p>
+                </h2>
+
+
+    </main>   
+</body>
+</html>

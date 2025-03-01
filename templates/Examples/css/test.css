@@ -1,0 +1,39 @@
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+html {
+    background-color: aquamarine;
+}
+
+header {
+    background-color: bisque;
+}
+body {
+    background-color: blue;
+    font-family:"open-sans-v34-latin_cyrillic-regular";
+    font-size: 14px;
+    line-height: 1.428;
+    color: #333;
+    margin: 0;
+}
+
+
+.main {
+    display: flex;
+    border-radius: .5em;
+    background-color: #fafafa;
+}
+
+.sidebar {
+    width: 50%;
+    padding: 1.5em;
+    background-color: #fafafa;
+    border-radius: .5em;
+}

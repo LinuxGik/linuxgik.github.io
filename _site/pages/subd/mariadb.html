@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux.subd.MariaDB</title>
+    <link rel="stylesheet" href="/css/styles.css" type="text/css"/>
+</head>
+<body>
+   <header>
+    <h1>MariaDB</h1>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Главная</a> </li>
+            <li><a href="../linux.html">GNU/LINUX</a></li>
+            <li><a href="util.html">Утилиты</a></li>
+        </ul>    
+    </nav>
+   </header> 
+   <p>MariaDB - форк от MySQL. Развивается полностью самостоятельно.</p>
+   <main>
+    <section>
+        <article>
+            <h2>Установка и настройка MariaDB</h2>
+                <p>Для установки потребуются пакеты:</p>
+                <ul> 
+                    <li>mariadb</li>
+                    <li>mariadb-server (можно установить этот пакет, он подтянет все зависимости</li>
+                </ul>
+                <p>Служба:</p>
+                <ul>
+                    <li>mariadb.service</li>
+                </ul>
+                <p>После установки службу надо запустить и настроить на автоматический запуск при входе в систему</p>
+                <code>sudo systemctl enable mariadb.service --now</code>
+                <p>Впринципе, после этого уже можно приступать к работе. Но рекомендуется перед тем как приступать к работе с MariaDB выполнить ее первоначальную настройку: </p>
+                <p>Безопастность:</p>
+                <ul>
+                    <li>Команда: <b>mysql_secure_installation</b></li>
+                    <li>Аспекты безопастности</li>
+                        
+                    <ul>
+                            <li>Установить пароль для учетной записи root. (по умолчнию его нет)</li>
+                            <li>Удалить анонимных пользователей.</li>
+                            <li>Запретить удаленное подключение под учетной записью root.</li>
+                        </ul>
+                </ul>
+                <h3>Запускаем mysql_secure_installation</h3>
+                    <code> sudo mysql_secure_installation</code>
+                    <p>Это мастер, он будет спрашивать:</p>
+                    <ul>
+                        <li>Установить пароль root? Да</li>
+                        <li>Remove anonymous users? Удалить анонимных пользователей? Да</li>
+                        <li>Disallow root login remotely? Запретить root подключаться удаленно? Да</li>
+                        <li>Remove test database and access to it? Удалить тестовые БД? Да</li>
+                        <li>Reload privilege tables now? Перезапустить таблицу привелегий? Да</li>
+                    </ul>
+                <h3>Примеры работы</h3>
+                    <p>Можно работать при помощи утилиты mysql</p>
+                    <code>$ mysql -u root -p</code>
+                    <p><code>MariaDB [(none)]> show databases;</code> - смотрим какие есть базы данных</p>
+                    <p>Создать базу данных <code>MariaDB [(none)]> create database demodb;</code></p>
+                    <p>Подключиться к БД <code>MariaDB [(none)]> use demodb;</code></p>
+                    <p>Просматреть таблицы <code>MariaDB [demodb]> show tables;</code></p>
+                    <p>Создать таблицу <code>MariaDB [demodb]> create table demotab (col01 int primary key, col02 nvarchar(50));</code></p>
+                    <p>Показать структуру таблицы <code>MariaDB [demodb]> describe demotab;</code></p>
+                    <p>Заносим значения в таблицу <code>MariaDB [demodb]> insert into demotab values (1, 'MariaDB') (2, 'PostgresSQL');</code></p>
+                    <p>Выбрать все из таблицы (просмотреть информацию которая в таблице) <cod>MariaDB [demodb]> select * from demotab;</cod></p>
+            <h2>Настройка MariaDB</h2>
+                <p>MariaDB настраиваеться при помощи конфигурационных файлов.</p>
+                <ul>
+                    <li>Основной конфигурационный файл:</li>
+                        <ul>
+                            <li>/etc/my.cnf.d/mariadb-server.cnf</li>
+                        </ul>
+                    <li>Основная секция</li>
+                        <ul>
+                            <li>[mysqld]</li>
+                        </ul>
+                    <li>Популярные директивы</li>
+                        <ul>
+                            <li>bind-address - на каком адресе должна прослушивать соединения БД</li>
+                            <li>skip-networking - отключает поддержку сети БД</li>
+                            <li>port - позволяет задать порт</li>
+                        </ul>
+                </ul>
+                <h3>Примеры</h3>
+                <p>В секции [mysqld] пропишем: bind-address=10.0.0.55 </p>
+                <p>Указываем ip-адресс на ктором MariaDB должна прослушивать соединения. Т.е. если у сервера пять сетевых интерфейсов, 20 ip-адресов, работать
+                    MariaDB будет только на указаном.
+                </p>
+                <p>Смотрим что сейчас слушает mariadb: <code># ss -tupln | grep mariadb</code> </p>
+        </article>
+        <article id="article-h2">
+            <h2>ALTER TABLE</h2>
+                <p>Добавление, изменение, удаление столбцов таблицы. А так же переименование таблицы</p>
+                <article id="article-h3">
+                    <h3>Добавление столбцов в таблицу</h3>
+                        <p>Синтаксис</p>
+                            <div id="syntaxSQL">
+                                <code>
+                                    ALTER TABLE table_name</br>
+                                    ADD new_column_name datatype</br>
+                                    [ FIRST | AFTER column_name ];
+                                </code>
+                            </div>
+                            <p>
+                                FIRST | AFTER column_name
+                                Необязательный атрибут. Сообщает MariaDB, где в таблице создать столбец. Если этот параметр не указан, новый столбец будет 
+                                добавлен в конец таблицы.
+                            </p>
+                        <p>Пример</p>
+                            <code>  
+                                ALTER TABLE slova
+                                ADD columtest varchar(40)
+                                AFTER col02;
+                            </code>
+                            <p>В таблицу slova добавляет столбец с именем columtest, после столбца col02</p>
+                </article>
+                    <article id="article-h4">
+                        <h4>Добавить несколько столбцов</h4>
+                            <p>Синтаксис</p>
+                                <div id="syntaxSQL">
+                                    <code>
+                                        ALTER TABLE table_name
+                                        ADD new_column_name column_datetype
+                                        [ FIRST | AFTER column_name ],
+                                        ADD new_column_name column_datatype
+                                        [ FIRST | AFTER column_name ],
+                                        ..
+                                        ;
+                                    </code>
+                                </div>
+                                <p>Если надо добавить сразу несколько столбцов, то добавляем их через запятую.</p>
+                    </article>
+                <article id="article-h3">
+                    <h3>Изменение типа данных существующего столбца</h3>
+                        <p>Синтаксис</p>
+                        <div dir="syntaxSQL">
+                            <code>
+                                ALTER TABLE table_name
+                                MODIFY column_name column_definition
+                                [ FIRST | AFTER column_name ],
+
+  MODIFY column_name column_definition
+
+    [ FIRST | AFTER column_name ],
+
+  ..
+
+;
+                            </code>
+                        </div>
+                        <p>Необязательные атрибуты FIRST | AFTER можно использовать чтобы изменить место столбца в таблице.</p>
+                        <p>Пример</p>
+                        <p>Переместим столбец columtest c типом данных varchar(40) после столбца сol02</p>
+                        <code>  
+                            ALTER TABLE slova
+                            MODIFY columtest varchar(40)
+                            AFTER col02;
+                        </code>
+
+
+                </article>
+        </article>
+    </section>
+   </main>
+</body>
+</html>

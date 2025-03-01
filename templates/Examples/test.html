@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>LinuxGik</title>
+		<link rel="stylesheet" href="css/test.css" type="text/css">
+	</head>
+
+	<body>
+		<header>
+			<h1>LinuxGik</h1>
+			<nav class="topnav">
+				<ul>
+					<li><a class="active" href="#index.html">Home</a></li>
+        			<li><a href="apache.html">Apache</a></li>
+					<li><a href="rsync.html">rsync</a></li>
+					<li><a href="webworck.html">Web</a></li>
+					<li><a href="dnf.html">Linux</a></li>
+					<li><a href="#abaut">About</a></li>
+				</ul>
+			</nav>	
+		</header>
+		<div class="container">
+		<main>
+            <section class="main">
+                <article class="sidebar">
+                    <h2>Инструкция по синхронизации /var/www/html</h2>
+                        <p>Предпосылки: rsync должна быть установлена на всех машинах.</p>
+                        <ul>
+                            <li><code>@local ~]$ rsync -a -e "ssh -p 7967" html/ user@host:html/</code></li>
+                            <li>на сервере синхронизируем каталоги: <code>remote ~]$ sudo rsync -a html/ /var/www/html/</code> </li>
+                        </ul>
+                        <p>Вода: Сколько это занимает времени? С того момена как вы внесли измениния у себя в студии, до момента 
+                            публикации на сервере, проходит не больше 20 секунд. Все очень быстро. Можно назвать это реал-тайм.
+                        </p>
+                </article>
+                <article class="sidebar">
+                    <h2>Команда scp</h2>
+                        <p><dfn>scp</dfn> - копирует файлы между хостами в Сети. Работает подобно команде <i>cp</i></p>
+                        <p>
+                            Примеры:
+                            <ul>
+                                <li><b>Файл</b> с удаленного хоса к себе в текущию дерикторию - <code>~]$ scp user@host:path_file path_copy_past</code></li>
+                                <li><b>Каталог</b> c удаленного хоста через <b>другой порт</b> - <code>~]$ scp -r -P 2871 user@host:path_file path_copy_past</code></li>
+                            </ul>
+                            Внимание: для scp порт указываеться с большой P
+                        </p>
+                </article>
+            </section>
+        </main>
+    
+</body>
+</html>

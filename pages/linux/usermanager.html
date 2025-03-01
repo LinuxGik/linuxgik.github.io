@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GNU/Linux</title>
+        <link rel="stylesheet" href="/css/styles.css" type="text/css"/>
+    </head>
+    <body>
+        <header>
+            <h1>Управление пользователями и правами доступа</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Главная</a> </li>
+                <li><a href="util.html">Утилиты</a></li>
+                <li><a href="ssh.html">ssh</a></li>
+                <li><a href="serverSetupInstructions.html">Инстркция по настройке сервера</a></li>
+                <li><a href="subd/index-subd.html">Базы данных</a></li>
+                <li><a href="qemu-kvm.html">Qemu/KVM</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section>
+                <h2>Права доступа</h2>
+                    <div style="margin-top: 25px; margin-bottom: 25px; border: solid; padding: 5px 50px 25px; ">
+                        <p><b>Режим файла</b></p>
+                        <img src="/images/svg/test.svg" width= 20%; height= auto; alt="Тут изображение: режим файла состоит из 10 элементов. Первый элемент обозначает тип файла,
+                        остальные девять объеденены в группы. всего три группы. первая группа из трех элементов - права владельца, вторая группа - парава группы.
+                        третия - права остальных">
+                    </div>
+                    <table>
+                        <caption>Таблица обозначение прав доступа</caption>
+                        <thead>
+                            <tr>
+                                <th>Обозначение</th>
+                                <th>Описание для файла</th>
+                                <th>Описание для каталога</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>r</td>
+                                <td>файл доступен для <b>чтение</b></td>
+                                <td>каталоге доступен для <b>просмотра</b> содержимого</td>
+                            </tr>
+                            <tr>
+                                <td>w</td>
+                                <td>файл доспупен для <b>записи</b></td>
+                                <td>каталог доступен для <b>создания и удаления</b> фалов</td>
+                            </tr>
+                            <tr>
+                                <td>x</td>
+                                <td><b>исполняемый</b> файл (можно запустить его как программу)</td>
+                                <td>позволяет <b>обращаться</b> к файлам внутри каталога</td>
+                            </tr>
+                            <tr>
+                                <td>&mdash;</td>
+                                <td colspan="2">ничего не обозначает</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <article .code>
+                        <p>Вывести права доступа в цифрах:</p>
+                        <pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~]$ stat -c %a /media/sf_Shared/</pre>
+                        <pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">777</pre>
+                    </article>
+                    <article .code>
+                        <p>Смена владельца файла. Команда <strong>chown</strong></p>
+                        <div class="note">
+                            <p>Изменить владельца файла/каталога может только суперпользователь root</p>
+                        </div>
+                        <pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">~]$ ls -l file_name.txt</pre>
+                        <pre style="margin-bottom: 0; margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">~]$ -rw-r--r--. 1 marina marina 144 ноя  7 21:49 file_name.txt</pre>
+                        <pre style="border-top: 0; margin-top: 0; margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;"><b>~]$ sudo chown bob file_name.txt</b></pre>
+                        <pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">~]$ -rw-r--r--. 1 bob marina 144 ноя  7 21:49 file_name.txt</pre>
+                    </article>
+                    <article .code>
+                        <p>Изменить группу файла/каталога. Команда <strong>chgrp</strong></p>
+                        <div class="note">
+                            <p>Изменить группу может владелец файла, но только на ту к которой он сам принадлежит.</p>
+                        </div>
+                        <pre style="margin-bottom: 0; border-bottom:none; padding-bottom:0.8em;">marina@fedora~]$ ls -l file_name.txt</pre>
+                        <pre style="margin-bottom: 0; margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">marina@fedora~]$ -rw-r--r--. 1 marina <b>wheel</b> 144 ноя  7 21:49 file_name.txt</pre>
+                        <pre style="margin-top: 0; margin-bottom: 0; border-top: 0; border-bottom:none; padding-bottom:0.8em;">marina@fedora~]$ groups</pre>
+                        <pre style="margin-bottom: 0; margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">marina@fedora~]$ marina</pre>
+                        <pre style="margin-top: 0; margin-bottom: 0; border-top: 0; border-bottom:none; padding-bottom:0.8em;"><b>marina@fedora~]$ chgrp marina file_name.txt</b></pre>
+                        <pre style="margin-top: 0; border-top-style:dashed; padding-top: 0.8em;">marina@fedora~]$ -rw-r--r--. 1 marina <b>marina</b> 144 ноя  7 21:49 file_name.txt</pre>
+                    </article>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Linuxgik">
+	<meta name="description" content="Быстрый помошник в информационом мире. Мы ценим ваше время.">
+	<title>LinuxGik/Веб-разработка</title>
+	<link rel="stylesheet" href="../css/style.css" type="text/css">
+	
+</head>
+<body>
+	<div class="body-box"> <!--body-box flexbox-->
+		<div class="middle-box">
+			<nav>
+				<ul class="site-nav"> <!--flexbox-->
+					<li><a href="../index.html">Главная</a>
+					<li><a href="servera.html" title="Веб-сервера">Веб-сервера</a></li>
+					<li><a href="linux.html" title="GNU Linux">GNU Linux</a></li>
+					<li><a href="web-devel.html">Веб-разработка</a></li>
+					<li><a href="textide.html" title="Текстовый редакторы">Текстовые редакоторы/IDE</a></li>
+					<li><a href="webworck.html" title="E-бизнес">E-Бизнес</a></li>
+					<li><a href="programmer.html">Программирование</a></li>
+					<li><a href="my_notes.html">Мои записки</a></li>
+				</ul>
+			</nav>
+			<header>			
+				<h1>Веб-разработка</h1>
+					<p>Подменю раздела:
+						<ul>
+							<li><a href="../index.html">На главную</a></li>
+							<li><a href="web-devel/html.html">Про HTML</a></li>
+							<li><a href="web-devel/grant.html">Про CSS</a></li>
+						</ul>
+			</header>
+			
+
+			<div class="podradel-menu">
+				<p>Вы находитесь тут: linuxgik.ru/Веб-разаботка</p>
+				<nav>
+				<ul>
+					<li><a href="web-devel/grant.html">CSS</a></li>
+					<li><a href="web-devel/html.html">HTML</a></li>
+				</ul>
+				</nav>
+			</div><!--podradel-menu-->
+		<main>
+    		<section >
+				<article class="article-box">
+					<h2>Конвертация png в svg</h2>
+						<pre>
+<code class="code-box"><span style="color:rgb(225, 65, 73);">#</span> dnf install potrace 
+<span style="color:rgb(225, 65, 73);">#</span></code>
+						</pre>
+						<p>
+							Путь к каталогу источнику <span class="sync2">с косой чертой в конце</span> <code>]$ rsync -a path/dir/ user@host:dest_dir</code> скопирует 
+							<span class="sync2">не сам каталог</span> /path/dir, а все содержимое в удаленный каталог dest_dir</p>
+						<ul>
+							<li><code class="code-box">@local ~]$ rsync -a -e "ssh -p 7967" html/ user@host:html/</code></li>
+							<li>на сервере синхронизируем каталоги: <code>remote ~]$ rsync -a html/ /var/www/html/</code> </li>
+							<li>исключить каталог из операции переноса: <code>@local ~]$ rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/</code></li>
+						</ul>
+				</article> <!-- close article rsync-->
+
+				<article>
+					<h2>Команда scp</h2>
+						<p><dfn>scp</dfn> - копирует файлы между хостами в Сети. Работает подобно команде <i>cp</i></p>
+						<p>
+							Примеры:
+							<ul>
+								<li><b>Файл</b> с удаленного хоса к себе в текущию дерикторию - <code>~]$ scp user@host:path_file path_copy_past</code></li>
+								<li><b>Каталог</b> c удаленного хоста через <b>другой порт</b> - <code>~]$ scp -r -P 2871 user@host:path_file path_copy_past</code></li>
+							</ul>
+							Внимание: для scp порт указываеться с большой P
+						</p>
+				</article>
+
+            	<article>
+					<h2>Инструкция по настройке сервера</h2>
+						<article>
+            	    		<h3>1. Создаем пользователя с правами sudo</h3>
+								<ul>
+									<li><code>~]# useradd <i>new_username</i></code> - добавляем пользователя</li>
+									<li><code>~]# passwd <i>new_username</i></code> - задаем ему пароль</li>
+									<li><code>~]# usermod -aG <i>group_name1,group_name2,... user_name</i> - добавляем пользователя в группу <b>wheel</b></code></li>
+								</ul>
+							<p>Выходим из сессии root и заходим под новым пользователем.</p>
+							<p>Готово</p>
+            			</article>
+
+						<article>
+							<h3>2. Настройка SSH</h3>
+								<ul>
+									<li><code>~] $ssh-keygen</code> - на клиенте генерируем пару ключей.</li>
+									<li><code>~] $ssh-copy-id user@host</code> - копируем открытый ключ на удаленный сервер.</li>
+									<li>Отключаем аутентификацию по паролю (в файле /etc/ssh/sshd_config) - <b>PasswordAuthentication no</b></li>
+									<li>Запрещаем логиниться от root (в файле /etc/ssh/sshd_config) - <b>PermitRootLogin no</b></li>
+									<li>Меняем порт (в файле /etc/ssh/sshd_config) - <b>Port #номер</b></li>
+									<li>Перезагружаем сервер <code>~]# systemct reload sshd</code></li>
+									<li>Далее нужно обновить политику SeLinux чтобы разрешить использование этого порта:
+										<ul>
+											<li><code>~]# yum install policycoreutils-python-utils</code></li>
+											<li><code>~]# semanage port -a -t ssh_port_t -p tcp #номер</code></li>
+										</ul>
+									</li>
+									<li>Открываем порт в firewall
+										<ul>
+											<li># firewall-cmd --add-port #номер/tcp</li>
+											<li># firewall-cmd --runtime-to-permanent</li>
+										</ul>
+									</li>
+								</ul>
+								<p>Готово</p>
+						</article>
+				</article> <!--close Инструкция по настройке сервера.-->
+
+				<article>
+					<h2>Как использовать sss-ключи</h2>
+						<p>
+							Команда <code>~] $ssh-keygen</code> - помещает сгенерированные ключи <b>id_rsa</b> 
+							и <b>id_rsa.pub</b> в каталог <b>~/.ssh</b>. Копируем эту пару на флешку.
+						</p>
+						<p>
+							Чтобы ключи работали на другой машине, создаем на новой машине каталог ~/.ssh и копируем с флешки туда свою
+							пару ключей.
+							Обязательно выставляем этой паре ключей нужные права <code>~]$ chmod 600 id_rsa  id_rsa.pub </code>
+						</p>
+				</article>
+						
+				<article>
+					<h2>Инструкция по уcтановке web-серевера Apache</h2>
+						<ul>
+							<li><code>~]# yum install <i>httpd</i></code></li>
+							<li><code>~]$ sudo systemctl enable httpd --now</code></li>
+							<li><code>~]# firewall-cmd --zone=public --add-service=http --permanent</code></li>
+							<li><code>~]# firewall-cmd --reload</code></li>
+						</ul>
+						<p>Готово</p>
+				</article>
+			</section>
+				<a href="https://www.w3.org/">Перейти на главную страницу W3C Консорциум всемирной паутины. </a>
+			
+		</div>	<!--middle-box-->
+
+			<div class="right-box">
+				<h2>Знать</h2>
+					<div class="know-block"> <!----------------FLEX-->
+						<div class="h3rig-block">	<!--FLEX-->
+							<div class="reverth3">
+									<img src="/images/supa.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell">
+								
+									<h3>Ввод и вывод с помощью оболочки</h3>
+							</div>
+						</div> <!--h3rig-block <= know-block-->
+
+						<div class="rg-content">
+							<p>
+								<b>stdin</b>- стандартный ввод
+								<b>stdou</b> - стандартный вывод
+								<b>stderr</b> - стадартаня ошибка
+							</p>
+
+							<p><span>"&gt;"</span> <code>~]$ ls > file</code> отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+							<p><span>"&gt;&gt;"</span>вывод в файл без затирания</p>
+							<p><code>~]$ set -C</code> включить параметр оболочки предотварщающий затирание (+С отключить)</p>
+							<p>
+								<span>"|" отправить стандартный вывод на стандартый вход другой комаде</span>
+								<code>$ head /proc/cpuinfo | tr a-z A-Z</code>
+							</p>
+							<p><span>"2&gt;</span> стандартная ошибка <code>$ ls /fffffffff > f 2> e</code>
+							</p>
+
+							<p><span>"2&gt;&amp;</span> направит ошибку туда же куда stdin
+								<code>~]$ ls /fffffffff > f 2>&1</code>
+							</p>
+						</div> <!-- rg-content -->
+					</div>	<!--know-block <= right-box-->
+			</div>	<!--right-box-->
+			
+		</main>			
+		</div> <!--body-box-->
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# на linuxgik.ru</title>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1 class="title">linuxgik.ru C#</h1>
+        <nav>
+            <ul class="nav">
+                <li><a href="index.html" class="featured">LinuxGik</a></li>
+                <li><a href="#">C#</a></li>
+                <li><a href="#">Мой сервер</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<main>
+    <article>
+        <h2>Создание консольного приложения .NET</h2>
+        <p>1. Содаем директорию. Имя директории, по умолчанию будет преобразовано имя проекта и имя пространства имён.
+            Открываем ее в терминале.</p>
+        <p><code>dotnet new console --framework net8.0 --use-program-main</code></p>
+        <h3>Публикация</h3>
+        <p><code>dotnet publish --configuration Release</code></p>
+        <p>При таком развертывании, созданное приложение выполняется на компьютере с установленной средой выполнения .NET.</p>
+        <p><a href="https://learn.microsoft.com/ru-ru/dotnet/core/tutorials/publishing-with-visual-studio-code?pivots=dotnet-8-0">
+            Читать подробнее о развёртывании документацию Microsoft.
+        </a></p>
+    </article>
+    <article>
+        <h2>Управление директориями через C#</h2>
+        <p class="present">Пространстов имён <span>System.IO</span>. Класс <span>Directory</span> и класс <span>Directoryinfo</span>.</p>
+        <div class="related-links">
+            <p>Ссылки по теме.</p>
+            <p><a href="">https://learn.microsoft.com/ru-ru/dotnet/api/system.io?view=net-8.0</a>System.IO Пространство имен</p>
+            <p><a href="">https://learn.microsoft.com/ru-ru/dotnet/api/system.io.directory?view=net-8.0</a>Directory Класс</p>
+        </div>
+        <p>Для работы с каталогами, нам нужна будет переменная типа <span class="type_cs">string</span>, в которой будет имя каталога с которым будем рабоать. Например:</p>
+        <p><code>string dirName = "C:\\Program Files";&Tab;# указывает на корневую директорию диска C.</code></p>
+        <p>Обратите внимание на двойной слеш в имени. Но также можно использовать и другую запись, где за местно двойного слеша будет "@" в начале записи. Наример:</p>
+        <p><code>string dirName = @"C:\Program Files";&Tab;# указывает на корневую директорию диска C.</code></p>
+        <h3>Получить список катлогов в текщей директории</h3>
+        <p><code>string[] dirs = Directory.GetDirectories(".");</code></p>
+        <p><code>foreach (string dir in dirs) { Console.WriteLine(dir); }</code></p>
+    </article>
+</main>
+
+</body>
+</html>

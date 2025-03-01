@@ -1,0 +1,290 @@
+Index: assets/css/navigation.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n.lgik-nav-container {\r\n    display: flex;\r\n    padding-left: .5em;\r\n    background-color: darkgreen;\r\n}\r\n\r\n.lgik-nav-container > .lgik-menu-box {\r\n    margin-left: auto;\r\n}\r\n\r\n.lgik-nav-brandbox {\r\n    background-color: #000000;\r\n    color: white;\r\n}\r\n\r\n.lgik-menu-box {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.lgik-nav-second {\r\n    display: flex;\r\n}\r\n.lgik-nav-menu {\r\n    display: flex;\r\n    padding-left: .5em;\r\n    background-color: #000000;\r\n    list-style-type: none;\r\n    margin: 0;\r\n}\r\n\r\n.lgik-nav-menu > li {\r\n\r\n    margin-top: 0;\r\n}\r\n\r\n.lgik-nav-menu > li > a {\r\n    display: block;\r\n    padding: 3px 1em;\r\n    background-color: #000000;\r\n    color: white;\r\n    text-decoration: none;\r\n    font-family: \"open\";\r\n    font-size: 13px;\r\n\r\n}\r\n\r\n.lgik-nav-menu > li + li {\r\n    margin-left: auto;\r\n}\r\n\r\n\r\n.lgik-nav-search {\r\n    background-color: #000000;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/assets/css/navigation.css b/assets/css/navigation.css
+--- a/assets/css/navigation.css	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/assets/css/navigation.css	(date 1740787699304)
+@@ -1,13 +1,18 @@
+ 
+-.lgik-nav-container {
++.flex {
+     display: flex;
+-    padding-left: .5em;
+-    background-color: darkgreen;
++}
++
++.flex > * + * {
++    margin-top: 0;
++    
+ }
+ 
+-.lgik-nav-container > .lgik-menu-box {
+-    margin-left: auto;
++.titel-nav {
++    background-color: aquamarine;
++    padding: 1.5em;
+ }
++
+ 
+ .lgik-nav-brandbox {
+     background-color: #000000;
+@@ -15,13 +20,25 @@
+ }
+ 
+ .lgik-menu-box {
+-    display: flex;
+-    flex-direction: column;
++    flex: 1;
++}
++
++.lgik-nav-brandbox {
++    flex: 2;
+ }
+ 
+-.lgik-nav-second {
++.nav-second {
+     display: flex;
++    padding: 0;
++    margin: 0;
+ }
++
++.lgik-nav-search {
++    background-color: #ca2d2d;
++    margin-left: auto;
++    padding-left: 10px;
++}
++
+ .lgik-nav-menu {
+     display: flex;
+     padding-left: .5em;
+@@ -51,6 +68,3 @@
+ }
+ 
+ 
+-.lgik-nav-search {
+-    background-color: #000000;
+-}
+\ No newline at end of file
+Index: _site/assets/css/navigation.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n.lgik-nav-container {\r\n    display: flex;\r\n    padding-left: .5em;\r\n    background-color: darkgreen;\r\n}\r\n\r\n.lgik-nav-container > .lgik-menu-box {\r\n    margin-left: auto;\r\n}\r\n\r\n.lgik-nav-brandbox {\r\n    background-color: #000000;\r\n    color: white;\r\n}\r\n\r\n.lgik-menu-box {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.lgik-nav-second {\r\n    display: flex;\r\n}\r\n.lgik-nav-menu {\r\n    display: flex;\r\n    padding-left: .5em;\r\n    background-color: #000000;\r\n    list-style-type: none;\r\n    margin: 0;\r\n}\r\n\r\n.lgik-nav-menu > li {\r\n\r\n    margin-top: 0;\r\n}\r\n\r\n.lgik-nav-menu > li > a {\r\n    display: block;\r\n    padding: 3px 1em;\r\n    background-color: #000000;\r\n    color: white;\r\n    text-decoration: none;\r\n    font-family: \"open\";\r\n    font-size: 13px;\r\n\r\n}\r\n\r\n.lgik-nav-menu > li + li {\r\n    margin-left: auto;\r\n}\r\n\r\n\r\n.lgik-nav-search {\r\n    background-color: #000000;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_site/assets/css/navigation.css b/_site/assets/css/navigation.css
+--- a/_site/assets/css/navigation.css	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/_site/assets/css/navigation.css	(date 1740787699000)
+@@ -1,13 +1,18 @@
+ 
+-.lgik-nav-container {
++.flex {
+     display: flex;
+-    padding-left: .5em;
+-    background-color: darkgreen;
++}
++
++.flex > * + * {
++    margin-top: 0;
++    
+ }
+ 
+-.lgik-nav-container > .lgik-menu-box {
+-    margin-left: auto;
++.titel-nav {
++    background-color: aquamarine;
++    padding: 1.5em;
+ }
++
+ 
+ .lgik-nav-brandbox {
+     background-color: #000000;
+@@ -15,13 +20,25 @@
+ }
+ 
+ .lgik-menu-box {
+-    display: flex;
+-    flex-direction: column;
++    flex: 1;
++}
++
++.lgik-nav-brandbox {
++    flex: 2;
+ }
+ 
+-.lgik-nav-second {
++.nav-second {
+     display: flex;
++    padding: 0;
++    margin: 0;
+ }
++
++.lgik-nav-search {
++    background-color: #ca2d2d;
++    margin-left: auto;
++    padding-left: 10px;
++}
++
+ .lgik-nav-menu {
+     display: flex;
+     padding-left: .5em;
+@@ -51,6 +68,3 @@
+ }
+ 
+ 
+-.lgik-nav-search {
+-    background-color: #000000;
+-}
+\ No newline at end of file
+Index: _site/pages/ruby/ruby.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"ru\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta name=\"author\" content=\"Linuxgik\" />\r\n    <meta name=\"description\" content=\"Быстрый помощник в информационном мире. Мы ценим ваше время.\" />\r\n    <meta name=\"keywords\" content=\"Linux, Windows, CSS, PowerShell, настройка сервера, SSH, Apache, Nginx, Ruby, jekyll\" />\r\n    <link rel=\"stylesheet\" href=\"/assets/css/reset.css\" type=\"text/css\">\r\n    <link rel=\"stylesheet\" href=\"/assets/css/navigation.css\" type=\"text/css\">\r\n    <title>Ruby - LinuxGik</title>\r\n</head>\r\n<body>\r\n    <div class=\"lgik-nav-container\">\r\n\r\n    <div class=\"lgik-nav-brandbox\">\r\n        <p>LinuxGik</p>\r\n    </div>\r\n\r\n    <div class=\"lgik-menu-box\">\r\n        <nav>\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n        </nav>\r\n\r\n        <nav class=\"lgik-nav-second\">\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n            <form class=\"lgik-nav-search\">\r\n                <input type=\"search\" name=\"q\" placeholder=\"Search query\">\r\n                <input type=\"submit\" value=\"Go!\">\r\n            </form>\r\n        </nav>\r\n    </div>\r\n\r\n</div>\r\n\r\n    <h2>gem</h2>\r\n<p>\r\n    Гем оформляется по определенным правилам, упаковывается в пакет и при необходимости регистрируетс на сайте <a href=\"https://rubygems.org/\">rubygems.org</a>.\r\n    С этого сайта гемы могут быть загружены при помощи утилиты <i>gem</i>.\r\n</p>\r\n<h3>Конанды утилиты gem</h3>\r\n        <p>gem install</p>\r\n\r\n    <footer>\r\n        <a href=\"https://www.w3.org/\"><img src=\"/assets/images/brands/w3c-no-bars.svg\" alt=\"Консорциум всемирной паутины\"></a>\r\n    </footer>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_site/pages/ruby/ruby.html b/_site/pages/ruby/ruby.html
+--- a/_site/pages/ruby/ruby.html	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/_site/pages/ruby/ruby.html	(date 1740787700099)
+@@ -11,14 +11,14 @@
+     <title>Ruby - LinuxGik</title>
+ </head>
+ <body>
+-    <div class="lgik-nav-container">
++    <div class="flex"> <!-- flex -->
+ 
+-    <div class="lgik-nav-brandbox">
++    <div class="lgik-nav-brandbox titel-nav">
+         <p>LinuxGik</p>
+     </div>
+ 
+     <div class="lgik-menu-box">
+-        <nav>
++        <nav class="titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+@@ -27,7 +27,7 @@
+             </ul>
+         </nav>
+ 
+-        <nav class="lgik-nav-second">
++        <nav class="lgik-nav-second titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+Index: _site/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"ru\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta name=\"author\" content=\"Linuxgik\" />\r\n    <meta name=\"description\" content=\"Быстрый помощник в информационном мире. Мы ценим ваше время.\" />\r\n    <meta name=\"keywords\" content=\"Linux, Windows, CSS, PowerShell, настройка сервера, SSH, Apache, Nginx, Ruby, jekyll\" />\r\n    <link rel=\"stylesheet\" href=\"/assets/css/reset.css\" type=\"text/css\">\r\n    <link rel=\"stylesheet\" href=\"/assets/css/navigation.css\" type=\"text/css\">\r\n    <title>Home - LinuxGik</title>\r\n</head>\r\n<body>\r\n    <div class=\"lgik-nav-container\">\r\n\r\n    <div class=\"lgik-nav-brandbox\">\r\n        <p>LinuxGik</p>\r\n    </div>\r\n\r\n    <div class=\"lgik-menu-box\">\r\n        <nav>\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n        </nav>\r\n\r\n        <nav class=\"lgik-nav-second\">\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n            <form class=\"lgik-nav-search\">\r\n                <input type=\"search\" name=\"q\" placeholder=\"Search query\">\r\n                <input type=\"submit\" value=\"Go!\">\r\n            </form>\r\n        </nav>\r\n    </div>\r\n\r\n</div>\r\n\r\n    <h1>Linuxgik</h1>\r\n<section>\r\n    \r\n</section>\r\n\r\n    <footer>\r\n        <a href=\"https://www.w3.org/\"><img src=\"/assets/images/brands/w3c-no-bars.svg\" alt=\"Консорциум всемирной паутины\"></a>\r\n    </footer>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_site/index.html b/_site/index.html
+--- a/_site/index.html	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/_site/index.html	(date 1740787700099)
+@@ -11,14 +11,14 @@
+     <title>Home - LinuxGik</title>
+ </head>
+ <body>
+-    <div class="lgik-nav-container">
++    <div class="flex"> <!-- flex -->
+ 
+-    <div class="lgik-nav-brandbox">
++    <div class="lgik-nav-brandbox titel-nav">
+         <p>LinuxGik</p>
+     </div>
+ 
+     <div class="lgik-menu-box">
+-        <nav>
++        <nav class="titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+@@ -27,7 +27,7 @@
+             </ul>
+         </nav>
+ 
+-        <nav class="lgik-nav-second">
++        <nav class="lgik-nav-second titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+Index: _site/pages/pro_css/pro_css.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"ru\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta name=\"author\" content=\"Linuxgik\" />\r\n    <meta name=\"description\" content=\"Быстрый помощник в информационном мире. Мы ценим ваше время.\" />\r\n    <meta name=\"keywords\" content=\"Linux, Windows, CSS, PowerShell, настройка сервера, SSH, Apache, Nginx, Ruby, jekyll\" />\r\n    <link rel=\"stylesheet\" href=\"/assets/css/reset.css\" type=\"text/css\">\r\n    <link rel=\"stylesheet\" href=\"/assets/css/navigation.css\" type=\"text/css\">\r\n    <title>Css - LinuxGik</title>\r\n</head>\r\n<body>\r\n    <div class=\"lgik-nav-container\">\r\n\r\n    <div class=\"lgik-nav-brandbox\">\r\n        <p>LinuxGik</p>\r\n    </div>\r\n\r\n    <div class=\"lgik-menu-box\">\r\n        <nav>\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n        </nav>\r\n\r\n        <nav class=\"lgik-nav-second\">\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n            <form class=\"lgik-nav-search\">\r\n                <input type=\"search\" name=\"q\" placeholder=\"Search query\">\r\n                <input type=\"submit\" value=\"Go!\">\r\n            </form>\r\n        </nav>\r\n    </div>\r\n\r\n</div>\r\n\r\n    <h1>Справочник по CSS</h1>\r\n<section>\r\n    <h2>Ссылки на полезные сайты</h2>\r\n    <ul>\r\n        <li><a href=\"https://developer.mozilla.org/ru/docs/Web/CSS\">MDN Web Docs <img src=\"/assets/images/brands/mdn_web_docs.svg\" alt=\"MDN Web Docs\" width=\"100\" height=\"30\"></a></li>\r\n        <li><a href=\"https://doka.guide/css/\">doca.guide</a></li>\r\n    </ul>\r\n</section>\r\n\r\n<section>\r\n    <h2>Оформление ссылок</h2>\r\n</section>\r\n    <footer>\r\n        <a href=\"https://www.w3.org/\"><img src=\"/assets/images/brands/w3c-no-bars.svg\" alt=\"Консорциум всемирной паутины\"></a>\r\n    </footer>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_site/pages/pro_css/pro_css.html b/_site/pages/pro_css/pro_css.html
+--- a/_site/pages/pro_css/pro_css.html	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/_site/pages/pro_css/pro_css.html	(date 1740787700099)
+@@ -11,14 +11,14 @@
+     <title>Css - LinuxGik</title>
+ </head>
+ <body>
+-    <div class="lgik-nav-container">
++    <div class="flex"> <!-- flex -->
+ 
+-    <div class="lgik-nav-brandbox">
++    <div class="lgik-nav-brandbox titel-nav">
+         <p>LinuxGik</p>
+     </div>
+ 
+     <div class="lgik-menu-box">
+-        <nav>
++        <nav class="titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+@@ -27,7 +27,7 @@
+             </ul>
+         </nav>
+ 
+-        <nav class="lgik-nav-second">
++        <nav class="lgik-nav-second titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+Index: _site/pages/pro_github.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"ru\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <meta name=\"author\" content=\"Linuxgik\" />\r\n    <meta name=\"description\" content=\"Быстрый помощник в информационном мире. Мы ценим ваше время.\" />\r\n    <meta name=\"keywords\" content=\"Linux, Windows, CSS, PowerShell, настройка сервера, SSH, Apache, Nginx, Ruby, jekyll\" />\r\n    <link rel=\"stylesheet\" href=\"/assets/css/reset.css\" type=\"text/css\">\r\n    <link rel=\"stylesheet\" href=\"/assets/css/navigation.css\" type=\"text/css\">\r\n    <title>Github - LinuxGik</title>\r\n</head>\r\n<body>\r\n    <div class=\"lgik-nav-container\">\r\n\r\n    <div class=\"lgik-nav-brandbox\">\r\n        <p>LinuxGik</p>\r\n    </div>\r\n\r\n    <div class=\"lgik-menu-box\">\r\n        <nav>\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n        </nav>\r\n\r\n        <nav class=\"lgik-nav-second\">\r\n            <ul class=\"lgik-nav-menu\">\r\n                <li><a href=\"/\">Home</a></li>\r\n                <li><a href=\"/pages/ruby/ruby.html\">Ruby</a></li>\r\n                <li><a href=\"/pages/pro_css/pro_css.html\">Веб-дизайн</a></li>\r\n                <li><a href=\"/pages/pro_github.html\">Спаравочник по Git</a></li>\r\n            </ul>\r\n            <form class=\"lgik-nav-search\">\r\n                <input type=\"search\" name=\"q\" placeholder=\"Search query\">\r\n                <input type=\"submit\" value=\"Go!\">\r\n            </form>\r\n        </nav>\r\n    </div>\r\n\r\n</div>\r\n\r\n    <h1>Справочник по системе контроля версий Git</h1>\r\n    <footer>\r\n        <a href=\"https://www.w3.org/\"><img src=\"/assets/images/brands/w3c-no-bars.svg\" alt=\"Консорциум всемирной паутины\"></a>\r\n    </footer>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_site/pages/pro_github.html b/_site/pages/pro_github.html
+--- a/_site/pages/pro_github.html	(revision 765396117a3356d6f78e5ccc666a355debe52357)
++++ b/_site/pages/pro_github.html	(date 1740787700099)
+@@ -11,14 +11,14 @@
+     <title>Github - LinuxGik</title>
+ </head>
+ <body>
+-    <div class="lgik-nav-container">
++    <div class="flex"> <!-- flex -->
+ 
+-    <div class="lgik-nav-brandbox">
++    <div class="lgik-nav-brandbox titel-nav">
+         <p>LinuxGik</p>
+     </div>
+ 
+     <div class="lgik-menu-box">
+-        <nav>
++        <nav class="titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>
+@@ -27,7 +27,7 @@
+             </ul>
+         </nav>
+ 
+-        <nav class="lgik-nav-second">
++        <nav class="lgik-nav-second titel-nav">
+             <ul class="lgik-nav-menu">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/pages/ruby/ruby.html">Ruby</a></li>

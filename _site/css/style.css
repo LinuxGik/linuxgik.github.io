@@ -1,0 +1,198 @@
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+::selection {
+    background-color: #dddaec;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(3, 31, 21);
+}
+
+@font-face {
+    font-family: "open";
+    src: url(../res/open-sans-v34-latin_cyrillic-regular.woff2);
+}
+
+@font-face {
+    font-family: "Linux";
+    src: url(../res/inter-v12-latin_cyrillic-regular.woff2);
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url(../res/ubuntu-mono-v15-latin_cyrillic-regular.woff2);
+}
+
+
+body {
+    background-color: #fafafa;
+    font-family:"Linux";
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}
+
+/* body *+* {
+    margin: 0;
+} */
+
+
+/* Основной макет boby-box Родитель  midle-box(flex) и right-box*/
+.body-box {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.middle-box {  /* потомки nav header main */
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-box {   
+    width: 15%;
+    margin-left: 6px;
+}
+
+
+
+/* Навигация. входит в midle-box(flex) */
+.site-nav {
+    display: flex;
+    padding-left: .5em;
+    background-color: #000000;
+    list-style-type: none;
+    border-radius: .1em;
+    margin: 0;
+}
+
+.site-nav > li {
+    
+    margin-top: 0;
+}
+
+.site-nav > li > a {
+    display: block;
+    padding: 3px 1em;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    font-family: "open";
+    font-size: 13px;
+
+}
+
+.site-nav > li + li {
+    margin-left: auto;    
+}
+
+/* Правая часть rigth-box */ 
+  
+
+/* Заголовок в right-box */
+.reverth3 {
+    flex-direction: row;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+}
+
+.reverth3 > img {
+    padding-right: 16px;
+    padding-left: 4px;
+    float: left;
+}
+
+.reverth3 > h3 {
+    padding-top: 15px;
+    margin-bottom: 13px;
+}
+
+/* статья в right-box */
+.blockknow {
+    margin: 5px 0 10px;
+}
+
+.blockknow > p {
+    margin: 1px;
+    
+}
+
+.blockknow > p > code {
+    background-color: #d4c3c3;
+    border-radius: 2px;
+    padding: 0 4px;
+    font-size: 0.7em;
+}
+
+
+/* Остальное */
+ul {
+    margin: 0;
+}
+
+header {
+    font-size: 12px;
+}
+
+h2 {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+h3 {
+    margin: 1.5em 0 0;
+}
+
+.rsync {
+    color: rgb(158, 30, 94);
+    font-weight: bold;
+}
+
+.sync2 {
+    color: rgb(90, 39, 230);
+    font-weight: bold;
+}
+
+.code-box {
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    padding: .2em 1em;
+    overflow: auto;
+}
+
+.article-box {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    background-color: #fbf1ec;
+    border-radius: 12px;
+    margin-top: 0;
+}
+
+.div-code-box {
+    width: fit-content;
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+    overflow: auto;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>LinuxGik/rsync</title>
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+
+	<body>
+		<header> 
+			<nav class="topnav">
+				<a href="index.html">Home</a>
+                <a href="apache.html">Apache</a>
+                <a class="active" href="#rsync.html">rsync</a>
+                <a href="webworck.html">Web</a>
+				<a href="#abaut">About</a>
+			</nav>
+			<h1>LinuxGik/rsync</h1>
+		</header>
+        <main>
+            <section>
+                <article>
+                    <h2>rsync инструкция по синхронизации  локального рабочего каталога с рабочим каталогом веб-сайта</h2>
+                        <article>
+                            <h3>Основы</h3>
+                                <p>rsyc должна быть установлена на локальном хосте и на сервере.</p>
+                                <p>rsync указываем источник и место назначения, что и куда копировать/синхронизировать.</p>
+                                <p>
+                                    Параметр <b>-e "ssh -p 234</b> Внимание: если вы коннектитесь по ssh через свой порт, добавляте в комнду rsync
+                                    параметр: <code>-e "ssh -p 342"</code>
+                                </p>
+                                <p>Скопировать файл на удаленный хост: <code>rsync -e "ssh -p 53335" file.txt user@host:</code> </p>
+                                <p>Параметр <b>-a</b> передать всю иерархию каталога (все символические ссылки, права доступа, режимы файлов).</p>
+                                <p>
+                                    <code>~]$ rsync -a -e "ssh -p 673" test_rsync/ user@host:dir</code> двоеточие в конце host: указвает домашний катлог.
+                                    в нашем случае указано :dir и в этом случаем rsync создаст каталог dir/ на удаленном хосте</p> 
+                                <p>Параметр <b>-nv</b>: проверит что произойдет после переноса, но не перенесет а просто покажет что будет.
+                                <b>-n</b> - режим пробного прогона. <b>-v</b> - подробный режит, отображает все детали.</p>
+                                <p>Пробный прогон<code>~]$ rsync -nva -e "ssh -p 673" test_rsync/ user@host:dir</code></p>
+                        </article>
+                        <article>
+                            <h3>Создание точной копии структуры каталога</h3>
+                                <p> Параметр <b>--delite</b>
+                                    По дефолту rsync копирует файлы и каталоги не принимая во внимание о содержимом в каталоге назначения.
+                                    Пример: копируем каталог test/ в котором содержаться файлы test1.txt и test2.txt 
+                                    <pre>
+                                        <code>
+                                            @local ~]$ ls test/
+                                            test1.txt  test2.txt
+                                        </code>
+                                    </pre>
+                                    На удаленном хосте уже есть каталог test/ c фалом test/test3
+                                    <pre>
+                                        <code>
+                                            @remote ~]$ ls test/
+                                            test3.txt  
+                                        </code>
+                                    </pre>
+                                    после выполнения команды <code>@local ~]$ rsync -a -e "ssh -p 673" test/ user@host:test</code>
+                                    на удаленном хосте буду содежраться все три файла.
+                                </p>
+                                <p>
+                                    Чтобы создать точную копию источника, необходимо удалить в <b>каталоге назначения</b> то что
+                                    нет в <b>каталоге источника</b>. <code>]$ rsync -a --delete -e "ssh -p 53335" test/ user@host:test/</code>
+                                    С --delete надо быть очень осторожным, всегда проверять что она сделает перед там как ее запустить.
+                                </p>
+                        </article>
+                        <article>
+                            <h3>Завершаущий слеш /</h3>
+                                <p>Надо быть особо внимательным при указании каталога источника (того что копируем).</p>
+                                <p>Источник без завершающего слеша: <code>]$ rsync -a test3 user@host:dest_dir</code> скопирует каталог test3 в удаленный 
+                                каталог dest_dir</p>
+                                <p>При добавлении косой черты <code>]$ rsync -a test3/ user@host:dest_dir</code> скопирует не сам каталог test3,
+                                а все содержимое в удаленный каталог dest_dir</p>
+                                <p>С завершающим слешем это подобно команде <i>cp -r</i></p>
+                        </article>
+                </article>
+            </section>
+        </main>
+    </body>
+</html>

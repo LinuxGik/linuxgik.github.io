@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta>
+</head>
+
+<body>
+   <h1>Смена раскладки в консоли</h1>
+   <p><em>Что было:</em> OS: Fedora 37, была установлена через net_installer.iso c рабочим окружением KDE<p>
+   <p>В системной консоли не переключалась раскладка клавиатуры. Был только английский ввод.</p>
+   <p><em>Как решил:</em> В файле /etc/vconsole.conf прописал: <strong>KEYMAP_TOGGLE="alt_shift_toggle"</strong></p>
+   <p>Изначально этот файл выглядел так:</p>
+   <pre>
+KEYMAP="ru"
+FONT="latarcyrheb-sun16"
+   </pre>
+   <p>После того как прописал стал выглядеть:</p>
+   <pre>
+KEYMAP="ru"
+FONT="latarcyrheb-sun16"
+KEYMAP_TOGGLE="alt_shift_toggle"
+   </pre>
+   <p>Особенность в том, что после того как заработало переключение раскладки, я удалил добавленную строчку
+   KEYMAP_TOGGLE="alt_shift_toggle". Но раскладка так и работет без этой строчки. Но повотрю, <b>без этой строчки она
+      не переключалась</b>. Т.е как только я добавил эту строчку, переключение раскладки заработало и <b>потом уже 
+      продолжало работать и без этой строчки</b>.</p>
+   <p>В дополениие: Вывод <code>$ localectl status</code>:</p>
+   <pre>
+   
+   System Locale: LANG=ru_RU.UTF-8
+       VC Keymap: ru
+      X11 Layout: us,ru
+     X11 Variant: ,
+     X11 Options: grp:alt_shift_toggle
+   </pre>
+   <p>Был такой в начале, таким после и осталься</p>
+

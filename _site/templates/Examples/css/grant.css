@@ -1,0 +1,10 @@
+p {
+    margin-top: 1px;
+}
+
+#notes {
+    background-color: bisque;
+    margin-right: 1000px;
+    padding: 5px 50px;
+    border-radius: 20px;
+}

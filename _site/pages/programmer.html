@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Linuxgik">
+	<meta name="description" content="Быстрый помошник в информационом мире. Мы ценим ваше время.">
+	<title>LinuxGik</title>
+	<link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+<body>
+<div class="body-box"> <!--body-box flexbox-->
+	<div class="middle-box">
+		<nav>
+			<ul class="site-nav"> <!--flexbox-->
+				<li><a href="servera.html" title="Веб-сервера">Веб-сервера</a></li>
+				<li><a href="linux.html" title="GNU Linux">GNU Linux</a></li>
+				<li><a href="web-devel.html">Веб-разработка</a></li>
+				<li><a href="textide.html" title="Текстовый редакторы">Текстовые редакоторы/IDE</a></li>
+				<li><a href="webworck.html" title="E-бизнес">E-Бизнес</a></li>
+				<li><a href="programmer.html">Программирование</a></li>
+			</ul>
+		</nav>	
+		<header>
+			<p>Популяризатор GNU Linux</p>
+			<h1>Справочный портал в мире информационных технологий</h1>
+		</header>
+		<main>
+    	<section >
+		<article class="article-box"> <!--rsync-->
+		<h2>rsync</h2>		
+		</article> <!-- закрытие rsync-->
+		</section>	
+	</div>	<!--Close middle-box < body-box-->
+	<div class="right-box">
+		<h2>Знать</h2>
+		<div class="reverth3">
+			<img  src="images/supa.svg" alig alt="фото Стивена Борна, который разработал оболочку Bourne shell">
+			<h3>Ввод и вывод с помощью оболочки</h3>
+		</div> <!--reverth3-->
+		<div class="rg-content">
+			<p>
+				<b>stdin</b>- стандартный ввод
+				<b>stdou</b> - стандартный вывод
+				<b>stderr</b> - стадартаня ошибка
+			</p>
+			<p>
+				<span>"&gt;"</span> <code>~]$ ls > file</code> отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.
+			</p>
+			<p>
+				<span>"&gt;&gt;"</span>вывод в файл без затирания
+			</p>
+			<p>
+				<code>~]$ set -C</code> включить параметр оболочки предотварщающий затирание (+С отключить)
+			</p>
+			<p>
+				<span>"|" отправить стандартный вывод на стандартый вход другой комаде</span>
+				<code>$ head /proc/cpuinfo | tr a-z A-Z</code>
+			</p>
+			<p>
+				<span>"2&gt;</span> стандартная ошибка <code>$ ls /fffffffff > f 2> e</code>
+			</p>
+			<p>
+				<span>"2&gt;&amp;</span> направит ошибку туда же куда stdin <code>~]$ ls /fffffffff > f 2>&1</code>
+			</p>
+		</div> <!-- rg-content -->				
+	</div>	<!--- right-box < body-box-->
+		</main>			
+		</div> <!--bodybox-->
+	</body>
+</html>
