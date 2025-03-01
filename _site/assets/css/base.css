@@ -1,0 +1,48 @@
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+::selection {
+    background-color: #dddaec;
+}
+
+/* Настройка ссылок */
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(3, 31, 21);
+}
+
+/* Подключение шрифтов */
+@font-face {
+    font-family: "open";
+    src: url(../fonts/open-sans-v34-latin_cyrillic-regular.woff2);
+}
+
+@font-face {
+    font-family: "Linux";
+    src: url(../fonts/inter-v12-latin_cyrillic-regular.woff2);
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url(../fonts/ubuntu-mono-v15-latin_cyrillic-regular.woff2);
+}
+
+/* Общее для всей страницы */
+body {
+    background-color: #fafafa;
+    font-family:"Linux";
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}

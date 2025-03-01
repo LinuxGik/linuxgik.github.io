@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta name="author" content="Linuxgik">
-	<meta name="description" content="Быстрый помошник в информационом мире. Мы ценим ваше время.">
-	<title>LinuxGik</title>
-	<link rel="stylesheet" href="css/style.css" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="author" content="Linuxgik">
+    <meta name="description" content="Быстрый помошник в информационом мире. Мы ценим ваше время.">
+    <title>LinuxGik Home</title>
+    <link rel="stylesheet" href="/assets/css/base.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-<div class="body-box"> <!--body-box flexbox-->
+    <div class="body-box"> <!--body-box flexbox-->
 	<div class="middle-box">
 		<nav>
 			<ul class="site-nav"> <!--flexbox-->
@@ -29,9 +30,29 @@
 	<main>
 		<p>Вы находитесь на главной странице портала</p>	
     <section >
-		<article> <!--Карта сайта-->
-			<h2>Карта сайта</h2>
-		</article><!--Закрытие Карта сайта-->
+<!--		<article> &lt;!&ndash;Карта сайта&ndash;&gt;-->
+<!--			<h2>Карта сайта</h2>-->
+<!--		</article>&lt;!&ndash;Закрытие Карта сайта&ndash;&gt;-->
+
+		<article class="article-box"> <!--Ruby Jekyll -->
+			<h2>Ruby Jekyll</h2>
+
+				<h3>_layouts/</h3>
+					<p>_layouts/default.html</p>
+					<h4>Подключается в Front Matter</h4>
+					<div class="front-matter">
+						<p>---</p>
+						<p>layout: default</p>
+						<p>---</p>
+					</div>
+
+				<h3>assets/</h3>
+					<p>assets/css</p>
+			        <p>assets/js</p>
+					<p>assets/images</p>
+					<p>assets/fonts</p>
+		</article>	<!-- Закрытие Ruby Jekyll -->
+
 		<article class="article-box"> <!--rsync-->
 			<h2>rsync</h2>
 			<p>Должна быть установлена на всех машинах.</p>
@@ -167,3 +188,5 @@
 </div> <!--bodybox-->
 </body>
 </html>
+
+</body>
