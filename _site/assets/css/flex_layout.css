@@ -1,4 +1,4 @@
-/* Основной макет boby-box Родитель  midle-box(flex) и left-box*/
+/* Основной макет boby-box Родитель  midle-box(flex) и left-box */
 .body-box {
     display: flex;
     flex-direction: row-reverse;

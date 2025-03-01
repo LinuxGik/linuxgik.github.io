@@ -6,48 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e3b33d0c-c0ad-49ac-9248-61b9aa72c48c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/index copy.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index copy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/layout_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/layout_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/css/flex_layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/css/flex_layout.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/dnf.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/dnf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/linux.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/linux.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/linux/kde.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/linux/kde.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/my_notes.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/my_notes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/programmer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/programmer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/programmer/pro-git.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/programmer/pro-git.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/rsync.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/rsync.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/servera.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/servera.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/servera/apache.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/servera/apache.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/web-devel.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/web-devel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/web-devel/css-pages/webworck.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/web-devel/css-pages/webworck.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/web-devel/grant.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/web-devel/grant.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/pages/web-devel/html.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/pages/web-devel/html.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/res/inter-v12-latin_cyrillic-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/res/open-sans-v34-latin_cyrillic-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/res/ubuntu-mono-v15-latin_cyrillic-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/templates/Examples/web-devel-orig.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/templates/Examples/web-devel-orig.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index copy.html" beforeDir="false" afterPath="$PROJECT_DIR$/index copy.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/dnf.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dnf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/linux.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/linux.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/linux/kde.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/linux/kde.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/my_notes.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my_notes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/programmer.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/programmer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/programmer/pro-git.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/programmer/pro-git.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rsync.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rsync.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/servera.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/servera.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/servera/apache.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/servera/apache.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/web-devel.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/web-devel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/web-devel/css-pages/webworck.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/web-devel/css-pages/webworck.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/web-devel/grant.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/web-devel/grant.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/web-devel/html.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/web-devel/html.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/inter-v12-latin_cyrillic-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/assets/fonts/inter-v12-latin_cyrillic-regular.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/open-sans-v34-latin_cyrillic-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/assets/fonts/open-sans-v34-latin_cyrillic-regular.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ubuntu-mono-v15-latin_cyrillic-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/assets/fonts/ubuntu-mono-v15-latin_cyrillic-regular.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Examples/web-devel-orig.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Examples/web-devel-orig.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,23 +37,23 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "expert__work",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/linuxgik.github.io",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ruby.structure.view.model.defaults.configured": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;expert__work&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/linuxgik.github.io&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ruby.structure.view.model.defaults.configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\linuxgik.github.io" />
@@ -283,6 +245,8 @@
       <workItem from="1740828410259" duration="2403000" />
       <workItem from="1740830836808" duration="382000" />
       <workItem from="1740834555962" duration="3746000" />
+      <workItem from="1740844870454" duration="3567000" />
+      <workItem from="1740852751024" duration="55000" />
     </task>
     <servers />
   </component>

@@ -6,9 +6,10 @@
     <meta name="description" content="Быстрый помошник в информационом мире. Мы ценим ваше время.">
     <title>LinuxGik Home</title>
     <link rel="stylesheet" href="/assets/css/base.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/flex_layout.css" type="text/css">
 </head>
 <body>
+    <header></header>
     <div class="body-box"> <!--body-box flexbox-->
 	<div class="middle-box">
 		<nav>
@@ -24,7 +25,6 @@
 		</nav>	
 		
 		<header>
-			<p>Популяризатор GNU Linux</p>
 			<h1>Справочный портал в мире информационных технологий</h1>
 		</header>
 	<main>
@@ -56,137 +56,141 @@
 		<article class="article-box"> <!--rsync-->
 			<h2>rsync</h2>
 			<p>Должна быть установлена на всех машинах.</p>
-			<p>В <span class="rsync">rsync</span> всегда, сначала указываем <span class="rsync">источник</span>, а потом <span class="rsync">место назначения</span>, т.е сначало что копируем, а потом куда копируем.<br>
-			Всегда используйте <span class="rsync">параметр -nv перед прогоном.</span> rsync может натворить огромную головную боль если что то не так сделать.</p>
-<!-- h3 "Завершающий слеш"--> <h3>Завершающий слеш /</h3> 
-				<p>Источник<span class="sync2"> без завершающего слеша скопирует сам каталог </span> /path/dir в удаленный каталог /dest_dir :<br>
-				<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a /path/dir user@host:dest_dir</code></p>
-				<p>Путь к каталогу источнику <span class="sync2">с косой чертой в конце </span>скопирует <span class="sync2">не сам каталог</span> /path/dir, а все содержимое в удаленный каталог dest_dir</span> :<br>
-				<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a path/dir/ user@host:dest_dir</code></p>
-<!--Cl h3 "Завершающий слеш"-->
-<!--h3 Небольшая инструкция по синхронизации--> <h3>Небольшая инструкция по синхронизации</h3> 
-				<p>1. Сихронизируем локальный каталог с удаленным сервером:<br>
-				<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" html/ user@host:html/</code><br>
-				прим: -e "ssh -p 7967" указывает коннектиться по определенному порту.</p>
-				<p>2. На удаленной машине синхронизируем каталоги:<br>
-				<code class="code-box"><span style="color: #ef2929;font-weight: bold;">remote</span>]<span style="color:royalblue;">$</span> rsync -a html/ /var/www/html/</code></p>
-<!--Cl h3 Небольшая инструкция по синхронизации-->
-<!--h3 Исключить каталог из операции переноса--> <h3>Исключить каталог из операции переноса</h3> 
-				<p><code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/</code></p>
-<!--CL h3 Исключить каталог из операции переноса-->
+			<p>
+				В <span class="rsync">rsync</span> всегда, сначала указываем <span class="rsync">источник</span>, а
+				потом <span class="rsync">место назначения</span>, т.е сначало что копируем, а потом куда копируем.<br>
+				Всегда используйте <span class="rsync">параметр -nv перед прогоном.</span> rsync может натворить
+				огромную головную боль если что то не так сделать.
+			</p>
+				 <h3>Завершающий слеш /</h3>
+					<p>Источник<span class="sync2"> без завершающего слеша скопирует сам каталог </span> /path/dir в удаленный каталог /dest_dir :<br>
+					<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a /path/dir user@host:dest_dir</code></p>
+					<p>Путь к каталогу источнику <span class="sync2">с косой чертой в конце </span>скопирует <span class="sync2">не сам каталог</span> /path/dir, а все содержимое в удаленный каталог dest_dir:<br>
+					<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a path/dir/ user@host:dest_dir</code></p>
+				<h3>Небольшая инструкция по синхронизации</h3>
+					<p>1. Сихронизируем локальный каталог с удаленным сервером:<br>
+					<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" html/ user@host:html/</code><br>
+					прим: -e "ssh -p 7967" указывает коннектиться по определенному порту.</p>
+					<p>2. На удаленной машине синхронизируем каталоги:<br>
+					<code class="code-box"><span style="color: #ef2929;font-weight: bold;">remote</span>]<span style="color:royalblue;">$</span> rsync -a html/ /var/www/html/</code></p>
+				<h3>Исключить каталог из операции переноса</h3>
+					<p>
+						<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>
+							rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/</code></p>
 		</article> <!-- закрытие rsync-->
 
-			<article class="article-box"> 
-				<h2>Команда scp</h2>
-					<p><dfn>scp</dfn> - копирует файлы между хостами в Сети. Работает подобно команде<i>cp</i>
-					</p>
-						<p>
-							Примеры:
-							<ul>
-								<li><b>Файл</b> с удаленного хоса к себе в текущию дерикторию - <code>~]$ scp user@host:path_file path_copy_past</code></li>
-								<li><b>Каталог</b> c удаленного хоста через <b>другой порт</b> - <code>~]$ scp -r -P 2871 user@host:path_file path_copy_past</code></li>
-							</ul>
-							Внимание: для scp порт указываеться с большой P
-						</p>
-				</article> <!--закрытие "Команда scp"-->
+		<article class="article-box">
+			<h2>Команда scp</h2>
+				<p><dfn>scp</dfn> - копирует файлы между хостами в Сети. Работает подобно команде<i>cp</i></p>
+				<p>Примеры:</p>
+				<ul>
+					<li><b>Файл</b> с удаленного хоса к себе в текущию дерикторию - <code>~]$ scp user@host:path_file path_copy_past</code></li>
+					<li><b>Каталог</b> c удаленного хоста через <b>другой порт</b> - <code>~]$ scp -r -P 2871 user@host:path_file path_copy_past</code></li>
+				</ul>
+			<p>Внимание: для scp порт указываеться с большой P</p>
+		</article> <!--закрытие "Команда scp"-->
 
-            	<article class="article-box">
-					<h2>Инструкция по настройке сервера</h2>
-            	    	<h3>1. Создаем пользователя с правами sudo</h3>
+		<article class="article-box"> <!-- Инструкция по настройке сервера -->
+			<h2>Инструкция по настройке сервера</h2>
+			<h3>1. Создаем пользователя с правами sudo</h3>
+				<ul>
+					<li><code>~]# useradd <i>new_username</i></code> - добавляем пользователя</li>
+					<li><code>~]# passwd <i>new_username</i></code> - задаем ему пароль</li>
+					<li><code>~]# usermod -aG <i>group_name1,group_name2,... user_name</i> - добавляем пользователя в группу <b>wheel</b></code></li>
+				</ul>
+				<p>Выходим из сессии root и заходим под новым пользователем.</p>
+			<h3>2. Настройка SSH</h3>
+				<ul>
+					<li><code>~] $ssh-keygen</code> - на клиенте генерируем пару ключей.</li>
+					<li><code>~] $ssh-copy-id user@host</code> - копируем открытый ключ на удаленный сервер.</li>
+					<li>Отключаем аутентификацию по паролю (в файле /etc/ssh/sshd_config) - <b>PasswordAuthentication no</b></li>
+					<li>Запрещаем логиниться от root (в файле /etc/ssh/sshd_config) - <b>PermitRootLogin no</b></li>
+					<li>Меняем порт (в файле /etc/ssh/sshd_config) - <b>Port #номер</b></li>
+					<li>Перезагружаем сервер <code>~]# systemct reload sshd</code></li>
+					<li>Далее нужно обновить политику SeLinux чтобы разрешить использование этого порта:
 						<ul>
-							<li><code>~]# useradd <i>new_username</i></code> - добавляем пользователя</li>
-							<li><code>~]# passwd <i>new_username</i></code> - задаем ему пароль</li>
-							<li><code>~]# usermod -aG <i>group_name1,group_name2,... user_name</i> - добавляем пользователя в группу <b>wheel</b></code></li>
+							<li><code>~]# yum install policycoreutils-python-utils</code></li>
+							<li><code>~]# semanage port -a -t ssh_port_t -p tcp 2233</code></li>
+							<li><code>~]# semanage port -l | grep ssh</code></li>
 						</ul>
-						<p>
-							Выходим из сессии root и заходим под новым пользователем.
-						</p>
-						<!--h3 "1. Создаем пользователя с правами sudo"-->
-						<h3>2. Настройка SSH</h3>
+					</li>
+					<li>Открываем порт в firewall
 						<ul>
-							<li><code>~] $ssh-keygen</code> - на клиенте генерируем пару ключей.</li>
-							<li><code>~] $ssh-copy-id user@host</code> - копируем открытый ключ на удаленный сервер.</li>
-							<li>Отключаем аутентификацию по паролю (в файле /etc/ssh/sshd_config) - <b>PasswordAuthentication no</b></li>
-							<li>Запрещаем логиниться от root (в файле /etc/ssh/sshd_config) - <b>PermitRootLogin no</b></li>
-							<li>Меняем порт (в файле /etc/ssh/sshd_config) - <b>Port #номер</b></li>
-							<li>Перезагружаем сервер <code>~]# systemct reload sshd</code></li>
-							<li>Далее нужно обновить политику SeLinux чтобы разрешить использование этого порта:
-								<ul>
-									<li><code>~]# yum install policycoreutils-python-utils</code></li>
-									<li><code>~]# semanage port -a -t ssh_port_t -p tcp 2233</code></li>
-									<li><code>~]# semanage port -l | grep ssh</code></li>
-								</ul>
-							</li>
-							<li>Открываем порт в firewall
-								<ul>
-									<li># firewall-cmd --add-port 2233/tcp</li>
-									<li># firewall-cmd --runtime-to-permanent</li>
-									<code># firewall-cmd --reload</code>
-								</ul>
-							</li>
+							<li># firewall-cmd --add-port 2233/tcp</li>
+							<li># firewall-cmd --runtime-to-permanent</li>
+							<li># firewall-cmd --reload</li>
 						</ul>
-						
-						<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>
-							ssh -p 2233 username@ip_address
-					   	</code>	
-						<p>или можно ставить в конце <code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>
-							ssh username@ip_address -p 2233
-					   	</code></p>
-						<!--h3 "2. Настройка SSH"-->
-						<h3>3. Установка web-серевера Apache</h3><!--Установка web-серевера Apache-->
-							<ul>
-								<li><code>~]# yum install <i>httpd</i></code></li>
-								<li><code>~]$ sudo systemctl enable httpd --now</code></li>
-								<li><code>~]# firewall-cmd --zone=public --add-service=http --permanent</code></li>
-								<li><code>~]# firewall-cmd --reload</code></li>
-							</ul>
-						<p>Готово</p>
-						<!--Установка web-серевера Apache-->
-						<h3>4. Настройка записей DNS</h3><!--h3 Настройка записей DNS-->
-						<p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
-						<!--h3 Настройка записей DNS-->
-						</article> <!--close Инструкция по настройке сервера.-->
-			<article class="article-box"> <!--Как использовать ключи ssh-->
-				<h2>Как использовать sss-ключи</h2>
-					<p>
-						Команда <code>~] $ssh-keygen</code> - помещает сгенерированные ключи <b>id_rsa</b> 
-						и <b>id_rsa.pub</b> в каталог <b>~/.ssh</b>. Копируем эту пару на флешку.
-					</p>
-					<p>
-						Чтобы ключи работали на другой машине, создаем на новой машине каталог ~/.ssh и копируем с флешки туда свою
-						пару ключей.
-						Обязательно выставляем этой паре ключей нужные права <code>~]$ chmod 600 id_rsa  id_rsa.pub </code>
-					</p>
-					<p>Добавит открытый ключ на удаленный хост: <br> <code>~]$ ssh-copy-id user_name@host_name</code><br>Открытые ключи заисываются в файл ~/.ssh/authorized_keys</p>
-			</article> <!--close Как использовать sss-ключи-->
-		</section>
-				<a href="https://www.w3.org/">Перейти на главную страницу W3C Консорциум всемирной паутины. </a>	
-		</div>	<!--Close middle-box <= body-box-->
-		<section class="right-box">
-			<h2 style="margin: 0;">Знать</h2>
-			<div class="reverth3">
-				<img  src="images/sup2.svg" alig alt="фото Стивена Борна, который разработал оболочку Bourne shell">	
-				<h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
-			</div><!-- div class="reverth3"-->	
-			<div class="rg-content">
-				<div class="blockknow">
-					<p><b>stdin</b>- стандартный ввод</p>
-					<p><b>stdout</b> - стандартный вывод</p>
-					<p><b>stderr</b> - стадартаня ошибка</p>
-				</div>
-				<div class="blockknow">
-					<p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
-					<p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
-					<p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
-					<p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
-					<p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
-					<p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
-				</div>
-			</div> <!-- rg-content h2 "Знать" -->				
-		</section>	<!--- right-box <= body-box-->
-	</main>			
+					</li>
+				</ul>
+				<p>
+					<code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>
+					ssh -p 2233 username@ip_address</code>
+				</p>
+				<p>
+					или можно ставить в конце
+					<code class="code-box">
+						<span style="color: #3bd11c;font-weight: bold;">local</span>]<span style="color:royalblue;">$</span>ssh username@ip_address -p 2233
+					</code>
+				</p>
+			<h3>3. Установка web-серевера Apache</h3><!--Установка web-серевера Apache-->
+				<ul>
+					<li><code>~]# yum install <i>httpd</i></code></li>
+					<li><code>~]$ sudo systemctl enable httpd --now</code></li>
+					<li><code>~]# firewall-cmd --zone=public --add-service=http --permanent</code></li>
+					<li><code>~]# firewall-cmd --reload</code></li>
+				</ul>
+				<p>Готово</p>
+			<h3>4. Настройка записей DNS</h3><!--h3 Настройка записей DNS-->
+			<p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
+			<!--h3 Настройка записей DNS-->
+		</article> <!--close Инструкция по настройке сервера.-->
+
+		<article class="article-box"> <!--Как использовать ключи ssh-->
+			<h2>Как использовать sss-ключи</h2>
+				<p>
+					Команда <code>~] $ssh-keygen</code> - помещает сгенерированные ключи <b>id_rsa</b>
+					и <b>id_rsa.pub</b> в каталог <b>~/.ssh</b>. Копируем эту пару на флешку.
+				</p>
+				<p>
+					Чтобы ключи работали на другой машине, создаем на новой машине каталог ~/.ssh и копируем с флешки туда свою
+					пару ключей.
+					Обязательно выставляем этой паре ключей нужные права <code>~]$ chmod 600 id_rsa  id_rsa.pub </code>
+				</p>
+				<p>
+					Добавит открытый ключ на удаленный хост: <br>
+					<code>~]$ ssh-copy-id user_name@host_name</code><br>Открытые ключи заисываются в файл ~/.ssh/authorized_keys
+				</p>
+		</article> <!--close Как использовать sss-ключи-->
+	</section>
+				<a href="https://www.w3.org/">Перейти на главную страницу W3C Консорциум всемирной паутины. </a>
+	</main>
+	</div>	<!--Close middle-box <= body-box-->
+
+	<section class="left-box">
+		<h2 style="margin: 0;">Знать</h2>
+		<div class="reverth3">
+			<img  src="images/sup2.svg"  alt="фото Стивена Борна, который разработал оболочку Bourne shell">
+			<h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+		</div><!-- div class="reverth3"-->
+		<div class="rg-content">
+			<div class="blockknow">
+				<p><b>stdin</b>- стандартный ввод</p>
+				<p><b>stdout</b> - стандартный вывод</p>
+				<p><b>stderr</b> - стадартаня ошибка</p>
+			</div>
+			<div class="blockknow">
+				<p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+				<p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+				<p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+				<p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+				<p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+				<p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+			</div>
+		</div> <!-- rg-content h2 "Знать" -->
+	</section>	<!--- right-box <= body-box-->
 </div> <!--bodybox-->
-</body>
-</html>
 
+
+    <footer>
+    </footer>
 </body>
