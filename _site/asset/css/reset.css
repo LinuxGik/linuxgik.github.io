@@ -1,0 +1,66 @@
+/* CSS RESET */
+:root {
+	box-sizing: border-box;
+	font-size: calc(0.001em + 1vw)
+}
+*,
+::before,
+::after {
+	box-sizing: inherit;
+}
+
+/* Настройка ссылок */
+::selection {
+    background-color: #dddaec;
+}
+a:link {
+    text-decoration: none;
+	color: #6e688b;
+}
+a:visited {
+    color: #6e688b;
+}
+
+ul {
+	list-style: none;
+}
+
+/* Подключение шрифта */
+@font-face {
+    font-family: "mazda";
+    src: url(../font/mazda.woff2);
+}
+
+/* Настройка шрифта и цвета */
+body {
+	font-family: mazda, serif;
+	background-color: black;    /* rgb(63, 49, 62); */
+	color: gray;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+/* Остальное */
+
+/*html, body, div, span, applet, object, iframe,*/
+/*h1, h2, h3, h4, h5, h6, p, blockquote, pre,*/
+/*a, abbr, acronym, address, big, cite, code,*/
+/*del, dfn, em, img, ins, kbd, q, s, samp,*/
+/*small, strike, strong, sub, sup, tt, var,*/
+/*u, i, center,*/
+/*dl, dt, dd, ol, ul, li,*/
+/*fieldset, form, label, legend,*/
+/*table, caption, tbody, tfoot, thead, tr, th, td,*/
+/*article, aside, canvas, details, embed, */
+/*figure, figcaption, footer, header, hgroup, */
+/*menu, nav, output, ruby, section, summary,*/
+/*time, mark, audio, video {*/
+/*	margin: 0;*/
+/*	padding: 0;*/
+/*	border: 0;*/
+/*	font-size: 95%;*/
+/*	!*font: inherit;*!*/
+/*	vertical-align: baseline;*/
+/*}*/

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/asset/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/asset/css/test.css" type="text/css">
+    <title>LinuxGik- Tor.bridge.fedora41</title>
+</head>
+<body>
+    <header>
+        
+
+<nav>
+    <ul>
+        
+            <li>
+                <a href="/" >Home</a>
+            </li>
+        
+            <li>
+                <a href="/pages/css/css.html" >Css</a>
+            </li>
+        
+            <li>
+                <a href="/pages/blog.html" >Blog</a>
+            </li>
+        
+    </ul>
+</nav>
+        <h1>LinuxGik  Tor.bridge.fedora41 </h1>
+    </header>
+    <main>
+        <h1 id="настройка-tor-через-мосты-на-fedora-linux">Настройка Tor через мосты на Fedora Linux</h1>
+
+<p>В этом руководстве мы настроим Tor для использования мостов, полученных через Telegram-бота <a href="https://t.me/GetBridgesBot">GetBridgesBot</a>. Мы также создадим отдельный конфигурационный файл для мостов, чтобы упростить управление настройками.</p>
+
+<hr />
+
+<h3 id="1-установите-tor-и-obfs4">1. Установите Tor и obfs4</h3>
+<p>Для начала установите Tor и плагин <code class="language-plaintext highlighter-rouge">obfs4</code>, который необходим для работы с мостами:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>dnf <span class="nb">install </span>tor obfs4
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="2-получите-мосты-через-telegram-бота">2. Получите мосты через Telegram-бота</h3>
+<ol>
+  <li>Перейдите в Telegram-бота <a href="https://t.me/GetBridgesBot">GetBridgesBot</a>.</li>
+  <li>Следуйте инструкциям бота, чтобы получить мосты. Обычно бот предоставляет мосты в формате <code class="language-plaintext highlighter-rouge">obfs4</code>.</li>
+  <li>Сохраните полученные мосты, они понадобятся для настройки.</li>
+</ol>
+
+<hr />
+
+<h3 id="3-настройка-tor">3. Настройка Tor</h3>
+<ol>
+  <li>
+    <p>Откройте файл конфигурации Tor:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /etc/tor/torrc
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Найдите строку <code class="language-plaintext highlighter-rouge">%include /etc/torrc.d/*.conf</code> и <strong>раскомментируйте</strong> ее (уберите символ <code class="language-plaintext highlighter-rouge">#</code> в начале строки). Это позволит включать дополнительные конфигурационные файлы из папки <code class="language-plaintext highlighter-rouge">/etc/torrc.d/</code>.</p>
+  </li>
+  <li>
+    <p>Сохраните изменения и закройте файл.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="4-создайте-файл-для-мостов">4. Создайте файл для мостов</h3>
+<ol>
+  <li>
+    <p>Создайте папку <code class="language-plaintext highlighter-rouge">/etc/torrc.d/</code>, если она еще не существует:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /etc/torrc.d/
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Создайте файл <code class="language-plaintext highlighter-rouge">bridge.conf</code> в этой папке:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /etc/torrc.d/bridge.conf
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Вставьте в файл следующие строки, заменив <code class="language-plaintext highlighter-rouge">&lt;ваши_мосты&gt;</code> на данные, полученные от бота:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UseBridges 1
+ClientTransportPlugin obfs4 <span class="nb">exec</span> /usr/bin/obfs4proxy
+
+Bridge &lt;ваши_мосты&gt;
+</code></pre></div>    </div>
+
+    <p>Пример (не используйте этот мост, вставьте свои данные):</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UseBridges 1
+ClientTransportPlugin obfs4 <span class="nb">exec</span> /usr/bin/obfs4proxy
+
+Bridge obfs4 141.94.213.29:34975 3CCF6211A6115BA32224E939C179AC2F8269E186 <span class="nv">cert</span><span class="o">=</span>xFW3DRM458PUIuWgi74qRg8IG7JElyFJIYgy9+V+flBQuvfKKonuPJb373QooLLR+eIqMg iat-mode<span class="o">=</span>0
+Bridge obfs4 57.128.35.251:17275 3411026D454DF9F94BB263BCED2CFBECEBBAAF4C <span class="nv">cert</span><span class="o">=</span>nDA6sKSsjz28b1XZVZwZcx2dBbRSdYFZR5yvenhtFKQA7zYY6N2otTaa562gZViSNSW9Kg iat-mode<span class="o">=</span>0
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Сохраните файл и закройте редактор.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="5-запустите-tor">5. Запустите Tor</h3>
+<ol>
+  <li>
+    <p>Перезапустите Tor, чтобы применить новые настройки:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart tor
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Если вы хотите, чтобы Tor запускался автоматически при загрузке системы, выполните:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl <span class="nb">enable </span>tor
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="6-проверка-работы-tor">6. Проверка работы Tor</h3>
+<p>Убедитесь, что Tor работает корректно и использует мосты. Вы можете проверить свой IP-адрес через Tor с помощью команды:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>torsocks curl https://check.torproject.org
+</code></pre></div></div>
+
+<p>Если все настроено правильно, вы увидите сообщение о том, что вы используете Tor.</p>
+
+<hr />
+
+<h3 id="7-опционально-настройка-браузера">7. (Опционально) Настройка браузера</h3>
+<p>Если вы хотите использовать Tor через браузер, настройте его на использование локального прокси-сервера Tor (<code class="language-plaintext highlighter-rouge">localhost:9050</code> как SOCKS5-прокси). Tor Browser уже настроен для этого, но если вы используете другой браузер, вам нужно будет настроить его вручную.</p>
+
+<hr />
+
+<h3 id="8-обновление-мостов-опционально">8. Обновление мостов (опционально)</h3>
+<p>Если мосты перестанут работать, вы всегда можете получить новые через <a href="https://t.me/GetBridgesBot">GetBridgesBot</a> и обновить файл <code class="language-plaintext highlighter-rouge">/etc/torrc.d/bridge.conf</code>.</p>
+
+<hr />
+
+<p>Теперь у вас настроен Tor с использованием мостов <code class="language-plaintext highlighter-rouge">obfs4</code> на Fedora Linux. Вы можете легко обновлять мосты, редактируя файл <code class="language-plaintext highlighter-rouge">bridge.conf</code>, не затрагивая основной конфигурационный файл.</p>
+
+    </main>
+</body>
+</html>

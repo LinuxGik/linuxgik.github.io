@@ -1,0 +1,24 @@
+.test {                         /* _layouts/navigation.html */
+    font-size: 2em;
+}
+
+h2 {
+    margin-top: 2em;
+}
+
+h3 {
+    margin-top: 1.5em;
+}
+
+h4 {
+    margin-top: 1em;
+}
+
+h5 {
+    margin-top: 0.5em;
+}
+
+/*p {*/
+/*    padding-top: 0.2em;*/
+/*    padding-bottom: 0.2em;*/
+/*}*/
