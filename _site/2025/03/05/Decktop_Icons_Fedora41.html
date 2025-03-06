@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/asset/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/asset/css/test.css" type="text/css">
+    <title>LinuxGik- Gnome. добавление значка приложения.</title>
+</head>
+<body>
+    <header>
+        
+
+<nav>
+    <ul>
+        
+            <li>
+                <a href="/" >Home</a>
+            </li>
+        
+            <li>
+                <a href="/pages/css/css.html" >Css</a>
+            </li>
+        
+            <li>
+                <a href="/pages/blog.html" >Blog</a>
+            </li>
+        
+    </ul>
+</nav>
+        <h1>LinuxGik  Gnome. добавление значка приложения. </h1>
+    </header>
+    <main>
+        <h1 id="создание-иконки-запуска-на-примере-rubymine-в-fedora-41">Создание иконки запуска на примере RubyMine в Fedora 41</h1>
+
+<h2 id="sudo-dnf-install-menuliber">sudo dnf install menuliber</h2>
+
+<p>Можно воспользоваться графическим приложением для добавления значка приложения. Оно само создаст файл.desktop 
+в нужном месте.</p>
+
+<h2 id="создать-файл-localshareapplicationsmenulibre-rubyminedesktop">Создать файл .local/share/applications/menulibre-rubymine.desktop</h2>
+
+<pre><code class="language-.local/share/applications/menulibre-rubymine.desktop">[Desktop Entry]
+Version=1.1
+Type=Application
+Name=RubyMine
+Icon=/home/user/.bin/RubyMine-2024.3.4/bin/rubymine.png
+Exec=/home/user/.bin/RubyMine-2024.3.4/bin/rubymine.sh
+Path=/home/user/.users_dir
+StartupWMClass=jetbrains-rubymine
+Actions=
+Categories=Development;
+</code></pre>
+
+<hr />
+
+<h3 id="как-узнать-startupwmclass"><strong>Как узнать <code class="language-plaintext highlighter-rouge">StartupWMClass</code>?</strong></h3>
+
+<p>Параметр <code class="language-plaintext highlighter-rouge">StartupWMClass</code> помогает окружению рабочего стола правильно связать окно приложения с иконкой в док-панели.</p>
+
+<p>Чтобы узнать значение <code class="language-plaintext highlighter-rouge">WM_CLASS</code> для вашего приложения, выполните следующие шаги:</p>
+
+<ol>
+  <li>
+    <p><strong>Запустите приложение</strong> (в вашем случае RubyMine).</p>
+  </li>
+  <li><strong>Откройте терминал</strong> и выполните команду:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xprop | <span class="nb">grep </span>WM_CLASS
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Нажмите на окно приложения</strong> (RubyMine), чтобы выбрать его.</p>
+  </li>
+  <li><strong>В терминале появится вывод</strong>, например:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WM_CLASS(STRING) = "jetbrains-rubymine", "jetbrains-rubymine"
+</code></pre></div>    </div>
+    <p>Здесь <code class="language-plaintext highlighter-rouge">"jetbrains-rubymine"</code> — это значение <code class="language-plaintext highlighter-rouge">WM_CLASS</code>, которое нужно использовать для <code class="language-plaintext highlighter-rouge">StartupWMClass</code>.</p>
+  </li>
+</ol>
+
+<hr />
+
+
+    </main>
+</body>
+</html>

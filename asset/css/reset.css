@@ -31,9 +31,14 @@ ul {
     src: url(../font/mazda.woff2);
 }
 
+@font-face {
+	font-family: Inter;
+	src: url(../font/inter.woff2);
+}
+
 /* Настройка шрифта и цвета */
 body {
-	font-family: mazda, serif;
+	font-family: Inter, serif;
 	background-color: black;    /* rgb(63, 49, 62); */
 	color: gray;
 }
