@@ -4,3 +4,6 @@
   link: /pages/css/css.html
 - name: Blog
   link: /pages/blog.html
+- name: Pascal и C
+  link: /pages/pascal_and_c/cpascal.html
+

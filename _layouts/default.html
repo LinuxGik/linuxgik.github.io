@@ -12,7 +12,7 @@
 <body>
     <header>
         {% include navigation.html %}
-        <h1>LinuxGik {% if page.title != "home" %} {{ page.title | capitalize }} {% endif %}</h1>
+        <h1>LinuxGik {% if page.title != "home" %} {{ page.title }} {% endif %}</h1>
     </header>
     <main>
         {{ content }}

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/asset/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/asset/css/test.css" type="text/css">
+    <title>LinuxGik- Nslookup</title>
+</head>
+<body>
+    <header>
+        
+
+<nav>
+    <ul>
+        
+            <li>
+                <a href="/" >Home</a>
+            </li>
+        
+            <li>
+                <a href="/pages/css/css.html" >Css</a>
+            </li>
+        
+            <li>
+                <a href="/pages/blog.html" >Blog</a>
+            </li>
+        
+            <li>
+                <a href="/pages/pascal_and_c/cpascal.html" >Pascal и C</a>
+            </li>
+        
+    </ul>
+</nav>
+        <h1>LinuxGik  nslookup </h1>
+    </header>
+    <main>
+        <h2 id="nslookup">nslookup</h2>
+
+<p>Это мощный инструмент для диагностики DNS (Domain Name System), который помогает узнать, как доменные имена преобразуются в IP-адреса и наоборот.</p>
+
+<h3 id="что-такое-nslookup"><strong>Что такое <code class="language-plaintext highlighter-rouge">nslookup</code>?</strong></h3>
+<p><code class="language-plaintext highlighter-rouge">nslookup</code> (от <strong>Name Server Lookup</strong>) — это сетевая утилита, которая позволяет:</p>
+<ol>
+  <li>Запрашивать DNS-серверы для получения информации о доменных именах и IP-адресах.</li>
+  <li>Проверять, как доменные имена разрешаются в IP-адреса (и наоборот).</li>
+  <li>Диагностировать проблемы с DNS, например, если сайт не открывается или пинг не работает.</li>
+</ol>
+
+<hr />
+
+<h3 id="основное-назначение-nslookup"><strong>Основное назначение <code class="language-plaintext highlighter-rouge">nslookup</code></strong></h3>
+<ol>
+  <li>
+    <p><strong>Разрешение доменных имен в IP-адреса</strong>:
+Например, ты можешь узнать, какой IP-адрес соответствует домену <code class="language-plaintext highlighter-rouge">ya.ru</code>.</p>
+  </li>
+  <li>
+    <p><strong>Обратное разрешение (Reverse DNS Lookup)</strong>:
+Ты можешь узнать, какое доменное имя соответствует определенному IP-адресу.</p>
+  </li>
+  <li>
+    <p><strong>Диагностика DNS-проблем</strong>:
+Если сайт не открывается, <code class="language-plaintext highlighter-rouge">nslookup</code> поможет определить, связана ли проблема с DNS (например, если DNS-сервер не возвращает правильный IP-адрес).</p>
+  </li>
+  <li>
+    <p><strong>Проверка работы DNS-серверов</strong>:
+Ты можешь указать конкретный DNS-сервер для запроса, чтобы проверить, как он обрабатывает запросы.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="как-использовать-nslookup"><strong>Как использовать <code class="language-plaintext highlighter-rouge">nslookup</code>?</strong></h3>
+
+<h4 id="1-базовый-синтаксис">1. <strong>Базовый синтаксис</strong></h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup &lt;доменное имя или IP-адрес&gt;
+</code></pre></div></div>
+<p>Пример:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup ya.ru
+</code></pre></div></div>
+
+<h4 id="2-режим-интерактивного-терминала">2. <strong>Режим интерактивного терминала</strong></h4>
+<p>Если просто ввести <code class="language-plaintext highlighter-rouge">nslookup</code> без аргументов, откроется интерактивный режим, где можно выполнять несколько запросов подряд. Чтобы выйти из этого режима, введи <code class="language-plaintext highlighter-rouge">exit</code>.</p>
+
+<p>Пример:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup
+<span class="o">&gt;</span> ya.ru
+<span class="o">&gt;</span> google.com
+<span class="o">&gt;</span> <span class="nb">exit</span>
+</code></pre></div></div>
+
+<h4 id="3-указание-dns-сервера">3. <strong>Указание DNS-сервера</strong></h4>
+<p>Ты можешь указать конкретный DNS-сервер для запроса. Например:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup ya.ru 8.8.8.8
+</code></pre></div></div>
+<p>Здесь <code class="language-plaintext highlighter-rouge">8.8.8.8</code> — это публичный DNS-сервер Google.</p>
+
+<hr />
+
+<h3 id="примеры-использования"><strong>Примеры использования</strong></h3>
+
+<h4 id="1-запрос-ip-адреса-для-домена">1. <strong>Запрос IP-адреса для домена</strong></h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup ya.ru
+</code></pre></div></div>
+<p>Вывод:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	ya.ru
+Address: 77.88.55.242
+Name:	ya.ru
+Address: 5.255.255.242
+Name:	ya.ru
+Address: 77.88.44.242
+Name:	ya.ru
+Address: 2a02:6b8::2:242
+</code></pre></div></div>
+<p>Здесь:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Server</code> — DNS-сервер, который обработал запрос.</li>
+  <li><code class="language-plaintext highlighter-rouge">Non-authoritative answer</code> — ответ от кэширующего DNS-сервера (не от authoritative сервера домена).</li>
+  <li><code class="language-plaintext highlighter-rouge">Address</code> — IP-адреса, связанные с доменом <code class="language-plaintext highlighter-rouge">ya.ru</code>.</li>
+</ul>
+
+<h4 id="2-обратный-dns-запрос-reverse-lookup">2. <strong>Обратный DNS-запрос (Reverse Lookup)</strong></h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup 77.88.55.242
+</code></pre></div></div>
+<p>Вывод:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>242.55.88.77.in-addr.arpa	name = ya.ru.
+</code></pre></div></div>
+<p>Это показывает, что IP-адрес <code class="language-plaintext highlighter-rouge">77.88.55.242</code> связан с доменом <code class="language-plaintext highlighter-rouge">ya.ru</code>.</p>
+
+<h4 id="3-запрос-mx-записей-для-почтовых-серверов">3. <strong>Запрос MX-записей (для почтовых серверов)</strong></h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-query</span><span class="o">=</span>mx ya.ru
+</code></pre></div></div>
+<p>Вывод:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ya.ru	mail exchanger = 10 mx.yandex.ru.
+</code></pre></div></div>
+<p>Это показывает, что почтовые серверы для домена <code class="language-plaintext highlighter-rouge">ya.ru</code> используют <code class="language-plaintext highlighter-rouge">mx.yandex.ru</code>.</p>
+
+<h4 id="4-запрос-ns-записей-dns-серверы-домена">4. <strong>Запрос NS-записей (DNS-серверы домена)</strong></h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-query</span><span class="o">=</span>ns ya.ru
+</code></pre></div></div>
+<p>Вывод:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ya.ru	nameserver = ns1.yandex.ru.
+ya.ru	nameserver = ns2.yandex.ru.
+</code></pre></div></div>
+<p>Это показывает authoritative DNS-серверы для домена <code class="language-plaintext highlighter-rouge">ya.ru</code>.</p>
+
+<hr />
+
+<h3 id="ключевые-опции-nslookup"><strong>Ключевые опции <code class="language-plaintext highlighter-rouge">nslookup</code></strong></h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-query=&lt;тип&gt;</code>: Запрос определенного типа DNS-записи (например, <code class="language-plaintext highlighter-rouge">A</code>, <code class="language-plaintext highlighter-rouge">MX</code>, <code class="language-plaintext highlighter-rouge">NS</code>, <code class="language-plaintext highlighter-rouge">TXT</code> и т.д.).
+Пример:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-query</span><span class="o">=</span>mx ya.ru
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">-type=&lt;тип&gt;</code>: Аналогично <code class="language-plaintext highlighter-rouge">-query</code>, указывает тип записи.</li>
+  <li><code class="language-plaintext highlighter-rouge">-debug</code>: Включает отладочный режим, показывая подробную информацию о запросе.</li>
+  <li><code class="language-plaintext highlighter-rouge">-port=&lt;порт&gt;</code>: Указывает порт DNS-сервера (по умолчанию 53).</li>
+</ul>
+
+<hr />
+
+<h3 id="когда-использовать-nslookup"><strong>Когда использовать <code class="language-plaintext highlighter-rouge">nslookup</code>?</strong></h3>
+<ol>
+  <li>
+    <p><strong>Диагностика проблем с DNS</strong>:
+Если сайт не открывается, проверь, правильно ли разрешается его доменное имя в IP-адрес.</p>
+  </li>
+  <li>
+    <p><strong>Проверка MX-записей</strong>:
+Если у тебя проблемы с почтой, проверь MX-записи домена.</p>
+  </li>
+  <li>
+    <p><strong>Проверка NS-записей</strong>:
+Убедись, что DNS-серверы домена настроены правильно.</p>
+  </li>
+  <li>
+    <p><strong>Обратный DNS-запрос</strong>:
+Если у тебя есть IP-адрес, и ты хочешь узнать, какому домену он принадлежит.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="альтернативы-nslookup"><strong>Альтернативы <code class="language-plaintext highlighter-rouge">nslookup</code></strong></h3>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">dig</code></strong>: Более мощная утилита для работы с DNS, предоставляет больше информации и гибкости.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">host</code></strong>: Простая альтернатива для разрешения доменных имен и IP-адресов.</li>
+</ul>
+
+<hr />
+
+<h3 id="итог"><strong>Итог</strong></h3>
+<p><code class="language-plaintext highlighter-rouge">nslookup</code> — это удобный инструмент для работы с DNS. Он помогает:</p>
+<ul>
+  <li>Узнать IP-адрес домена.</li>
+  <li>Проверить обратное разрешение (IP → домен).</li>
+  <li>Диагностировать проблемы с DNS.</li>
+  <li>Проверять MX, NS и другие типы DNS-записей.</li>
+</ul>
+
+    </main>
+</body>
+</html>

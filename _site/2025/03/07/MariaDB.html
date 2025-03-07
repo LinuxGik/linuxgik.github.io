@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/asset/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/asset/css/test.css" type="text/css">
+    <title>LinuxGik- Mariadb</title>
+</head>
+<body>
+    <header>
+        
+
+<nav>
+    <ul>
+        
+            <li>
+                <a href="/" >Home</a>
+            </li>
+        
+            <li>
+                <a href="/pages/css/css.html" >Css</a>
+            </li>
+        
+            <li>
+                <a href="/pages/blog.html" >Blog</a>
+            </li>
+        
+            <li>
+                <a href="/pages/pascal_and_c/cpascal.html" >Pascal и C</a>
+            </li>
+        
+    </ul>
+</nav>
+        <h1>LinuxGik  MariaDB </h1>
+    </header>
+    <main>
+        <h2 id="установка-в-fedora-41">Установка в Fedora 41</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>dnf <span class="nb">install </span>mariadb-server
+<span class="nb">sudo </span>systemctl start mariadb
+</code></pre></div></div>
+<h2 id="первоначальная-настройка-безопасность">Первоначальная настройка. Безопасность</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>mysql-secure_installation 
+</code></pre></div></div>
+<ol>
+  <li>Установим пароль для root (не путать с root в ОС)</li>
+  <li>Удалим анонимных пользователей</li>
+  <li>Запретим удалённое подключение под учётной записью root</li>
+</ol>
+
+<p>mysql-secure_installation - это мастер, т.е после того как мы его запускаем, он задаёт вопросы, на которые надо отвечать:</p>
+
+<ol>
+  <li>Enter current password for root (enter for none): - тут просит вести текущий пароль root. Поскольку это первый запуск,
+пароля нет. Просто нажимаем Enter.</li>
+  <li>*Switch to unix_socket authentication [Y/n] - Мастер предлагает настроить аутентификацию пользователя <strong>root</strong> в MariaDB/MySQL через <strong>unix_socket</strong>.</li>
+</ol>
+
+<hr />
+
+<h3 id="подробней-о-switch-to-unix_socket-authentication">*Подробней о Switch to unix_socket authentication</h3>
+<p>Примечание. То что мне написала нейронка.</p>
+
+<p><strong>Вопрос:</strong> <code class="language-plaintext highlighter-rouge">Switch to unix_socket authentication [Y/n]</code></p>
+
+<p><strong>Что это значит:</strong><br />
+Мастер предлагает настроить аутентификацию пользователя <strong>root</strong> в MariaDB/MySQL через <strong>unix_socket</strong>. Это позволяет
+пользователю <strong>root</strong> операционной системы автоматически подключаться к MariaDB/MySQL <strong>без пароля</strong>, если он вошел в 
+систему как <strong>root</strong> или использует <code class="language-plaintext highlighter-rouge">sudo</code>.</p>
+
+<h3 id="почему-это-важно">Почему это важно:</h3>
+<ul>
+  <li><strong>Если вы ответите <code class="language-plaintext highlighter-rouge">Y</code> (Да):</strong>
+    <ul>
+      <li>Аутентификация через <code class="language-plaintext highlighter-rouge">unix_socket</code> будет включена.</li>
+      <li>Это удобно для локального администрирования, но <strong>не подходит для переноса БД на другие машины</strong>, так как <code class="language-plaintext highlighter-rouge">unix_socket</code> привязан к текущей операционной системе.</li>
+    </ul>
+  </li>
+  <li><strong>Если вы ответите <code class="language-plaintext highlighter-rouge">n</code> (Нет):</strong>
+    <ul>
+      <li>Будет использоваться стандартная парольная аутентификация.</li>
+      <li>Это универсальный метод, который подходит для переноса БД на другие машины.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="что-выбрать">Что выбрать:</h3>
+<ul>
+  <li>
+    <p><strong>Ответьте <code class="language-plaintext highlighter-rouge">n</code> (Нет), если:</strong><br />
+Вы планируете переносить БД на другие машины или хотите использовать пароль для доступа.</p>
+  </li>
+  <li>
+    <p><strong>Ответьте <code class="language-plaintext highlighter-rouge">Y</code> (Да), если:</strong><br />
+Вы работаете только на этой машине и хотите упростить доступ к MariaDB/MySQL для пользователя <strong>root</strong>.</p>
+  </li>
+</ul>
+
+<h3 id="итог">Итог:</h3>
+<p>Этот вопрос мастера помогает выбрать метод аутентификации для пользователя <strong>root</strong>. Для переносимых БД лучше ответить <code class="language-plaintext highlighter-rouge">n</code> и использовать парольную аутентификацию.</p>
+
+<hr />
+
+
+    </main>
+</body>
+</html>
