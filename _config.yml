@@ -120,7 +120,7 @@ comments:
     repo: # <gh-username>/<repo>
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
-  discus:
+  giscus:
     repo: # <gh-username>/<repo>
     repo_id:
     category:
