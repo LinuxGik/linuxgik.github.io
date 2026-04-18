@@ -1,0 +1,11 @@
+/* Inter */
+@font-face {
+    font-family: Inter;
+    src: url("Inter/InterVariable.woff2");
+    font-style: normal;
+}
+@font-face {
+    font-family: Inter;
+    src: url("Inter/InterVariable-Italic.woff2");
+    font-style: italic;
+}

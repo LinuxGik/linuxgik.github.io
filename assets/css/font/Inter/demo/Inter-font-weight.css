@@ -1,0 +1,48 @@
+body {
+    background-color: rgb(22, 36, 66);
+    color: gray;
+    font-family: Inter;
+}
+
+p {
+    font-weight: 100;
+}
+.noute {
+    font-weight: 900;
+}
+
+.a1 {
+    font-weight: 100;
+}
+
+.a2 {
+    font-weight: 200;
+}
+
+.a3 {
+    font-weight: 300;
+}
+
+.a4 {
+    font-weight: 400;
+}
+
+.a5 {
+    font-weight: 500;
+}
+
+.a6 {
+    font-weight: 600;
+}
+
+.a7 {
+    font-weight: 700;
+}
+
+.a8 {
+    font-weight: 800;
+}
+
+.a9 {
+    font-weight: 900;
+}

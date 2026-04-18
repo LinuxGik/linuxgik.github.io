@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 180 40"
+     aria-labelledby="logo-title"
+     role="img"
+     style="max-width: 180px; width: 100%; height: auto;">
+  <title id="logo-title">LinuxGik</title>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#aded16"/>
+      <stop offset="100%" stop-color="#bbdd0e"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="30"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="32"
+        font-weight="700"
+        fill="url(#grad)">
+    LinuxGik
+  </text>
+</svg>

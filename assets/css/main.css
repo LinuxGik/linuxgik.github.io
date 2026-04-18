@@ -1,0 +1,51 @@
+@import "color-tail.css";
+@import "font/font.css";
+
+html {
+    background-color: var(--color-neutral-800);
+    color: var(--color-gray-300);
+    font-family: Inter, serif;
+}
+
+/* .site-nav применяется к тегу ul который внутри nav */
+.site-nav {
+    display: flex;
+    padding-left: .5em;
+    background-color: #000000;
+    list-style-type: none;
+    border-radius: .1em;
+    margin: 0;
+}
+
+.site-nav > li {
+    margin-top: 0;
+}
+
+ .site-nav > li:last-child {
+     padding-top: 3px;
+     padding-bottom: 3px;
+     padding-right: 1em;
+
+ }
+.site-nav > li > a {
+    display: block;
+    padding: 3px 1em;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    font-family: "open", sans-serif;
+    font-size: 13px;
+}
+
+.site-nav > li > a > img {
+    width: 8em;
+}
+
+.site-nav > li > a:hover {
+    text-decoration: underline;
+    color: #9ff300;
+}
+
+.site-nav > li + li {
+    margin-left: auto;
+}
