@@ -1,4 +1,4 @@
-@import "color-tail.css";
+@import "colorVar/linuxgik-color-variable.css";
 @import "font/font.css";
 
 html {
@@ -11,7 +11,7 @@ html {
 .site-nav {
     display: flex;
     padding-left: .5em;
-    background-color: #000000;
+    background-color: var(--color-stone-950);
     list-style-type: none;
     border-radius: .1em;
     margin: 0;
@@ -30,7 +30,7 @@ html {
 .site-nav > li > a {
     display: block;
     padding: 3px 1em;
-    background-color: #000000;
+    background-color: inherit;
     color: white;
     text-decoration: none;
     font-family: "open", sans-serif;
@@ -49,3 +49,6 @@ html {
 .site-nav > li + li {
     margin-left: auto;
 }
+ .attention {
+     color: var(--attention);
+ }

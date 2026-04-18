@@ -1,0 +1,5 @@
+@import "color-tail.css";
+
+:root {
+    --attention: oklch(0.5771 0.059 299.01)
+}
