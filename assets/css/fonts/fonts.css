@@ -1,0 +1,35 @@
+/*@import url("Spectral/spectral.css");*/
+
+/* Inter */
+@font-face {
+    font-family: Inter;
+    src: url("Inter/InterVariable.woff2");
+    font-style: normal;
+}
+@font-face {
+    font-family: Inter;
+    src: url("Inter/InterVariable-Italic.woff2");
+    font-style: italic;
+}
+
+/* Mazda */
+@font-face {
+    font-family: Mazda;
+    src: url("Mazda.woff2");
+}
+
+/* open-sans */
+@font-face {
+    font-family: open;
+    src: url("open-sans-v34-latin_cyrillic-regular.woff2");
+}
+
+/* Roboto */
+@font-face {
+    font-family: Roboto;
+    src: url("RobotoMono-VariableFont_wght.woff2");
+}
+@font-face {
+    font-family: Inter-v-12;
+    src: url("inter-v12-latin_cyrillic-regular.woff2");
+}

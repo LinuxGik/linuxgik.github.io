@@ -1,0 +1,16 @@
+:root {
+    /* <body class="grid-container"> _layouts/default.html */
+    --color-body-bg: oklch(0.94 0.02 62.78);              /* #f7eadf */
+    --color-body-font: oklch(0.32 0 0);                   /* #333 */
+
+    /* ARTICLE-BOX <article class="article-box">
+     ко всем статьям, на всех страницах */
+    --color-article-bg: oklch(0.96 0.01 48.5);            /*  #fbf1ec */
+    /* Шапка статьи <article class="article-box">
+                       <header class="article-header"> */
+    --color-article-header-border: oklch(0.91 0 0);        /* #e1e1e1 */
+
+    --color-neutral-300: oklch(0.87 0 0);
+    --color-emerald-200: oklch(0.905 0.093 164.15);
+    --color-rose-200: oklch(0.892 0.058 10.001);
+}

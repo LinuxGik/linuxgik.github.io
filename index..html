@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Linuxgik" />
+  <meta name="description" content="Быстрый помощник в информационном мире. Мы ценим ваше время." />
+  <title>LinuxGik</title>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="https://linuxgik.ru">Главная</a></li>
+      <li><a href="https://blog.linuxgik.ru">Блог</a></li>
+    </ul>
+  </nav>
+  <h1>Справочный портал в мире информационных технологий - linuxgik.ru</h1>
+</header>
+
+<main>
+
+<article> <!-- rsync -->
+  <h2>rsync</h2>
+  <p>Должна быть установлена на всех машинах.</p>
+  <p>
+    В <b>rsync</b> всегда сначала указываем <b>источник</b>, а потом <b>место назначения</b>,
+    т.е. сначала что копируем, а потом куда копируем.<br>
+    Всегда используйте <b>параметр -nv перед прогоном</b>. rsync может натворить огромную
+    головную боль, если что-то не так сделать.
+  </p>
+
+  <h3>Завершающий слеш "/"</h3>
+  <p>
+    Источник <b>без завершающего слеша скопирует сам каталог</b> <code>/path/dir</code>
+    в удаленный каталог <code>/dest_dir</code>:<br>
+    <code>~]$ rsync -a /path/dir user@host:dest_dir</code>
+  </p>
+  <p>
+    Путь к каталогу источнику <b>с косой чертой в конце</b> скопирует <b>не сам каталог</b>
+    <code>/path/dir</code>, а все содержимое в удаленный каталог <code>/dest_dir</code>:<br>
+    <code>~]$ rsync -a /path/dir/ user@host:dest_dir</code>
+  </p>
+
+  <h3>Небольшая инструкция по синхронизации</h3>
+  <ol>
+    <li>
+      <p>Синхронизируем локальный каталог с удаленным сервером:<br>
+      <code>~]$ rsync -a -e "ssh -p 7967" html/ user@host:html/</code></p>
+      <p>Примечание: <code>-e "ssh -p 7967"</code> указывает коннектиться по определенному порту.</p>
+    </li>
+    <li>
+      <p>На удаленной машине синхронизируем каталоги:<br>
+      <code>~]$ rsync -a html/ /var/www/html/</code></p>
+    </li>
+  </ol>
+
+  <h3>Исключить каталог из операции переноса</h3>
+  <p><code>~]$ rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/</code></p>
+</article>
+
+<article> <!-- scp -->
+  <h2>Команда scp</h2>
+  <p><dfn>scp</dfn> — копирует файлы между хостами в Сети. Работает подобно команде <i>cp</i>.</p>
+  <p>Примеры:</p>
+  <ul>
+    <li>
+      <p><b>Файл</b> с удаленного хоста к себе в текущую директорию —<br>
+      <code>~]$ scp user@host:path_file path_copy_past</code></p>
+    </li>
+    <li>
+      <p><b>Каталог</b> с удаленного хоста через <b>другой порт</b> —<br>
+      <code>~]$ scp -r -P 2871 user@host:path_file path_copy_past</code></p>
+    </li>
+  </ul>
+  <p>Внимание: для scp порт указывается с большой "P".</p>
+</article>
+<article> <!-- Инструкция по настройке сервера -->
+  <h2>Инструкция по настройке сервера</h2>
+  <p><em>Инструкция универсальна и адаптирована для семейств <strong>RHEL/CentOS/AlmaLinux</strong> и <strong>Debian/Ubuntu</strong>.</em></p>
+
+  <h3>1. Настройка записей DNS</h3>
+  <p>Заходим в личный кабинет на сайте, где у вас зарегистрирован домен.</p>
+  <p>
+    Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>your_domain.com</b> и для
+    <b>www.your_domain.com</b>. Для IPv6 — <strong>AAAA</strong>-запись.
+  </p>
+  <p>Важно: DNS-записи должны быть настроены ДО получения SSL-сертификата, так как процесс проверки права на домен требует доступности вашего домена.</p>
+
+  <h3>2. Создаем пользователя с правами sudo</h3>
+  <p>Используем VNC на сайте хостера.</p>
+  <ul>
+    <li><code>~]# useradd new_username</code> — добавляем пользователя. (для Debian <code>adduser</code>)</li>
+    <li><code>~]# passwd new_username</code> — задаем ему пароль.</li>
+    <li><code>~]# usermod -aG wheel new_username</code> — добавляем пользователя в группу <b>wheel</b>. (В Debian: установить <code>apt install sudo</code>. Добавить в группу <b>sudo</b>.)</li>
+  </ul>
+  <p>Выходим из сессии root и заходим под новым пользователем через терминал. VNC хостера больше не нужен.</p>
+  <hr />
+
+  <h3>3. Настройка SSH</h3>
+  <p>Внимание. Для генерации ключей-SSH в Windows 11, смотрите: <a href="pages/ssh-keys-windows.html">Генерация ключей-ssh в терминале Windows</a></p>
+
+  <h4>3.1 Генерация ключа и копирование открытого ключа на сервер</h4>
+  <ul>
+    <li><code>~]$ ssh-keygen</code> — создаём пару ключей на станции.</li>
+    <li><code>~]$ ssh-copy-id user@host</code> — отправляем публичный ключ на удалённый сервер.</li>
+  </ul>
+  <p>Если ssh-copy-id недоступен, скопируйте <code>~/.ssh/id_rsa.pub</code> в <code>~/.ssh/authorized_keys</code> на сервере.</p>
+  <p>Внимание: перед отключением паролей проверьте подключение по ключу в новой сессии.</p>
+
+  <h4>3.2 Настройка файла /etc/ssh/sshd_config</h4>
+  <p>Откройте файл конфигурации и внесите изменения:</p>
+  <p><code>~]# nano /etc/ssh/sshd_config</code></p>
+  <ul>
+    <li>Отключить авторизацию по паролю — <b>PasswordAuthentication no</b></li>
+    <li>Запретить вход по root — <b>PermitRootLogin no</b></li>
+    <li>Сменить порт — <b>Port 2222</b></li>
+  </ul>
+  <p>⚠️ Для того чтобы изменения вступили в силу, необходимо перезагрузить SSH-сервер. Команда перезагрузки приведена в пункте 3.6 — её следует выполнять только после завершения всех предыдущих настроек. Если применить перезагрузку до открытия нового порта в firewall и MAC, вы потеряете доступ к серверу.</p>
+
+  <h4>3.3 Разрешить системе обязательного доступа (SELinux / AppArmor) использовать нестандартный порт</h4>
+  <p>SELinux (CentOS/RHEL) и AppArmor (Debian/Ubuntu) — системы обязательного контроля доступа (MAC — Mandatory Access Control). Они ограничивают процессы, в том числе могут блокировать использование нестандартных портов.</p>
+  <figure>
+    <figcaption>CentOS / RHEL (SELinux)</figcaption>
+    <ul>
+      <li>Проверить статус SELinux — <code>~]$ sestatus</code>. Если SELinux отключен, переходим к следующему шагу, чтобы открыть порт в брандмауэре.</li>
+      <li>Установить утилиты управления — <code>~]# dnf install policycoreutils-python-utils</code></li>
+      <li>Разрешить нестандартный порт — <code>~]# semanage port -a -t ssh_port_t -p tcp 2222</code></li>
+      <li>Проверить — <code>~]# semanage port -l | grep ssh</code></li>
+    </ul>
+  </figure>
+  <figure>
+    <figcaption>Debian / Ubuntu (AppArmor)</figcaption>
+    <p>AppArmor по умолчанию не ограничивает привязку sshd к нестандартным портам — дополнительных действий не требуется.</p>
+  </figure>
+
+  <h4>3.4 Открытие порта в межсетевом экране (firewall)</h4>
+  <figure>
+    <figcaption>CentOS / RHEL (firewalld)</figcaption>
+    <ul>
+      <li><code>~]# firewall-cmd --add-port=2222/tcp</code></li>
+      <li><code>~]# firewall-cmd --runtime-to-permanent</code></li>
+      <li>Или сразу добавить порт в постоянную конфигурацию — <code>~]# firewall-cmd --permanent --add-port=2222/tcp</code>, затем <code>~]# firewall-cmd --reload</code></li>
+      <li>Проверить — <code>~]# firewall-cmd --list-ports</code>, <code>~]# firewall-cmd --query-port=2222/tcp</code></li>
+    </ul>
+  </figure>
+  <figure>
+    <figcaption>Debian / Ubuntu (UFW)</figcaption>
+    <ul>
+      <li>Установить UFW (если нет) — <code>~]# apt install ufw</code></li>
+      <li>Открыть новый порт — <code>~]# ufw allow 2222/tcp</code></li>
+      <li>Удалить старый (если был 22) — <code>~]# ufw delete allow 22/tcp</code></li>
+      <li>Включить firewall — <code>~]# ufw enable</code></li>
+      <li>Проверить — <code>~]# ufw status</code></li>
+    </ul>
+  </figure>
+
+  <h4>3.5 Права на ключи</h4>
+  <p>Если ключ создан командой <code>ssh-keygen</code>, нужные права будут установлены автоматически.</p>
+  <ul>
+    <li><code>~]$ chmod 700 ~/.ssh</code></li>
+    <li><code>~]$ chmod 600 ~/.ssh/*</code></li>
+  </ul>
+
+  <h4>3.6 Применение конфигурации и проверка</h4>
+  <ul>
+    <li>Перезагрузить конфигурацию SSH-сервера — <code>~]# systemctl reload sshd</code></li>
+    <li>Подключиться по новому порту — <code>~]$ ssh -p 2222 user@host</code> (вместо ip-адреса можно указывать доменное имя, если домен уже подключен).</li>
+  </ul>
+  <p>💡 Не закрывайте текущую SSH-сессию, пока не убедитесь, что подключение по новому порту работает. Если что-то пойдёт не так, вы сможете исправить ошибку в открытой сессии.</p>
+  <p>Базовая настройка SSH завершена.</p>
+  <hr />
+  <h3>4. Установка и запуск веб-сервера</h3>
+  <p>Выберите веб-сервер для установки: Apache или Nginx.</p>
+  <ul>
+    <li><a href="https://httpd.apache.org/">Перейти на официальный сайт apache.org</a></li>
+    <li><a href="https://nginx.org/ru/">Перейти на официальный сайт nginx.org</a></li>
+  </ul>
+  <figure>
+    <figcaption>Для запуска веб-сервера нужно:</figcaption>
+    <ol>
+      <li>Установить веб-сервер</li>
+      <li>Открыть порт в межсетевом экране</li>
+      <li>Настроить автоматический запуск для службы <i>httpd</i> или <i>nginx</i></li>
+    </ol>
+  </figure>
+
+  <h4>4.1 Установка Apache</h4>
+  <ul>
+    <li><code>~]# dnf install httpd</code> — устанавливает Apache (пакет <code>httpd</code>).</li>
+    <li><code>~]# systemctl enable httpd --now</code> — включает Apache и добавляет его в автозапуск.</li>
+  </ul>
+
+  <h4>4.2 Установка Nginx</h4>
+  <ul>
+    <li><code>~]# dnf module list nginx</code> — вывести список модулей, которые содержит Nginx. Прим.: поток по умолчанию обозначен "[d]".</li>
+    <li><code>~]# dnf install nginx</code> — устанавливает Nginx.</li>
+    <li><code>~]# systemctl enable nginx --now</code> — включает Nginx и добавляет его в автозапуск.</li>
+    <li><code>~]$ systemctl status nginx.service</code> — проверяем статус службы.</li>
+  </ul>
+
+  <h4>4.3 Открытие портов в firewall</h4>
+  <p>Для работы веб-сервера откройте порты 80 (HTTP) и 443 (HTTPS):</p>
+  <ul>
+    <li><code>~]# firewall-cmd --list-all</code> — убеждаемся, что по умолчанию <i>отсутствует разрешение на доступ по 80 порту</i>.</li>
+    <li>
+      <code>~]# firewall-cmd --zone=public --add-service=http --permanent</code> — добавляем 80-й порт в виде сервиса http.
+      <p>Порт 80 ассоциирован с сервисом http в firewalld. Подробней читай в официальной документации firewalld: <a href="https://firewalld.org/documentation/howto/open-a-port-or-service.html">Open a Port or Service</a></p>
+    </li>
+    <li><code>~]# firewall-cmd --zone=public --add-service=https --permanent</code> — открывает порт 443 (HTTPS).</li>
+    <li><code>~]# firewall-cmd --reload</code> — применяет изменения в firewall.</li>
+    <li><code>~]# firewall-cmd --list-all</code> — проверяем, что порт открыт.</li>
+  </ul>
+  <p>Примечание: в системе AlmaLinux 8, при установке веб-сервера Apache, порты автоматически добавились в открытые. Добавлять ничего не надо, нужно только проверить <i>конфигурацию зоны</i>, чтобы убедиться, что порты открыты.</p>
+  <p>Готово. Проверьте работу сервера, введя в браузере IP-адрес или доменное имя.</p>
+  <p>Проверить доступность:</p>
+  <p><code>~]$ curl -I http://YOUR_SERVER_IP</code></p>
+
+  <h4>4.4 Конфигурация по умолчанию</h4>
+  <p>Конфигурационный файл — <code>/etc/nginx/nginx.conf</code>. В нём веб-сервер настроен на работу на 80 порту, и нацелен на каталог контента в <code>/usr/share/nginx/html/</code></p>
+  <hr />
+
+  <h3>5. Получение и настройка SSL-сертификата Let's Encrypt</h3>
+  <ul>
+    <li><a href="https://letsencrypt.org/ru/docs/">Документация Let's Encrypt</a></li>
+    <li><a href="https://certbot.eff.org/">Документация certbot</a></li>
+  </ul>
+  <p>Инструкция исходит из анализа, который представлен в моём посте <a href="pages/ssh-keys-windows.html">О сертификатах Let's Encrypt</a>.</p>
+
+  <h4>5.1 Установка Certbot</h4>
+  <p>Certbot — это официальный клиент для получения и управления сертификатами Let's Encrypt.</p>
+  <p>Установите EPEL-репозиторий и Certbot:</p>
+  <pre><code>sudo dnf install -y epel-release
+sudo dnf install -y certbot python3-certbot-nginx   # для Nginx
+# или
+sudo dnf install -y certbot python3-certbot-apache  # для Apache</code></pre>
+
+  <h4>5.2 Автоматическая настройка для Apache</h4>
+  <p>
+    Делаем бекап. Переименовываем конфиг <code>/etc/httpd/conf.d/ssl.conf</code> —
+    этот файл конфигурации создается автоматически в AlmaLinux 8, при установке httpd.
+    В нём подключается сертификат <code>/etc/pki/tls/certs/localhost.crt</code> для локальной разработки.
+  </p>
+  <p><code>sudo mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak</code></p>
+  <p>Создаем виртуальный хост:</p>
+  <p><code>sudo vim /etc/httpd/conf.d/linuxgik.ru.conf</code></p>
+  <pre><code>&lt;VirtualHost *:80&gt;
+    ServerName linuxgik.ru
+    ServerAlias www.linuxgik.ru
+    DocumentRoot /var/www/html
+
+    ErrorLog /var/log/httpd/linuxgik.ru-error.log
+    CustomLog /var/log/httpd/linuxgik.ru-access.log combined
+
+    &lt;Directory "/var/www/html"&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre>
+  <p>Проверяем синтаксис:</p>
+  <p><code>sudo apachectl configtest</code></p>
+  <p>Перезагружаем:</p>
+  <p><code>sudo systemctl reload httpd</code></p>
+  <p>Проверяем что виртуальный хост работает:</p>
+  <p><code>curl -I http://linuxgik.ru</code></p>
+
+  <h4>5.3 Получение сертификата</h4>
+  <p>Для Apache:</p>
+  <p><code>sudo certbot --apache</code></p>
+  <p>Для Nginx (нужно настроить виртуальный хост):</p>
+  <p><code>sudo certbot --nginx</code></p>
+  <p>Для nginx я пока что не делал сам, поэтому только предполагаю, что так.</p>
+
+  <h4>5.4 Настройка автоматического продления</h4>
+  <p>Проверить работу автоматического обновления:</p>
+  <p><code>sudo certbot renew --dry-run</code></p>
+  <hr />
+
+  <h3>6. Рекомендации по безопасности и эксплуатации</h3>
+  <ul>
+    <li>Оставьте одну рабочую сессию при тестировании SSH-изменений</li>
+    <li>Проверьте security group провайдера, если сервер в облаке</li>
+    <li>Рассмотрите установку fail2ban для защиты от brute-force атак</li>
+    <li>Сделайте резервную копию конфигураций: <code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></li>
+    <li>Настройте мониторинг срока действия SSL-сертификатов</li>
+    <li>Регулярно обновляйте систему и установленные пакеты: <code>sudo dnf update</code></li>
+  </ul>
+</article>
+
+</main>
+
+<footer>
+  <p>Это подвал</p>
+</footer>
+
+</body>
+</html>

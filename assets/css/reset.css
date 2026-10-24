@@ -1,0 +1,61 @@
+/* CSS RESET */
+:root {
+	box-sizing: border-box;
+}
+*,
+::before,
+::after {
+	box-sizing: inherit;
+}
+
+::selection {
+    background-color: #dddaec;
+}
+a:link {
+    text-decoration: none;
+	color: #6e688b;
+}
+a:visited {
+    color: #6e688b;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #cda913;
+}
+
+h1 {
+    font-family: Mazda, sans-serif;
+    margin-bottom: 2em;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: Inter-v-12, sans-serif;
+}
+
+p {
+    margin: 16px 0;
+}
+
+html, body, div, span, applet, object, iframe,
+blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	/*padding: 0;*/
+	/*border: 0;*/
+	/*font-size: 100%;*/
+	/*font: inherit;*/
+	vertical-align: baseline;
+}
+
+
