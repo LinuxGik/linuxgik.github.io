@@ -2,6 +2,7 @@
     /* <body class="grid-container"> _layouts/default.html */
     --color-body-bg: oklch(0.94 0.02 62.78);              /* #f7eadf */
     --color-body-font: oklch(0.32 0 0);                   /* #333 */
+    --color-code-bg: oklch(0.88 0.02 62);   /* теплый тон, чуть темнее body-bg */
 
     /* ARTICLE-BOX <article class="article-box">
      ко всем статьям, на всех страницах */

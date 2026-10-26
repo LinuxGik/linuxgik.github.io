@@ -1,0 +1,9 @@
+/* assets/css/code.css - инлайн-код, пути, имена файлов. */
+code {
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 0.875em;
+    background-color: var(--color-code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+
+}
