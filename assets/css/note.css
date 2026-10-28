@@ -1,0 +1,20 @@
+/* ОФОРМЛЕНИЕ ЗАМЕТОК */
+
+.note {
+    padding: 2px;
+    display: inline-block;
+    border: #cdec98 solid 1px;
+    margin-top: 0;
+    font-size: 0.7em;
+    /*background-color: #dee1cf;*/
+    background-color: #f1f4e8;
+}
+
+.note-attention {
+    padding: 2px;
+    display: inline-block;
+    border: #efb6cf solid 1px;
+    margin-top: 0;
+    font-size: 0.7em;
+    background-color: #f1e7ec;
+}

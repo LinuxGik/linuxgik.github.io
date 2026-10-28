@@ -1,3 +1,6 @@
+@import "base.css";
+@import "article.css";
+@import "note.css";
 @import url("fonts/fonts.css");
 @import url("color-var.css");
 @import url("code.css");
@@ -6,107 +9,14 @@
 @import url("sidebar-L.css");
 */
 
-/* <body class="grid-container"> _layouts/default.html */
-body {
-    font-family: Inter, sans-serif;
-    background-color: var(--color-body-bg);
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--color-body-font);
-    margin: 0;
-}
+
+/* КАКИЕ ФАЙЛЫ ПОДКЛЮЧАЮТСЯ И ЧТО В НИХ СОДЕРЖИТСЯ */
+/* body.css - body, .main ( Базовый стиль ) */
+/* article.css - оформление статьи <article class="article-box"> ко всем статьям, на всех страницах */
+/* note.css - оформление заметок*/
+/* footer.css - подвал */
 
 
 
-/* <main class="main"> _layouts/default.html*/
-.main {
-    margin-right: 1em;
-}
-/* ARTICLE-BOX <article class="article-box"> ко всем статьям, на всех страницах */
-.article-box {
-    padding-left: 3em;
-    padding-bottom: 1em;
-    background-color: var(--color-article-bg);
-    border-radius: 12px;
-    margin-top: 0;
-    margin-bottom: 1em;
-}
-    /* Шапка статьи <header class="article-header">
-    (<article class="article-box">
-                        <header class="article-header">) */
-.article-header {
-    display: flex;
-    border-bottom: 1px solid var(--color-article-header-border);
-}
-    /* <span class="type-h2-header type-briefly"> Мало-заметный =информатор=  типа статьи.
-     В шапке расположен справа в конце. =информаторы= бывают разные, в зависимости от тип статьи.
-     <header class="article-header">
-        <h2>Команда scp</h2>
-            <span class="type-h2-header type-briefly"> </span>
-         </header>                                                                              */
-    /* Общий и обязательный для всех =информаторов= */
-.type-h2-header {
-    font-size: 0.7em;
-    margin-left: auto;
-    padding-right: 1em;
-}
-.type-h2-header::before {
-    content: "Тип:";
-    color: var(--color-neutral-300);
-}
 
-    /* Выбираем тип статьи */
-.type-full::after {
-    color: var(--color-emerald-200);
-    content: "полноценный материал";
-}
-.type-briefly::after {
-    color: var(--color-rose-200);
-    content: "краткая инструкция";
 
-}
-
-.article-box > h3 {
-    margin-top: 1rem;
-    margin-bottom: 0;
-}
-
-.article-box h3 + p {
-    margin-top: 0.5em;
-}
-
-.article-box > ul {
-    list-style-type: none;
-}
-
-.instruction-list > li > p:first-child {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
-
-.note {
-    padding: 2px;
-    display: inline-block;
-    border: #cdec98 solid 1px;
-    margin-top: 0;
-    font-size: 0.7em;
-    /*background-color: #dee1cf;*/
-    background-color: #f1f4e8;
-}
-
-.note-attention {
-    padding: 2px;
-    display: inline-block;
-    border: #efb6cf solid 1px;
-    margin-top: 0;
-    font-size: 0.7em;
-    background-color: #f1e7ec;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    background-color: rgb(0, 0, 0);
-    color: rgb(223, 219, 213);
-    font-size: 0.8em;
-}
