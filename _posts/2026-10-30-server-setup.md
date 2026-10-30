@@ -111,7 +111,7 @@ ssh your_username@host
 
 ## 3. Настройка SSH
 
-> Настройка ключей в Windows 11: [Настройка OpenSSH в Windows 11](/pages/ssh-keys-windows.html)
+> Настройка ключей в Windows 11: [Настройка ключей OpenSSH в Windows 11]({% post_url 2026-10-30-ssh-keys-windows %})
 
 ### 3.1 Ключи
 
@@ -410,7 +410,7 @@ sudo nano /etc/httpd/conf.d/your_domain.com.conf
 
 Про параметры:
 
-- `-Indexes` запрещает показывать список файлов каталога, если в нём нет `../../../Users/lynxc/Downloads/index.html`;
+- `-Indexes` запрещает показывать список файлов каталога, если в нём нет `index.html`;
 - `AllowOverride None` отключает `.htaccess`. Если он вам нужен, поставьте `All`.
 
 ```bash
@@ -535,12 +535,17 @@ sudo apt install -y certbot python3-certbot-nginx     # для Nginx
 
 ### 5.2 Файл ssl.conf на AlmaLinux (только Apache)
 
-Пакет `mod_ssl` создаёт `/etc/httpd/conf.d/ssl.conf`. В нём стандартный виртуальный хост на порту 443 с самоподписанным сертификатом `/etc/pki/tls/certs/localhost.crt`, предназначенным для локальной разработки. Такой хост может мешать certbot выбрать нужную конфигурацию. Уберите его с сохранением копии:
+Пакет `mod_ssl` создаёт `/etc/httpd/conf.d/ssl.conf`. В нём стандартный виртуальный хост на порту 443 с тестовым самоподписанным сертификатом `/etc/pki/tls/certs/localhost.crt`. Этот сертификат создаёт служба `httpd-init.service` при **запуске** `httpd`. Если Apache уже работал, когда `mod_ssl` установился, файла нет, и `apachectl configtest` (а значит и certbot) падает с ошибкой `SSLCertificateFile ... does not exist or is empty`.
+
+Два способа исправить:
 
 ```bash
-sudo mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak
-sudo systemctl reload httpd
+sudo systemctl restart httpd                                          # создаст localhost.crt
+sudo mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak     # или убрать ssl.conf
+sudo apachectl configtest                                             # должно быть Syntax OK
 ```
+
+Подробнее с примерами ошибок: [О сертификатах Let's Encrypt]({% post_url 2026-10-30-letsencrypt-certbot %}).
 
 ### 5.3 Получение сертификата
 

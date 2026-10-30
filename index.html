@@ -20,273 +20,273 @@
 </header>
 
 <main>
-  <article> <!-- rsync -->
-    <h2>rsync</h2>
-    <p>
-      Должен быть установлен <b>на обеих машинах</b>: на локальной и на сервере.<br>
-      Порядок аргументов: сначала <b>источник</b> (что копируем), потом <b>назначение</b> (куда копируем).<br>
-      Перед каждым прогоном — <b>пробный запуск с <code>-n</code></b>. rsync может натворить много бед,
-      если что-то указать неверно.
-    </p>
+<article> <!-- rsync -->
+  <h2>rsync</h2>
+  <p>
+    Должен быть установлен <b>на обеих машинах</b>: на локальной и на сервере.<br>
+    Порядок аргументов: сначала <b>источник</b> (что копируем), потом <b>назначение</b> (куда копируем).<br>
+    Перед каждым прогоном — <b>пробный запуск с <code>-n</code></b>. rsync может натворить много бед,
+    если что-то указать неверно.
+  </p>
 
-    <h3>Завершающий слеш "/" у источника</h3>
-    <p>Без слеша копируется <b>сам каталог</b>, со слешем — <b>только его содержимое</b>:</p>
-    <p>
-      <code>~]$ rsync -a /path/dir user@host:/dest/</code> → <code>/dest/dir/...</code><br>
-      <code>~]$ rsync -a /path/dir/ user@host:/dest/</code> → <code>/dest/...</code>
-    </p>
-    <p>
-      Слеш в конце назначения ни на что не влияет. Путь назначения без начального <code>/</code>
-      (<code>user@host:html/</code>) считается от домашнего каталога.
-    </p>
+  <h3>Завершающий слеш "/" у источника</h3>
+  <p>Без слеша копируется <b>сам каталог</b>, со слешем — <b>только его содержимое</b>:</p>
+  <p>
+    <code>~]$ rsync -a /path/dir user@host:/dest/</code> → <code>/dest/dir/...</code><br>
+    <code>~]$ rsync -a /path/dir/ user@host:/dest/</code> → <code>/dest/...</code>
+  </p>
+  <p>
+    Слеш в конце назначения ни на что не влияет. Путь назначения без начального <code>/</code>
+    (<code>user@host:html/</code>) считается от домашнего каталога.
+  </p>
 
-    <h3>Деплой сайта</h3>
-    <p>
-      У обычного пользователя нет прав записи в <code>/var/www/html/</code>, поэтому деплой в два шага:
-      через домашний каталог сервера.
-    </p>
-    <ol>
-      <li>
-        <p>Локальная машина → домашний каталог сервера:<br>
-          <code>~]$ rsync -nva --delete -e "ssh -p 2222" html/ user@host:html/</code> — проверка<br>
-          <code>~]$ rsync -a --delete -e "ssh -p 2222" html/ user@host:html/</code> — выполнение</p>
-      </li>
-      <li>
-        <p>На сервере → каталог веб-сервера:<br>
-          <code>~]$ sudo rsync -nva --delete ~/html/ /var/www/html/</code> — проверка<br>
-          <code>~]$ sudo rsync -a --delete ~/html/ /var/www/html/</code> — выполнение</p>
-        <p>Другой владелец файлов — добавить <code>--chown=apache:apache</code> (на Debian/Ubuntu <code>www-data</code>).</p>
-      </li>
-    </ol>
+  <h3>Деплой сайта</h3>
+  <p>
+    У обычного пользователя нет прав записи в <code>/var/www/html/</code>, поэтому деплой в два шага:
+    через домашний каталог сервера.
+  </p>
+  <ol>
+    <li>
+      <p>Локальная машина → домашний каталог сервера:<br>
+      <code>~]$ rsync -nva --delete -e "ssh -p 2222" html/ user@host:html/</code> — проверка<br>
+      <code>~]$ rsync -a --delete -e "ssh -p 2222" html/ user@host:html/</code> — выполнение</p>
+    </li>
+    <li>
+      <p>На сервере → каталог веб-сервера:<br>
+      <code>~]$ sudo rsync -nva --delete ~/html/ /var/www/html/</code> — проверка<br>
+      <code>~]$ sudo rsync -a --delete ~/html/ /var/www/html/</code> — выполнение</p>
+      <p>Другой владелец файлов — добавить <code>--chown=apache:apache</code> (на Debian/Ubuntu <code>www-data</code>).</p>
+    </li>
+  </ol>
 
-    <h3>Параметры</h3>
+  <h3>Параметры</h3>
+  <ul>
+    <li><code>-a</code> — режим архива: рекурсия, ссылки, права, время, группа, владелец. Владелец и группа сохраняются, только если приёмник работает от root.</li>
+    <li><code>-n</code> — пробный прогон, <code>-v</code> — подробный вывод, <code>-i</code> — что именно меняется в каждом файле. В конце вывода должно быть <code>(DRY RUN)</code>.</li>
+    <li><code>-e "ssh -p 2222"</code> — нестандартный порт SSH (для scp порт задаётся заглавной <code>-P</code>).</li>
+    <li>
+      <code>--exclude 'assets/css'</code> — исключить из переноса. Путь считается от корня источника и совпадает на любой глубине;
+      <code>'/assets/css'</code> — только в корне. Исключённое не удаляется при <code>--delete</code>.
+    </li>
+    <li>
+      <code>--delete</code> — удалить в назначении всё, чего нет в источнике.
+      <b>Самый опасный параметр:</b> проверяйте путь назначения и строки <code>deleting</code> в выводе <code>-nv</code>.
+    </li>
+    <li><code>--mkpath</code> — создать всю цепочку каталогов назначения. Без него создаётся только последний уровень.</li>
+  </ul>
+
+  <p>
+    Подробный разбор: <a href="/2026/10/30/rsync/">Основы rsync</a>.<br>
+    Мануал: <code>man rsync</code>, онлайн-версия — <a href="https://download.samba.org/pub/rsync/rsync.1">rsync(1)</a>.
+  </p>
+</article>
+
+<article> <!-- scp -->
+  <h2>Команда scp</h2>
+  <p>
+    <dfn>scp</dfn> — копирует файлы между хостами по SSH. Работает подобно команде <i>cp</i>:
+    сначала <b>источник</b>, потом <b>назначение</b>. Удалённый путь записывается как <code>user@host:путь</code>.
+    Относительный путь считается от домашнего каталога, а <code>user@host:</code> — это сам домашний каталог.
+  </p>
+  <p>Примеры:</p>
+  <ul>
+    <li>
+      <p><b>Файл на сервер</b> —<br>
+      <code>~]$ scp file.txt user@host:/remote/dir/</code></p>
+    </li>
+    <li>
+      <p><b>Файл с сервера</b> в текущий каталог —<br>
+      <code>~]$ scp user@host:/remote/dir/file.txt .</code></p>
+    </li>
+    <li>
+      <p><b>Каталог</b> с сервера через <b>другой порт</b> —<br>
+      <code>~]$ scp -r -P 2222 user@host:/remote/dir .</code></p>
+    </li>
+  </ul>
+  <p>Внимание:</p>
+  <ul>
+    <li>порт у scp задаётся заглавной <code>-P</code>, а у ssh и в <code>rsync -e "ssh -p …"</code> — строчной;</li>
+    <li>для каталогов нужен <code>-r</code>;</li>
+    <li>существующие файлы в назначении перезаписываются без вопросов, пробного режима нет;</li>
+    <li>
+      для больших и повторных копирований лучше rsync. Разработчики OpenSSH в релизе
+      <a href="https://www.openssh.com/txt/release-8.0">8.0</a> (2019) назвали протокол scp устаревшим
+      и рекомендовали sftp и rsync. Начиная с <a href="https://www.openssh.com/txt/release-9.0">9.0</a> (2022)
+      команда <code>scp</code> по умолчанию работает через SFTP; прежний протокол включается флагом <code>-O</code>.
+    </li>
+  </ul>
+  <p>Мануал: <code>man scp</code>, онлайн-версия — <a href="https://man.openbsd.org/scp">scp(1)</a>.</p>
+</article>
+<article> <!-- Инструкция по настройке сервера -->
+  <h2>Инструкция по настройке и запуску веб-сервера</h2>
+  <p><em>Для <strong>AlmaLinux 8</strong> и <strong>Debian</strong>. Команды для Debian собраны по документации и пока не проверены.</em></p>
+  <p>
+    <b>Порядок:</b> DNS → пользователь → SSH (ключи → конфиг → SELinux → firewall → <b>только потом применить</b>) →
+    веб-сервер → сертификат.<br>
+    Новый порт SSH применяем <b>после</b> открытия его в firewall, иначе потеряем доступ к серверу.
+  </p>
+  <p>Обозначения: <code>your_domain.com</code>, <code>your_username</code>, <code>host</code>, порт SSH — <code>2222</code>.</p>
+
+  <h3>1. DNS</h3>
+  <ul>
+    <li>A-запись с IPv4 сервера для <b>your_domain.com</b> и <b>www.your_domain.com</b>, для IPv6 — AAAA.</li>
+    <li>Проверка — <code>~]$ dig +short your_domain.com</code></li>
+  </ul>
+  <p>Важно: DNS должен работать <b>до</b> получения сертификата.</p>
+  <hr />
+
+  <h3>2. Пользователь с sudo</h3>
+  <p>Под root в консоли хостера (VNC):</p>
+  <figure>
+    <figcaption>AlmaLinux 8</figcaption>
     <ul>
-      <li><code>-a</code> — режим архива: рекурсия, ссылки, права, время, группа, владелец. Владелец и группа сохраняются, только если приёмник работает от root.</li>
-      <li><code>-n</code> — пробный прогон, <code>-v</code> — подробный вывод, <code>-i</code> — что именно меняется в каждом файле. В конце вывода должно быть <code>(DRY RUN)</code>.</li>
-      <li><code>-e "ssh -p 2222"</code> — нестандартный порт SSH (для scp порт задаётся заглавной <code>-P</code>).</li>
-      <li>
-        <code>--exclude 'assets/css'</code> — исключить из переноса. Путь считается от корня источника и совпадает на любой глубине;
-        <code>'/assets/css'</code> — только в корне. Исключённое не удаляется при <code>--delete</code>.
-      </li>
-      <li>
-        <code>--delete</code> — удалить в назначении всё, чего нет в источнике.
-        <b>Самый опасный параметр:</b> проверяйте путь назначения и строки <code>deleting</code> в выводе <code>-nv</code>.
-      </li>
-      <li><code>--mkpath</code> — создать всю цепочку каталогов назначения. Без него создаётся только последний уровень.</li>
+      <li><code>~]# useradd your_username</code></li>
+      <li><code>~]# passwd your_username</code></li>
+      <li><code>~]# usermod -aG wheel your_username</code></li>
     </ul>
-
-    <p>
-      Подробный разбор: <a href="/2026/10/30/rsync/">Основы rsync</a>.<br>
-      Мануал: <code>man rsync</code>, онлайн-версия — <a href="https://download.samba.org/pub/rsync/rsync.1">rsync(1)</a>.
-    </p>
-  </article>
-
-  <article> <!-- scp -->
-    <h2>Команда scp</h2>
-    <p>
-      <dfn>scp</dfn> — копирует файлы между хостами по SSH. Работает подобно команде <i>cp</i>:
-      сначала <b>источник</b>, потом <b>назначение</b>. Удалённый путь записывается как <code>user@host:путь</code>.
-      Относительный путь считается от домашнего каталога, а <code>user@host:</code> — это сам домашний каталог.
-    </p>
-    <p>Примеры:</p>
+  </figure>
+  <figure>
+    <figcaption>Debian</figcaption>
     <ul>
-      <li>
-        <p><b>Файл на сервер</b> —<br>
-          <code>~]$ scp file.txt user@host:/remote/dir/</code></p>
-      </li>
-      <li>
-        <p><b>Файл с сервера</b> в текущий каталог —<br>
-          <code>~]$ scp user@host:/remote/dir/file.txt .</code></p>
-      </li>
-      <li>
-        <p><b>Каталог</b> с сервера через <b>другой порт</b> —<br>
-          <code>~]$ scp -r -P 2222 user@host:/remote/dir .</code></p>
-      </li>
+      <li><code>~]# apt install sudo</code> — если sudo не установлен</li>
+      <li><code>~]# adduser your_username</code> — создаёт домашний каталог и спрашивает пароль</li>
+      <li><code>~]# usermod -aG sudo your_username</code></li>
     </ul>
-    <p>Внимание:</p>
-    <ul>
-      <li>порт у scp задаётся заглавной <code>-P</code>, а у ssh и в <code>rsync -e "ssh -p …"</code> — строчной;</li>
-      <li>для каталогов нужен <code>-r</code>;</li>
-      <li>существующие файлы в назначении перезаписываются без вопросов, пробного режима нет;</li>
-      <li>
-        для больших и повторных копирований лучше rsync. Разработчики OpenSSH в релизе
-        <a href="https://www.openssh.com/txt/release-8.0">8.0</a> (2019) назвали протокол scp устаревшим
-        и рекомендовали sftp и rsync. Начиная с <a href="https://www.openssh.com/txt/release-9.0">9.0</a> (2022)
-        команда <code>scp</code> по умолчанию работает через SFTP; прежний протокол включается флагом <code>-O</code>.
-      </li>
-    </ul>
-    <p>Мануал: <code>man scp</code>, онлайн-версия — <a href="https://man.openbsd.org/scp">scp(1)</a>.</p>
-  </article>
-  <article> <!-- Инструкция по настройке сервера -->
-    <h2>Инструкция по настройке и запуску веб-сервера</h2>
-    <p><em>Для <strong>AlmaLinux 8</strong> и <strong>Debian</strong>. Команды для Debian собраны по документации и пока не проверены.</em></p>
-    <p>
-      <b>Порядок:</b> DNS → пользователь → SSH (ключи → конфиг → SELinux → firewall → <b>только потом применить</b>) →
-      веб-сервер → сертификат.<br>
-      Новый порт SSH применяем <b>после</b> открытия его в firewall, иначе потеряем доступ к серверу.
-    </p>
-    <p>Обозначения: <code>your_domain.com</code>, <code>your_username</code>, <code>host</code>, порт SSH — <code>2222</code>.</p>
+  </figure>
+  <p>Проверка: <code>~]# su - your_username</code>, затем <code>~]$ sudo whoami</code> → <code>root</code>. Дальше работаем по SSH под новым пользователем.</p>
+  <hr />
 
-    <h3>1. DNS</h3>
-    <ul>
-      <li>A-запись с IPv4 сервера для <b>your_domain.com</b> и <b>www.your_domain.com</b>, для IPv6 — AAAA.</li>
-      <li>Проверка — <code>~]$ dig +short your_domain.com</code></li>
-    </ul>
-    <p>Важно: DNS должен работать <b>до</b> получения сертификата.</p>
-    <hr />
+  <h3>3. Настройка SSH</h3>
+  <p>Для Windows 11: <a href="/2026/10/30/ssh-keys-windows/">Настройка ключей OpenSSH в Windows 11</a></p>
 
-    <h3>2. Пользователь с sudo</h3>
-    <p>Под root в консоли хостера (VNC):</p>
-    <figure>
-      <figcaption>AlmaLinux 8</figcaption>
-      <ul>
-        <li><code>~]# useradd your_username</code></li>
-        <li><code>~]# passwd your_username</code></li>
-        <li><code>~]# usermod -aG wheel your_username</code></li>
-      </ul>
-    </figure>
-    <figure>
-      <figcaption>Debian</figcaption>
-      <ul>
-        <li><code>~]# apt install sudo</code> — если sudo не установлен</li>
-        <li><code>~]# adduser your_username</code> — создаёт домашний каталог и спрашивает пароль</li>
-        <li><code>~]# usermod -aG sudo your_username</code></li>
-      </ul>
-    </figure>
-    <p>Проверка: <code>~]# su - your_username</code>, затем <code>~]$ sudo whoami</code> → <code>root</code>. Дальше работаем по SSH под новым пользователем.</p>
-    <hr />
+  <h4>3.1 Ключи</h4>
+  <ul>
+    <li><code>~]$ ssh-keygen -t ed25519</code> — на локальной машине.</li>
+    <li><code>~]$ ssh-copy-id your_username@host</code> — отправить открытый ключ (пока порт 22).</li>
+    <li>Без <code>ssh-copy-id</code> — добавить <code>~/.ssh/id_ed25519.pub</code> в <code>~/.ssh/authorized_keys</code> на сервере.</li>
+    <li>Права на сервере: <code>~]$ chmod 700 ~/.ssh</code>, <code>~]$ chmod 600 ~/.ssh/authorized_keys</code></li>
+  </ul>
+  <p>Внимание: перед отключением паролей проверьте вход по ключу <b>в новой сессии</b>.</p>
 
-    <h3>3. Настройка SSH</h3>
-    <p>Для Windows 11: <a href="/pages/ssh-keys-windows.html">Настройка OpenSSH в Windows 11</a></p>
+  <h4>3.2 Конфигурация sshd</h4>
+  <p><code>~]$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code><br>
+     <code>~]$ sudo nano /etc/ssh/sshd_config</code></p>
+  <ul>
+    <li>Отключить пароли — <b>PasswordAuthentication no</b></li>
+    <li>Запретить вход root — <b>PermitRootLogin no</b></li>
+    <li>Сменить порт — <b>Port 2222</b></li>
+  </ul>
+  <ul>
+    <li><code>~]$ sudo sshd -t</code> — проверка синтаксиса (без вывода = ошибок нет).</li>
+    <li><code>~]$ sudo sshd -T | grep -Ei '^(port|passwordauthentication|permitrootlogin) '</code> — что sshd применит на самом деле.</li>
+  </ul>
+  <p>
+    На Debian в начале <code>sshd_config</code> подключается <code>sshd_config.d/*.conf</code>, и там действует
+    <b>первое</b> найденное значение директивы. Если <code>sshd -T</code> показывает не то, что вы задали, ищите в этом каталоге.
+  </p>
+  <p>⚠️ Пока <b>не применяем</b>: сначала 3.3 и 3.4.</p>
 
-    <h4>3.1 Ключи</h4>
-    <ul>
-      <li><code>~]$ ssh-keygen -t ed25519</code> — на локальной машине.</li>
-      <li><code>~]$ ssh-copy-id your_username@host</code> — отправить открытый ключ (пока порт 22).</li>
-      <li>Без <code>ssh-copy-id</code> — добавить <code>~/.ssh/id_ed25519.pub</code> в <code>~/.ssh/authorized_keys</code> на сервере.</li>
-      <li>Права на сервере: <code>~]$ chmod 700 ~/.ssh</code>, <code>~]$ chmod 600 ~/.ssh/authorized_keys</code></li>
-    </ul>
-    <p>Внимание: перед отключением паролей проверьте вход по ключу <b>в новой сессии</b>.</p>
+  <h4>3.3 SELinux: разрешить новый порт (только AlmaLinux)</h4>
+  <ul>
+    <li><code>~]$ sestatus</code> — если <i>disabled</i>, шаг пропускаем.</li>
+    <li><code>~]$ sudo dnf install -y policycoreutils-python-utils</code></li>
+    <li><code>~]$ sudo semanage port -a -t ssh_port_t -p tcp 2222</code></li>
+    <li><code>~]$ semanage port -l | grep ssh</code> — должно быть <code>2222, 22</code>.</li>
+  </ul>
+  <p>Debian: для sshd AppArmor ничего делать не нужно.</p>
 
-    <h4>3.2 Конфигурация sshd</h4>
-    <p><code>~]$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code><br>
-      <code>~]$ sudo nano /etc/ssh/sshd_config</code></p>
+  <h4>3.4 Firewall: открыть новый порт</h4>
+  <figure>
+    <figcaption>AlmaLinux 8 (firewalld)</figcaption>
     <ul>
-      <li>Отключить пароли — <b>PasswordAuthentication no</b></li>
-      <li>Запретить вход root — <b>PermitRootLogin no</b></li>
-      <li>Сменить порт — <b>Port 2222</b></li>
+      <li><code>~]$ sudo firewall-cmd --permanent --add-port=2222/tcp</code></li>
+      <li><code>~]$ sudo firewall-cmd --reload</code></li>
+      <li><code>~]$ sudo firewall-cmd --list-ports</code></li>
     </ul>
+  </figure>
+  <figure>
+    <figcaption>Debian (ufw)</figcaption>
     <ul>
-      <li><code>~]$ sudo sshd -t</code> — проверка синтаксиса (без вывода = ошибок нет).</li>
-      <li><code>~]$ sudo sshd -T | grep -Ei '^(port|passwordauthentication|permitrootlogin) '</code> — что sshd применит на самом деле.</li>
+      <li><code>~]$ sudo apt install ufw</code></li>
+      <li><code>~]$ sudo ufw allow 22/tcp</code> — пока SSH на 22, иначе включение ufw оборвёт сессию</li>
+      <li><code>~]$ sudo ufw allow 2222/tcp</code></li>
+      <li><code>~]$ sudo ufw enable</code>, затем <code>~]$ sudo ufw status</code></li>
     </ul>
-    <p>
-      На Debian в начале <code>sshd_config</code> подключается <code>sshd_config.d/*.conf</code>, и там действует
-      <b>первое</b> найденное значение директивы. Если <code>sshd -T</code> показывает не то, что вы задали, ищите в этом каталоге.
-    </p>
-    <p>⚠️ Пока <b>не применяем</b>: сначала 3.3 и 3.4.</p>
+  </figure>
+  <p>Сервер в облаке — откройте порт ещё и в сетевом экране (security group) провайдера.</p>
 
-    <h4>3.3 SELinux: разрешить новый порт (только AlmaLinux)</h4>
-    <ul>
-      <li><code>~]$ sestatus</code> — если <i>disabled</i>, шаг пропускаем.</li>
-      <li><code>~]$ sudo dnf install -y policycoreutils-python-utils</code></li>
-      <li><code>~]$ sudo semanage port -a -t ssh_port_t -p tcp 2222</code></li>
-      <li><code>~]$ semanage port -l | grep ssh</code> — должно быть <code>2222, 22</code>.</li>
-    </ul>
-    <p>Debian: для sshd AppArmor ничего делать не нужно.</p>
+  <h4>3.5 Применить и проверить</h4>
+  <ul>
+    <li>AlmaLinux — <code>~]$ sudo systemctl reload sshd</code></li>
+    <li>Debian — <code>~]$ sudo systemctl reload ssh</code></li>
+    <li>
+      Если <code>systemctl is-active ssh.socket</code> показывает <i>active</i> (Ubuntu 22.10+, возможны образы Debian),
+      порт задаётся сокетом, и <code>Port</code> из sshd_config игнорируется:
+      <code>~]$ sudo systemctl daemon-reload</code>, затем <code>~]$ sudo systemctl restart ssh.socket</code>
+    </li>
+    <li><code>~]$ sudo ss -tlnp | grep 2222</code> — порт слушается.</li>
+  </ul>
+  <p><b>Не закрывая старую сессию</b>, в новом окне терминала:</p>
+  <ul>
+    <li><code>~]$ ssh -p 2222 your_username@host</code> — пускает без пароля</li>
+    <li><code>~]$ sudo whoami</code> → <code>root</code></li>
+    <li><code>~]$ ssh -p 2222 root@host</code> — должен быть отказ</li>
+  </ul>
 
-    <h4>3.4 Firewall: открыть новый порт</h4>
-    <figure>
-      <figcaption>AlmaLinux 8 (firewalld)</figcaption>
-      <ul>
-        <li><code>~]$ sudo firewall-cmd --permanent --add-port=2222/tcp</code></li>
-        <li><code>~]$ sudo firewall-cmd --reload</code></li>
-        <li><code>~]$ sudo firewall-cmd --list-ports</code></li>
-      </ul>
-    </figure>
-    <figure>
-      <figcaption>Debian (ufw)</figcaption>
-      <ul>
-        <li><code>~]$ sudo apt install ufw</code></li>
-        <li><code>~]$ sudo ufw allow 22/tcp</code> — пока SSH на 22, иначе включение ufw оборвёт сессию</li>
-        <li><code>~]$ sudo ufw allow 2222/tcp</code></li>
-        <li><code>~]$ sudo ufw enable</code>, затем <code>~]$ sudo ufw status</code></li>
-      </ul>
-    </figure>
-    <p>Сервер в облаке — откройте порт ещё и в сетевом экране (security group) провайдера.</p>
-
-    <h4>3.5 Применить и проверить</h4>
-    <ul>
-      <li>AlmaLinux — <code>~]$ sudo systemctl reload sshd</code></li>
-      <li>Debian — <code>~]$ sudo systemctl reload ssh</code></li>
-      <li>
-        Если <code>systemctl is-active ssh.socket</code> показывает <i>active</i> (Ubuntu 22.10+, возможны образы Debian),
-        порт задаётся сокетом, и <code>Port</code> из sshd_config игнорируется:
-        <code>~]$ sudo systemctl daemon-reload</code>, затем <code>~]$ sudo systemctl restart ssh.socket</code>
-      </li>
-      <li><code>~]$ sudo ss -tlnp | grep 2222</code> — порт слушается.</li>
-    </ul>
-    <p><b>Не закрывая старую сессию</b>, в новом окне терминала:</p>
-    <ul>
-      <li><code>~]$ ssh -p 2222 your_username@host</code> — пускает без пароля</li>
-      <li><code>~]$ sudo whoami</code> → <code>root</code></li>
-      <li><code>~]$ ssh -p 2222 root@host</code> — должен быть отказ</li>
-    </ul>
-
-    <h4>3.6 Закрыть порт 22</h4>
-    <p>Только после успешной проверки порта 2222.</p>
-    <ul>
-      <li>AlmaLinux — <code>~]$ sudo firewall-cmd --permanent --remove-service=ssh</code>, затем <code>~]$ sudo firewall-cmd --reload</code></li>
-      <li>Debian — <code>~]$ sudo ufw delete allow 22/tcp</code></li>
-    </ul>
-    <p>Чтобы не вводить порт, на локальной машине в <code>~/.ssh/config</code>:</p>
-    <pre><code>Host myserver
+  <h4>3.6 Закрыть порт 22</h4>
+  <p>Только после успешной проверки порта 2222.</p>
+  <ul>
+    <li>AlmaLinux — <code>~]$ sudo firewall-cmd --permanent --remove-service=ssh</code>, затем <code>~]$ sudo firewall-cmd --reload</code></li>
+    <li>Debian — <code>~]$ sudo ufw delete allow 22/tcp</code></li>
+  </ul>
+  <p>Чтобы не вводить порт, на локальной машине в <code>~/.ssh/config</code>:</p>
+  <pre><code>Host myserver
     HostName host
     User your_username
     Port 2222</code></pre>
-    <hr />
+  <hr />
 
-    <h3>4. Установка и запуск веб-сервера</h3>
-    <p>Выберите один: <a href="https://httpd.apache.org/">Apache</a> или <a href="https://nginx.org/ru/">Nginx</a>.</p>
+  <h3>4. Установка и запуск веб-сервера</h3>
+  <p>Выберите один: <a href="https://httpd.apache.org/">Apache</a> или <a href="https://nginx.org/ru/">Nginx</a>.</p>
 
-    <h4>4.1 Установка</h4>
-    <figure>
-      <figcaption>AlmaLinux 8</figcaption>
-      <ul>
-        <li>Apache — <code>~]$ sudo dnf install -y httpd</code>, затем <code>~]$ sudo systemctl enable --now httpd</code></li>
-        <li>Nginx — <code>~]$ sudo dnf install -y nginx</code>, затем <code>~]$ sudo systemctl enable --now nginx</code></li>
-      </ul>
-    </figure>
-    <figure>
-      <figcaption>Debian (запускается и включается автоматически)</figcaption>
-      <ul>
-        <li>Apache — <code>~]$ sudo apt install -y apache2</code></li>
-        <li>Nginx — <code>~]$ sudo apt install -y nginx</code></li>
-      </ul>
-    </figure>
+  <h4>4.1 Установка</h4>
+  <figure>
+    <figcaption>AlmaLinux 8</figcaption>
+    <ul>
+      <li>Apache — <code>~]$ sudo dnf install -y httpd</code>, затем <code>~]$ sudo systemctl enable --now httpd</code></li>
+      <li>Nginx — <code>~]$ sudo dnf install -y nginx</code>, затем <code>~]$ sudo systemctl enable --now nginx</code></li>
+    </ul>
+  </figure>
+  <figure>
+    <figcaption>Debian (запускается и включается автоматически)</figcaption>
+    <ul>
+      <li>Apache — <code>~]$ sudo apt install -y apache2</code></li>
+      <li>Nginx — <code>~]$ sudo apt install -y nginx</code></li>
+    </ul>
+  </figure>
 
-    <h4>4.2 Порты 80 и 443</h4>
-    <figure>
-      <figcaption>AlmaLinux 8</figcaption>
-      <ul>
-        <li><code>~]$ sudo firewall-cmd --zone=public --permanent --add-service=http</code></li>
-        <li><code>~]$ sudo firewall-cmd --zone=public --permanent --add-service=https</code></li>
-        <li><code>~]$ sudo firewall-cmd --reload</code></li>
-        <li><code>~]$ sudo firewall-cmd --zone=public --list-all</code> — проверка. Подробнее: <a href="https://firewalld.org/documentation/howto/open-a-port-or-service.html">Open a Port or Service</a></li>
-      </ul>
-    </figure>
-    <figure>
-      <figcaption>Debian</figcaption>
-      <ul>
-        <li><code>~]$ sudo ufw allow 80/tcp</code>, <code>~]$ sudo ufw allow 443/tcp</code></li>
-      </ul>
-    </figure>
-    <p>Примечание: на моём сервере AlmaLinux 8 порты были открыты заранее (вероятно, образом хостера). Всегда проверяйте <code>--list-all</code>.</p>
-    <p>Проверка — <b>с локальной машины</b>, не с сервера: <code>~]$ curl -I http://your_domain.com</code></p>
+  <h4>4.2 Порты 80 и 443</h4>
+  <figure>
+    <figcaption>AlmaLinux 8</figcaption>
+    <ul>
+      <li><code>~]$ sudo firewall-cmd --zone=public --permanent --add-service=http</code></li>
+      <li><code>~]$ sudo firewall-cmd --zone=public --permanent --add-service=https</code></li>
+      <li><code>~]$ sudo firewall-cmd --reload</code></li>
+      <li><code>~]$ sudo firewall-cmd --zone=public --list-all</code> — проверка. Подробнее: <a href="https://firewalld.org/documentation/howto/open-a-port-or-service.html">Open a Port or Service</a></li>
+    </ul>
+  </figure>
+  <figure>
+    <figcaption>Debian</figcaption>
+    <ul>
+      <li><code>~]$ sudo ufw allow 80/tcp</code>, <code>~]$ sudo ufw allow 443/tcp</code></li>
+    </ul>
+  </figure>
+  <p>Примечание: на моём сервере AlmaLinux 8 порты были открыты заранее (вероятно, образом хостера). Всегда проверяйте <code>--list-all</code>.</p>
+  <p>Проверка — <b>с локальной машины</b>, не с сервера: <code>~]$ curl -I http://your_domain.com</code></p>
 
-    <h4>4.3 Виртуальный хост (Apache)</h4>
-    <p>AlmaLinux: файл <code>/etc/httpd/conf.d/your_domain.com.conf</code></p>
-    <pre><code>&lt;VirtualHost *:80&gt;
+  <h4>4.3 Виртуальный хост (Apache)</h4>
+  <p>AlmaLinux: файл <code>/etc/httpd/conf.d/your_domain.com.conf</code></p>
+  <pre><code>&lt;VirtualHost *:80&gt;
     ServerName your_domain.com
     ServerAlias www.your_domain.com
     DocumentRoot /var/www/html
@@ -300,32 +300,32 @@
         Require all granted
     &lt;/Directory&gt;
 &lt;/VirtualHost&gt;</code></pre>
-    <ul>
-      <li><code>-Indexes</code> — не показывать список файлов каталога. <code>AllowOverride All</code> — только если нужен <code>.htaccess</code>.</li>
-      <li>AlmaLinux — <code>~]$ sudo apachectl configtest</code>, затем <code>~]$ sudo systemctl reload httpd</code></li>
-    </ul>
-    <p>
-      Debian: файл в <code>/etc/apache2/sites-available/your_domain.com.conf</code>, в путях логов <code>${APACHE_LOG_DIR}/</code>. Затем
-      <code>~]$ sudo a2ensite your_domain.com.conf</code>, <code>~]$ sudo a2dissite 000-default.conf</code>,
-      <code>~]$ sudo apache2ctl configtest</code>, <code>~]$ sudo systemctl reload apache2</code>
-    </p>
-    <p>
-      Nginx: файл в <code>/etc/nginx/conf.d/</code> (Alma) или <code>sites-available/</code> + ссылка в <code>sites-enabled/</code> (Debian).
-      Проверка — <code>~]$ sudo nginx -t</code>. Пример конфигурации — в посте.
-    </p>
-    <p>Тест: <code>~]$ echo '&lt;h1&gt;It works&lt;/h1&gt;' | sudo tee /var/www/html/index.html</code></p>
-    <p>AlmaLinux: если после <code>mv</code> файлов в <code>/var/www/html</code> сайт отвечает 403 — <code>~]$ sudo restorecon -Rv /var/www/html</code></p>
-    <hr />
+  <ul>
+    <li><code>-Indexes</code> — не показывать список файлов каталога. <code>AllowOverride All</code> — только если нужен <code>.htaccess</code>.</li>
+    <li>AlmaLinux — <code>~]$ sudo apachectl configtest</code>, затем <code>~]$ sudo systemctl reload httpd</code></li>
+  </ul>
+  <p>
+    Debian: файл в <code>/etc/apache2/sites-available/your_domain.com.conf</code>, в путях логов <code>${APACHE_LOG_DIR}/</code>. Затем
+    <code>~]$ sudo a2ensite your_domain.com.conf</code>, <code>~]$ sudo a2dissite 000-default.conf</code>,
+    <code>~]$ sudo apache2ctl configtest</code>, <code>~]$ sudo systemctl reload apache2</code>
+  </p>
+  <p>
+    Nginx: файл в <code>/etc/nginx/conf.d/</code> (Alma) или <code>sites-available/</code> + ссылка в <code>sites-enabled/</code> (Debian).
+    Проверка — <code>~]$ sudo nginx -t</code>. Пример конфигурации — в посте.
+  </p>
+  <p>Тест: <code>~]$ echo '&lt;h1&gt;It works&lt;/h1&gt;' | sudo tee /var/www/html/index.html</code></p>
+  <p>AlmaLinux: если после <code>mv</code> файлов в <code>/var/www/html</code> сайт отвечает 403 — <code>~]$ sudo restorecon -Rv /var/www/html</code></p>
+  <hr />
 
-    <h3>5. Сертификат Let's Encrypt</h3>
-    <ul>
-      <li><a href="https://letsencrypt.org/ru/docs/">Документация Let's Encrypt</a></li>
-      <li><a href="https://certbot.eff.org/">Документация certbot</a></li>
-    </ul>
-    <p>Нужно: DNS указывает на сервер, порт 80 открыт, виртуальный хост с вашим доменом работает.</p>
+  <h3>5. Сертификат Let's Encrypt</h3>
+  <ul>
+    <li><a href="https://letsencrypt.org/ru/docs/">Документация Let's Encrypt</a></li>
+    <li><a href="https://certbot.eff.org/">Документация certbot</a></li>
+  </ul>
+  <p>Нужно: DNS указывает на сервер, порт 80 открыт, виртуальный хост с вашим доменом работает.</p>
 
-    <h4>5.1 Установка certbot</h4>
-    <pre><code># AlmaLinux 8
+  <h4>5.1 Установка certbot</h4>
+  <pre><code># AlmaLinux 8
 sudo dnf install -y epel-release
 sudo dnf install -y certbot python3-certbot-apache mod_ssl   # Apache
 sudo dnf install -y certbot python3-certbot-nginx            # Nginx
@@ -334,42 +334,48 @@ sudo dnf install -y certbot python3-certbot-nginx            # Nginx
 sudo apt install -y certbot python3-certbot-apache           # Apache
 sudo apt install -y certbot python3-certbot-nginx            # Nginx</code></pre>
 
-    <h4>5.2 AlmaLinux + Apache: ssl.conf</h4>
-    <p>
-      Пакет <code>mod_ssl</code> создаёт <code>/etc/httpd/conf.d/ssl.conf</code> с хостом на 443 и самоподписанным сертификатом
-      <code>localhost.crt</code>. Он может мешать certbot, поэтому убираем с копией:
-    </p>
-    <p><code>~]$ sudo mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak</code>, затем <code>~]$ sudo systemctl reload httpd</code></p>
+  <h4>5.2 AlmaLinux + Apache: ssl.conf</h4>
+  <p>
+    Пакет <code>mod_ssl</code> создаёт <code>/etc/httpd/conf.d/ssl.conf</code> с тестовым сертификатом <code>localhost.crt</code>.
+    Его создаёт <code>httpd-init.service</code> при <b>запуске</b> httpd. Если Apache уже работал при установке <code>mod_ssl</code>,
+    файла нет, и <code>configtest</code> (а с ним certbot) падает с ошибкой <code>SSLCertificateFile ... does not exist</code>.
+    Исправление — один из двух вариантов:
+  </p>
+  <ul>
+    <li><code>~]$ sudo systemctl restart httpd</code> — создаст <code>localhost.crt</code></li>
+    <li><code>~]$ sudo mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak</code> — убрать файл</li>
+  </ul>
+  <p>Затем <code>~]$ sudo apachectl configtest</code> → <i>Syntax OK</i>. Подробнее: <a href="/2026/10/30/letsencrypt-certbot/">О сертификатах Let's Encrypt</a>.</p>
 
-    <h4>5.3 Получение сертификата</h4>
-    <ul>
-      <li>Apache — <code>~]$ sudo certbot --apache -d your_domain.com -d www.your_domain.com</code></li>
-      <li>Nginx — <code>~]$ sudo certbot --nginx -d your_domain.com -d www.your_domain.com</code> (не проверено)</li>
-      <li>Проверка — <code>~]$ curl -I https://your_domain.com</code>, срок — <code>~]$ sudo certbot certificates</code></li>
-    </ul>
+  <h4>5.3 Получение сертификата</h4>
+  <ul>
+    <li>Apache — <code>~]$ sudo certbot --apache -d your_domain.com -d www.your_domain.com</code></li>
+    <li>Nginx — <code>~]$ sudo certbot --nginx -d your_domain.com -d www.your_domain.com</code> (не проверено)</li>
+    <li>Проверка — <code>~]$ curl -I https://your_domain.com</code>, срок — <code>~]$ sudo certbot certificates</code></li>
+  </ul>
 
-    <h4>5.4 Автоматическое продление</h4>
-    <ul>
-      <li><code>~]$ sudo certbot renew --dry-run</code> — только имитация, ничего не включает.</li>
-      <li><code>~]$ systemctl list-timers | grep certbot</code> — таймер должен быть в списке.</li>
-      <li>AlmaLinux, если пусто — <code>~]$ sudo systemctl enable --now certbot-renew.timer</code>. На Debian таймер включается пакетом.</li>
-    </ul>
-    <hr />
+  <h4>5.4 Автоматическое продление</h4>
+  <ul>
+    <li><code>~]$ sudo certbot renew --dry-run</code> — только имитация, ничего не включает.</li>
+    <li><code>~]$ systemctl list-timers | grep certbot</code> — таймер должен быть в списке.</li>
+    <li>AlmaLinux, если пусто — <code>~]$ sudo systemctl enable --now certbot-renew.timer</code>. На Debian таймер включается пакетом.</li>
+  </ul>
+  <hr />
 
-    <h3>6. Рекомендации по безопасности и эксплуатации</h3>
-    <ul>
-      <li>При тестировании SSH держите одну открытую сессию. Запасной вход — консоль хостера.</li>
-      <li>Порты открывайте и в сетевом экране провайдера, если сервер в облаке.</li>
-      <li>Перед правкой делайте копию конфигураций: <code>~]$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></li>
-      <li>fail2ban на нестандартном порту: в <code>/etc/fail2ban/jail.local</code> секция <code>[sshd]</code> с <code>enabled = true</code> и <code>port = 2222</code>.</li>
-      <li>Следите за сроком сертификата: <code>~]$ sudo certbot certificates</code></li>
-      <li>Обновления: <code>~]$ sudo dnf update</code> (Alma), <code>~]$ sudo apt update &amp;&amp; sudo apt upgrade</code> (Debian).</li>
-    </ul>
-    <p>
-      Типичные проблемы и подробный разбор: <a href="/2026/10/30/server-setup/">Настройка и запуск веб-сервера</a>.<br>
-      Мануалы: <code>man sshd_config</code>, <code>man firewall-cmd</code>, <code>man ufw</code>; онлайн — <a href="https://man.openbsd.org/sshd_config">sshd_config(5)</a>.
-    </p>
-  </article>
+  <h3>6. Рекомендации по безопасности и эксплуатации</h3>
+  <ul>
+    <li>При тестировании SSH держите одну открытую сессию. Запасной вход — консоль хостера.</li>
+    <li>Порты открывайте и в сетевом экране провайдера, если сервер в облаке.</li>
+    <li>Перед правкой делайте копию конфигураций: <code>~]$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></li>
+    <li>fail2ban на нестандартном порту: в <code>/etc/fail2ban/jail.local</code> секция <code>[sshd]</code> с <code>enabled = true</code> и <code>port = 2222</code>.</li>
+    <li>Следите за сроком сертификата: <code>~]$ sudo certbot certificates</code></li>
+    <li>Обновления: <code>~]$ sudo dnf update</code> (Alma), <code>~]$ sudo apt update &amp;&amp; sudo apt upgrade</code> (Debian).</li>
+  </ul>
+  <p>
+    Типичные проблемы и подробный разбор: <a href="/2026/10/30/server-setup/">Настройка и запуск веб-сервера</a>.<br>
+    Мануалы: <code>man sshd_config</code>, <code>man firewall-cmd</code>, <code>man ufw</code>; онлайн — <a href="https://man.openbsd.org/sshd_config">sshd_config(5)</a>.
+  </p>
+</article>
 
 </main>
 
