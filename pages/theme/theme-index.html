@@ -1,6 +1,8 @@
 ---
 layout: theme
+title: Документация темы
 pagesH1: Документация Jekyll-темы LinuxGik
+description: "Структура каталогов, конфигурация, макеты, front matter, правила ссылок и оформления команд в теме LinuxGik."
 ---
 
 <article>
@@ -8,65 +10,170 @@ pagesH1: Документация Jekyll-темы LinuxGik
         <header>
             <h2>Структура каталогов и файлов</h2>
         </header>
-            <p>
-                Все страницы сайта хранятся в каталоге <code>pages/</code>. При этом блог и его посты хранятся в 
-                каталоге <code>_posts/</code>
-            </p>
-            <p>
-                Сайт разделен на <b>разделы</b>. Раздел делится на <b>подразделы</b>. Любой подраздел так же может делиться на
-                дополнительные подразделы, и так по цепочке по мере надобности.
-            </p>
-            <p>
-                Переход по разделам осуществляется через главное меню сайта. Главное меню сайта отображается на любой
-                странице сайта.
-            </p>
-            <h3>Разделы сайта</h3>
-                <p>Сайт разделен на разделы. Имя каждого раздела отображается в главном меню сайта</p>
-                <p>В структуре каталогов, у каждого раздела свой каталог в <code>pages/</code></p>
-                <p><i>Каталог раздела</i> содержит главную страницу, которая подключается к главному меню сайта.</p>
-                    <h4>Страницы раздела</h4>
-                        <p>Все <i>страницы раздела</i> находятся в каталоге своего раздела.</p>
+        <p>
+            Все страницы сайта хранятся в каталоге <code>pages/</code>. При этом блог и его посты хранятся в
+            каталоге <code>_posts/</code>
+        </p>
+        <pre><code>.
+├── _config.yml      настройки сайта
+├── _layouts/        макеты: default.html, post.html, theme.html
+├── _posts/          посты (markdown): ГГГГ-ММ-ДД-имя.md
+├── assets/
+│   ├── css/         main.css подключает остальные файлы через @import
+│   └── js/          copycode.js
+├── pages/           страницы (html), по разделам
+│   ├── theme/       документация этой темы
+│   └── windows/     раздел «Windows»
+├── index.html       главная страница (без макета)
+├── CNAME            домен сайта
+└── Gemfile          зависимости для локальной сборки</code></pre>
+        <p>
+            Имена <code>_layouts</code> и <code>_posts</code> должны быть точными. При опечатке в имени каталога
+            Jekyll ничего не сообщает и просто не видит файлы.
+        </p>
+        <p>
+            Сайт разделен на <b>разделы</b>. Раздел делится на <b>подразделы</b>. Любой подраздел так же может делиться на
+            дополнительные подразделы, и так по цепочке по мере надобности.
+        </p>
+        <p>
+            Переход по разделам осуществляется через главное меню сайта. Главное меню сайта отображается на любой
+            странице сайта.
+        </p>
+        <h3>Разделы сайта</h3>
+        <p>Сайт разделен на разделы. Имя каждого раздела отображается в главном меню сайта</p>
+        <p>В структуре каталогов, у каждого раздела свой каталог в <code>pages/</code></p>
+        <p><i>Каталог раздела</i> содержит главную страницу, которая подключается к главному меню сайта.</p>
+        <h4>Страницы раздела</h4>
+        <p>Все <i>страницы раздела</i> находятся в каталоге своего раздела.</p>
     </section>
+
+    <section>
+        <header>
+            <h2>Конфигурация: _config.yml</h2>
+        </header>
+        <pre><code>title: LinuxGik
+url: https://linuxgik.ru
+lang: ru
+permalink: /:year/:month/:day/:title/</code></pre>
+        <table>
+            <thead>
+            <tr><th>Параметр</th><th>Назначение</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>title</code></td><td>название сайта: идёт в <code>&lt;title&gt;</code> и в подвал сайта</td></tr>
+            <tr><td><code>url</code></td><td>адрес сайта</td></tr>
+            <tr><td><code>lang</code></td><td>язык, попадает в атрибут <code>lang</code> страницы</td></tr>
+            <tr><td><code>permalink</code></td><td>формат адресов постов: <code>/2026/10/30/rsync/</code></td></tr>
+            </tbody>
+        </table>
+        <p>
+            <b>Внимание:</b> смена <code>permalink</code> меняет адреса всех постов. Ссылки, прописанные вручную
+            (например, на главной), придётся поправить.
+        </p>
+        <p>После правки <code>_config.yml</code> локальный сервер нужно перезапустить.</p>
+    </section>
+
+    <section>
+        <header>
+            <h2>Макеты</h2>
+        </header>
+        <p>Макеты лежат в <code>_layouts/</code>. Страница выбирает макет переменной <code>layout</code> в front matter.</p>
+        <table>
+            <thead>
+            <tr><th>Макет</th><th>Наследует</th><th>Что выводит</th></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>default</code></td>
+                <td>&mdash;</td>
+                <td>
+                    каркас страницы: <code>&lt;head&gt;</code> (заголовок вкладки, описание, <code>main.css</code>),
+                    меню, <code>&lt;main&gt;</code> с содержимым, подвал сайта
+                </td>
+            </tr>
+            <tr>
+                <td><code>post</code></td>
+                <td><code>default</code></td>
+                <td>
+                    статья: заголовок <code>h1</code> из <code>title</code>, дата, теги, текст поста.
+                    Если в front matter есть <code>page</code>, внизу ссылка на страницу-выжимку
+                </td>
+            </tr>
+            <tr>
+                <td><code>theme</code></td>
+                <td><code>default</code></td>
+                <td>
+                    страница темы и разделов: заголовок <code>h1</code> из <code>pagesH1</code>, текст страницы.
+                    Если есть <code>post</code>, внизу ссылка на пост
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            Главная страница <code>index.html</code> макета не использует, потому что у неё нет front matter.
+        </p>
+        <h3>Правила для макетов</h3>
+        <ul>
+            <li>
+                В макете обязательно должна быть строка <code>{% raw %}{{ content }}{% endraw %}</code>.
+                Без неё страница выводится пустой.
+            </li>
+            <li>
+                Макет-наследник начинается с front matter <code>layout: default</code>. Его содержимое
+                подставляется на место <code>{% raw %}{{ content }}{% endraw %}</code> родителя.
+            </li>
+            <li>
+                <code>&lt;header&gt;</code> и <code>&lt;footer&gt;</code> в <code>default</code> стоят прямо в
+                <code>&lt;body&gt;</code> и относятся к сайту. Внутри <code>&lt;article&gt;</code>
+                они относятся к статье. В CSS различайте их:
+                <code>body &gt; footer</code> и <code>article &gt; footer</code>.
+            </li>
+            <li>
+                Адреса внутри макетов пишите через фильтр <code>{% raw %}{{ '/путь/' | relative_url }}{% endraw %}</code>.
+            </li>
+        </ul>
+    </section>
+
     <section>
         <header>
             <h2>Front matter</h2>
         </header>
-            <p>
-                <i>Front matter</i> &mdash; блок YAML между двумя строками <code>---</code> в самом начале файла.
-                Jekyll обрабатывает файл (Liquid, layout) только если такой блок есть. Без него файл копируется в
-                <code>_site/</code> как есть.
-            </p>
-            <p>
-                Переменные из front matter доступны в шаблонах как <code>page.имя</code>.
-            </p>
-            <p>
-                <b>Внимание:</b> в файле с front matter Liquid обрабатывается и в теле. Чтобы показать
-                <code>{% raw %}{{ page.title }}{% endraw %}</code> как текст, оборачивайте его в
-                <code>&#123;% raw %&#125;...&#123;% endraw %&#125;</code>.
-            </p>
+        <p>
+            <i>Front matter</i> &mdash; блок YAML между двумя строками <code>---</code> в самом начале файла.
+            Jekyll обрабатывает файл (Liquid, макет) только если такой блок есть. Без него файл копируется в
+            <code>_site/</code> как есть.
+        </p>
+        <p>
+            Переменные из front matter доступны в шаблонах как <code>page.имя</code>.
+        </p>
+        <p>
+            <b>Внимание:</b> в файле с front matter Liquid обрабатывается и в теле. Чтобы показать
+            <code>{% raw %}{{ page.title }}{% endraw %}</code> как текст, оборачивайте его в
+            <code>&#123;% raw %&#125;...&#123;% endraw %&#125;</code>.
+        </p>
 
-            <h3>Связь поста и страницы</h3>
-                <p>
-                    Пост хранит полный разбор, страница &mdash; выжимку. Они ссылаются друг на друга через
-                    переменные <code>page</code> (в посте) и <code>post</code> (на странице). Значение &mdash; URL от корня сайта.
-                </p>
+        <h3>Связь поста и страницы</h3>
+        <p>
+            Пост хранит полный разбор, страница &mdash; выжимку. Они ссылаются друг на друга через
+            переменные <code>page</code> (в посте) и <code>post</code> (на странице). Значение &mdash; URL от корня сайта.
+        </p>
 
-            <h3>Front matter поста</h3>
-                <p>Файл лежит в <code>_posts/</code> и называется <code>ГГГГ-ММ-ДД-имя.md</code>.</p>
-                <table>
-                    <thead>
-                        <tr><th>Переменная</th><th>Обязательна</th><th>Назначение</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><code>layout</code></td><td>да</td><td>шаблон из <code>_layouts/</code>, значение <code>post</code></td></tr>
-                        <tr><td><code>title</code></td><td>да</td><td>заголовок поста, выводится как <code>h1</code>. Если есть двоеточие, берите в кавычки</td></tr>
-                        <tr><td><code>date</code></td><td>нет</td><td>дата, по умолчанию берётся из имени файла</td></tr>
-                        <tr><td><code>tags</code></td><td>нет</td><td>список тегов: <code>[rsync, ssh]</code></td></tr>
-                        <tr><td><code>description</code></td><td>да</td><td>краткое содержание: превью в списке постов и <code>&lt;meta name="description"&gt;</code></td></tr>
-                        <tr><td><code>page</code></td><td>нет</td><td>URL страницы-выжимки. Не задаётся, пока страницы нет</td></tr>
-                    </tbody>
-                </table>
-                <pre><code>---
+        <h3>Front matter поста</h3>
+        <p>Файл лежит в <code>_posts/</code> и называется <code>ГГГГ-ММ-ДД-имя.md</code>.</p>
+        <table>
+            <thead>
+            <tr><th>Переменная</th><th>Обязательна</th><th>Назначение</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>layout</code></td><td>да</td><td>значение <code>post</code></td></tr>
+            <tr><td><code>title</code></td><td>да</td><td>заголовок поста, выводится как <code>h1</code> и в заголовке вкладки. Если есть двоеточие, берите в кавычки</td></tr>
+            <tr><td><code>date</code></td><td>нет</td><td>дата, по умолчанию берётся из имени файла</td></tr>
+            <tr><td><code>tags</code></td><td>нет</td><td>список тегов: <code>[rsync, ssh]</code></td></tr>
+            <tr><td><code>description</code></td><td>да</td><td>краткое содержание для <code>&lt;meta name="description"&gt;</code></td></tr>
+            <tr><td><code>page</code></td><td>нет</td><td>URL страницы-выжимки. Не задаётся, пока страницы нет: иначе макет выведет ссылку на несуществующую страницу</td></tr>
+            </tbody>
+        </table>
+        <pre><code>---
 layout: post
 title: "Основы rsync: синхронизация каталога"
 date: 2026-10-30
@@ -74,31 +181,136 @@ tags: [rsync, ssh, деплой]
 description: "Краткое содержание поста."
 page: /pages/rsync/
 ---</code></pre>
+        <p>
+            В <code>description</code> не используйте двойной дефис <code>--</code>: Jekyll заменит его на тире.
+        </p>
 
-            <h3>Front matter страницы</h3>
-                <p>Файл лежит в <code>pages/</code>, в каталоге своего раздела.</p>
-                <table>
-                    <thead>
-                        <tr><th>Переменная</th><th>Обязательна</th><th>Назначение</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><code>layout</code></td><td>да</td><td>шаблон из <code>_layouts/</code>, значение <code>theme</code></td></tr>
-                        <tr><td><code>pagesH1</code></td><td>да</td><td>текст заголовка <code>h1</code> страницы</td></tr>
-                        <tr><td><code>description</code></td><td>да</td><td><code>&lt;meta name="description"&gt;</code></td></tr>
-                        <tr><td><code>post</code></td><td>да</td><td>URL поста с подробным разбором. Layout выводит из него ссылку «Подробнее»</td></tr>
-                    </tbody>
-                </table>
-                <pre><code>---
+        <h3>Front matter страницы</h3>
+        <p>Файл лежит в <code>pages/</code>, в каталоге своего раздела.</p>
+        <table>
+            <thead>
+            <tr><th>Переменная</th><th>Обязательна</th><th>Назначение</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>layout</code></td><td>да</td><td>значение <code>theme</code></td></tr>
+            <tr><td><code>title</code></td><td>да</td><td>заголовок вкладки браузера</td></tr>
+            <tr><td><code>pagesH1</code></td><td>да</td><td>текст заголовка <code>h1</code> страницы</td></tr>
+            <tr><td><code>description</code></td><td>да</td><td><code>&lt;meta name="description"&gt;</code></td></tr>
+            <tr><td><code>post</code></td><td>да</td><td>URL поста с подробным разбором. Макет выводит из него ссылку внизу страницы</td></tr>
+            </tbody>
+        </table>
+        <pre><code>---
 layout: theme
+title: rsync
 pagesH1: rsync
 description: "Шпаргалка по rsync."
 post: /2026/10/30/rsync/
 ---</code></pre>
 
-            <h4>Что идёт на страницу</h4>
-                <p>
-                    Команды, подводные камни и одна строка &laquo;зачем&raquo;. Объяснения, варианты и разбор ошибок остаются в посте.
-                </p>
+        <h4>Что идёт на страницу</h4>
+        <p>
+            Команды, подводные камни и одна строка &laquo;зачем&raquo;. Объяснения, варианты и разбор ошибок остаются в посте.
+        </p>
+    </section>
+
+    <section>
+        <header>
+            <h2>Ссылки</h2>
+        </header>
+        <table>
+            <thead>
+            <tr><th>Откуда</th><th>Куда</th><th>Как писать</th></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>пост</td>
+                <td>другой пост</td>
+                <td><code>[текст]({% raw %}{% post_url ГГГГ-ММ-ДД-имя %}{% endraw %})</code> &mdash; имя файла без <code>.md</code>. При опечатке сборка падает</td>
+            </tr>
+            <tr>
+                <td>главная</td>
+                <td>пост</td>
+                <td><code>/ГГГГ/ММ/ДД/имя/</code> &mdash; вручную, так как у <code>index.html</code> нет front matter и Liquid в нём не работает</td>
+            </tr>
+            <tr>
+                <td>любая</td>
+                <td>страница</td>
+                <td>путь от корня: <code>/pages/раздел/имя.html</code></td>
+            </tr>
+            <tr>
+                <td>любая</td>
+                <td>внешний сайт</td>
+                <td>полный адрес <code>https://...</code>. Для утверждений о чужих продуктах и версиях давайте ссылку на первоисточник</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Относительные пути вида <code>pages/имя.html</code> без начального слеша ломаются на вложенных страницах, не используйте их.</p>
+    </section>
+
+    <section>
+        <header>
+            <h2>Оформление команд</h2>
+        </header>
+        <ul>
+            <li>
+                <b>На страницах:</b> команда в <code>&lt;code&gt;</code> с приглашением <code>~]$</code> (обычный
+                пользователь) или <code>~]#</code> (root). Несколько строк &mdash; в <code>&lt;pre&gt;&lt;code&gt;</code> без приглашения.
+            </li>
+            <li>
+                <b>В постах:</b> блоки кода с указанием языка (<code>bash</code>, <code>powershell</code>,
+                <code>apache</code>), без приглашения, чтобы команды копировались целиком.
+            </li>
+            <li>
+                <b>Отличия систем:</b> отдельные блоки с подписью &laquo;AlmaLinux 8&raquo; и &laquo;Debian&raquo;.
+                Непроверенное помечается явно.
+            </li>
+            <li>
+                <b>Условные обозначения:</b> <code>your_domain.com</code>, <code>your_username</code>,
+                <code>host</code>, порт SSH <code>2222</code>.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <header>
+            <h2>Сборка и публикация</h2>
+        </header>
+        <p>Публикация: <code>git push</code> в ветку <code>main</code>. Сборку можно отслеживать на вкладке Actions репозитория.</p>
+        <table>
+            <thead>
+            <tr><th></th><th>Локально</th><th>GitHub Pages</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>Версия Jekyll</td><td>из <code>Gemfile.lock</code> (4.4.1)</td><td>собственная (на момент написания 3.10.0)</td></tr>
+            <tr><td><code>Gemfile</code></td><td>используется</td><td>игнорируется</td></tr>
+            <tr><td>Регистр в именах файлов</td><td>Windows не различает</td><td>различает</td></tr>
+            </tbody>
+        </table>
+        <p>
+            Чтобы локальная сборка совпадала с публикуемой, в <code>Gemfile</code> можно заменить <code>jekyll</code> на
+            <code>github-pages</code>.
+        </p>
+        <p>Файл <code>CNAME</code> удалять нельзя: в нём домен сайта.</p>
+    </section>
+
+    <section>
+        <header>
+            <h2>Типичные ошибки</h2>
+        </header>
+        <table>
+            <thead>
+            <tr><th>Симптом</th><th>Причина</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>Страницы открываются пустыми</td><td>в макете нет <code>{% raw %}{{ content }}{% endraw %}</code></td></tr>
+            <tr><td>Макет не применяется</td><td>опечатка в имени <code>_layouts</code> или значения <code>layout</code>; Jekyll молчит</td></tr>
+            <tr><td>Пост не появился на сайте</td><td>имя файла не по формату <code>ГГГГ-ММ-ДД-имя.md</code> или дата в будущем</td></tr>
+            <tr><td>Сборка упала на <code>post_url</code></td><td>нет поста с таким именем файла</td></tr>
+            <tr><td>Фигурные скобки <code>{% raw %}{{ }}{% endraw %}</code> пропали из текста</td><td>Liquid обработал их; оберните в <code>&#123;% raw %&#125;</code></td></tr>
+            <tr><td>В описании вместо <code>--</code> появилось тире</td><td>типографика Jekyll; перепишите описание</td></tr>
+            <tr><td>Локально работает, онлайн нет</td><td>разные версии Jekyll, регистр в именах, не запушены файлы</td></tr>
+            </tbody>
+        </table>
     </section>
     <footer>
         <p>Это подвал статьи &lt;article&gt;</p>
