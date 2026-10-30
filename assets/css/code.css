@@ -7,3 +7,109 @@ code {
     border-radius: 4px;
 
 }
+
+
+/*  Оформление блоков кода из генератора */
+
+/* YAML */
+
+/* Блок кода — тема «VS Code Dark» */
+.code-block {
+    --cb-bg: #1e1e1e;
+    --cb-head-bg: #2c2c34;
+    --cb-border: #3a3a44;
+    --cb-text: #d4d4d4;
+    --cb-line-num: #6e7681;
+    --cb-select: #264f78;
+    --cb-btn-text: #c9d1d9;
+    --cb-btn-border: #3a3a44;
+    --cb-btn-hover-bg: #3a3a44;
+    --cb-copied: #7ee787;
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--cb-bg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.08);
+    font-family: ui-monospace, "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, "Courier New", monospace;
+}
+
+.code-block__head {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .55rem .9rem;
+    background: var(--cb-head-bg);
+    border-bottom: 1px solid var(--cb-border);
+    font-size: .82rem;
+}
+
+.code-block__file {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    min-width: 0;
+    font-size: .8rem;
+    color: var(--cb-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.code-block__file svg { flex-shrink: 0; opacity: .7; }
+
+.code-block__copy {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: .25rem .65rem;
+    font-size: .75rem;
+    color: var(--cb-btn-text);
+    background: transparent;
+    border: 1px solid var(--cb-btn-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s;
+}
+.code-block__copy:hover { background: var(--cb-btn-hover-bg); }
+.code-block__copy.is-copied { color: var(--cb-copied); border-color: var(--cb-copied); }
+
+.code-block pre {
+    margin: 0;
+    padding: 1rem 0;
+    overflow-x: auto;
+    font-size: .875rem;
+    line-height: 1.7;
+    color: var(--cb-text);
+    tab-size: 2;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cb-border) transparent;
+}
+.code-block pre::-webkit-scrollbar { height: 8px; }
+.code-block pre::-webkit-scrollbar-thumb { background: var(--cb-border); border-radius: 4px; }
+.code-block ::selection { background: var(--cb-select); }
+
+.code-block pre { counter-reset: line; }
+.code-block .line {
+    display: block;
+    padding-right: 1.25rem;
+    white-space: pre;
+    counter-increment: line;
+}
+.code-block .line::before {
+    content: counter(line);
+    display: inline-block;
+    width: 2.5rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: var(--cb-line-num);
+    user-select: none;
+}
+
+@media (max-width: 480px) {
+    .code-block__dots { display: none; }
+    .code-block pre { font-size: .8rem; }
+}
+
+.hljs-attr { color: #9cdcfe; }
+
+.hljs-literal { color: #569cd6; }
+
+.hljs-string { color: #ce9178; }

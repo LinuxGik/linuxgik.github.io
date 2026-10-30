@@ -27,6 +27,79 @@ pagesH1: Документация Jekyll-темы LinuxGik
                     <h4>Страницы раздела</h4>
                         <p>Все <i>страницы раздела</i> находятся в каталоге своего раздела.</p>
     </section>
+    <section>
+        <header>
+            <h2>Front matter</h2>
+        </header>
+            <p>
+                <i>Front matter</i> &mdash; блок YAML между двумя строками <code>---</code> в самом начале файла.
+                Jekyll обрабатывает файл (Liquid, layout) только если такой блок есть. Без него файл копируется в
+                <code>_site/</code> как есть.
+            </p>
+            <p>
+                Переменные из front matter доступны в шаблонах как <code>page.имя</code>.
+            </p>
+            <p>
+                <b>Внимание:</b> в файле с front matter Liquid обрабатывается и в теле. Чтобы показать
+                <code>{% raw %}{{ page.title }}{% endraw %}</code> как текст, оборачивайте его в
+                <code>&#123;% raw %&#125;...&#123;% endraw %&#125;</code>.
+            </p>
+
+            <h3>Связь поста и страницы</h3>
+                <p>
+                    Пост хранит полный разбор, страница &mdash; выжимку. Они ссылаются друг на друга через
+                    переменные <code>page</code> (в посте) и <code>post</code> (на странице). Значение &mdash; URL от корня сайта.
+                </p>
+
+            <h3>Front matter поста</h3>
+                <p>Файл лежит в <code>_posts/</code> и называется <code>ГГГГ-ММ-ДД-имя.md</code>.</p>
+                <table>
+                    <thead>
+                        <tr><th>Переменная</th><th>Обязательна</th><th>Назначение</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>layout</code></td><td>да</td><td>шаблон из <code>_layouts/</code>, значение <code>post</code></td></tr>
+                        <tr><td><code>title</code></td><td>да</td><td>заголовок поста, выводится как <code>h1</code>. Если есть двоеточие, берите в кавычки</td></tr>
+                        <tr><td><code>date</code></td><td>нет</td><td>дата, по умолчанию берётся из имени файла</td></tr>
+                        <tr><td><code>tags</code></td><td>нет</td><td>список тегов: <code>[rsync, ssh]</code></td></tr>
+                        <tr><td><code>description</code></td><td>да</td><td>краткое содержание: превью в списке постов и <code>&lt;meta name="description"&gt;</code></td></tr>
+                        <tr><td><code>page</code></td><td>нет</td><td>URL страницы-выжимки. Не задаётся, пока страницы нет</td></tr>
+                    </tbody>
+                </table>
+                <pre><code>---
+layout: post
+title: "Основы rsync: синхронизация каталога"
+date: 2026-10-30
+tags: [rsync, ssh, деплой]
+description: "Краткое содержание поста."
+page: /pages/rsync/
+---</code></pre>
+
+            <h3>Front matter страницы</h3>
+                <p>Файл лежит в <code>pages/</code>, в каталоге своего раздела.</p>
+                <table>
+                    <thead>
+                        <tr><th>Переменная</th><th>Обязательна</th><th>Назначение</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>layout</code></td><td>да</td><td>шаблон из <code>_layouts/</code>, значение <code>theme</code></td></tr>
+                        <tr><td><code>pagesH1</code></td><td>да</td><td>текст заголовка <code>h1</code> страницы</td></tr>
+                        <tr><td><code>description</code></td><td>да</td><td><code>&lt;meta name="description"&gt;</code></td></tr>
+                        <tr><td><code>post</code></td><td>да</td><td>URL поста с подробным разбором. Layout выводит из него ссылку «Подробнее»</td></tr>
+                    </tbody>
+                </table>
+                <pre><code>---
+layout: theme
+pagesH1: rsync
+description: "Шпаргалка по rsync."
+post: /2026/10/30/rsync/
+---</code></pre>
+
+            <h4>Что идёт на страницу</h4>
+                <p>
+                    Команды, подводные камни и одна строка &laquo;зачем&raquo;. Объяснения, варианты и разбор ошибок остаются в посте.
+                </p>
+    </section>
     <footer>
         <p>Это подвал статьи &lt;article&gt;</p>
     </footer>
