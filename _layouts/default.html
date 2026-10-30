@@ -1,13 +1,30 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'ru' }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ page.title }}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Linuxgik" />
+    <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}Быстрый помощник в информационном мире. Мы ценим ваше время.{% endif %}" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title }}</title>
 </head>
 <body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="{{ '/' | relative_url }}">Главная</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {{ content }}
+</main>
+
+<footer>
+    <p>&copy; {{ site.title }}</p>
+</footer>
 
 </body>
 </html>
