@@ -1,0 +1,375 @@
+---
+layout: theme
+title: Digital Garden и TIL
+pagesH1: Digital Garden и TIL
+description: "Дополнение к теме: коллекции garden и til, значения по умолчанию, front matter, макеты, индексы, темы и связи между заметками."
+---
+
+{% raw %}
+<p><a href="/pages/theme/theme-index/">&larr; Документация темы</a></p>
+
+<p>
+    Устройство двух коллекций: <code>garden</code> (заметки сада, статусы <code>seed</code>, <code>budding</code>,
+    <code>evergreen</code>) и <code>til</code> (короткие ответы). <b>Статус реализации:</b> пока ничего из описанного
+    не создано, это проект.
+</p>
+
+<article>
+    <section>
+        <header>
+            <h2>Состав</h2>
+        </header>
+        <table>
+            <thead>
+            <tr><th>Файл или каталог</th><th>Назначение</th><th>Этап</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>_config.yml</code></td><td>коллекции <code>garden</code> и <code>til</code>, значения по умолчанию</td><td>1</td></tr>
+            <tr><td><code>_garden/</code></td><td>заметки сада, markdown, дата в имени не нужна</td><td>1</td></tr>
+            <tr><td><code>_layouts/garden.html</code></td><td>макет заметки сада</td><td>1</td></tr>
+            <tr><td>страница с адресом <code>/garden/</code></td><td>индекс сада</td><td>1</td></tr>
+            <tr><td><code>_til/</code></td><td>TIL-заметки, markdown, дата в имени</td><td>2</td></tr>
+            <tr><td><code>_layouts/til.html</code></td><td>макет TIL</td><td>2</td></tr>
+            <tr><td><code>_data/topics.yml</code></td><td>справочник тем</td><td>3</td></tr>
+            <tr><td><code>_layouts/topic.html</code>, <code>topics/*.md</code></td><td>страницы тем</td><td>3</td></tr>
+            <tr><td>поле <code>raised_in</code></td><td>связь «вопрос вырос из заметки»</td><td>4</td></tr>
+            </tbody>
+        </table>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>1. Конфигурация: _config.yml</h2>
+        </header>
+        <h3>Коллекции</h3>
+        <p><code>_config.yml</code></p>
+        <pre><code>collections:
+  garden:
+    output: true
+    permalink: /garden/:slug/
+  til:
+    output: true
+    permalink: /til/:year/:month/:day/:slug/</code></pre>
+        <ul>
+            <li><code>output: true</code> &mdash; для каждой заметки создаётся своя страница.</li>
+            <li>Имя коллекции &mdash; имя каталога без подчёркивания: <code>garden</code> &rarr; <code>_garden/</code>.</li>
+            <li><code>:slug</code> &mdash; имя файла без расширения и без даты. <code>:year</code>, <code>:month</code>, <code>:day</code> берутся из даты в имени файла.</li>
+            <li>У сада адрес без даты, у TIL с датой.</li>
+            <li>Коллекции входят в ядро Jekyll и работают на GitHub Pages без плагинов.</li>
+            <li>В RSS основных постов заметки не попадают: фид собирается из <code>site.posts</code> (если RSS будет подключён).</li>
+            <li>После правки <code>_config.yml</code> локальный сервер перезапускается.</li>
+        </ul>
+
+        <h3>Значения по умолчанию</h3>
+        <p><code>_config.yml</code></p>
+        <pre><code>defaults:
+  - scope:
+      path: ""
+      type: garden
+    values:
+      layout: garden
+      status: seed
+  - scope:
+      path: ""
+      type: til
+    values:
+      layout: til</code></pre>
+        <ul>
+            <li><code>type</code> &mdash; имя коллекции.</li>
+            <li>Макет задаётся здесь, поэтому в заметках <code>layout</code> не пишется.</li>
+            <li>Статус <code>seed</code> подставляется автоматически. Заметка без <code>status</code> не попала бы ни в одну группу индекса.</li>
+        </ul>
+        <p><b>Позже разобрать:</b> как <code>permalink</code> влияет на адреса страниц, постов и коллекций.</p>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>2. Структура каталогов</h2>
+        </header>
+        <pre><code>_config.yml
+_layouts/
+  garden.html
+  til.html
+  topic.html                         (этап 3)
+_data/
+  topics.yml                         (этап 3)
+_garden/
+  html-article-count.md              без даты в имени
+_til/
+  2026-10-29-html-article-count.md   дата в имени
+topics/
+  html.md                            (этап 3)</code></pre>
+        <ul>
+            <li>Индекс сада &mdash; страница с адресом <code>/garden/</code>. По правилам темы страницы лежат в <code>pages/</code>, нужный адрес задаётся <code>permalink: /garden/</code> во front matter.</li>
+            <li>Имя файла заметки сада определяет её адрес (slug). После публикации его не меняют.</li>
+            <li>Имя файла TIL начинается с даты: <code>ГГГГ-ММ-ДД-slug.md</code>.</li>
+        </ul>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>3. Front matter</h2>
+        </header>
+
+        <h3>Заметка сада</h3>
+        <p>Файл <code>_garden/html-article-count.md</code>.</p>
+        <pre><code>---
+title: Сколько article может быть на странице?
+status: seed                # seed | budding | evergreen
+til: html-article-count     # slug связанной TIL-заметки
+---
+
+Вопрос: ...</code></pre>
+        <table>
+            <thead>
+            <tr><th>Переменная</th><th>Обязательна</th><th>Значение</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>title</code></td><td>да</td><td>заголовок заметки</td></tr>
+            <tr><td><code>status</code></td><td>нет</td><td><code>seed</code>, <code>budding</code> или <code>evergreen</code>. По умолчанию <code>seed</code></td></tr>
+            <tr><td><code>til</code></td><td>нет</td><td>slug связанной TIL-заметки</td></tr>
+            <tr><td><code>topics</code></td><td>этап 3</td><td>список тем: <code>[html]</code> или <code>[html, css]</code></td></tr>
+            <tr><td><code>raised_in</code></td><td>этап 4</td><td>список slug заметок, из которых вырос вопрос</td></tr>
+            <tr><td><code>updated</code></td><td>нет</td><td>дата последнего дополнения (предложено, в исходной задумке нет)</td></tr>
+            </tbody>
+        </table>
+        <p>Значения <code>status</code> описывают этап: <code>seed</code> &mdash; вопрос зафиксирован, <code>budding</code> &mdash; идёт расследование, <code>evergreen</code> &mdash; ответ найден.</p>
+        <p>Минимальный front matter при включённых значениях по умолчанию:</p>
+        <pre><code>---
+title: Сколько article может быть на странице?
+---</code></pre>
+
+        <h3>TIL-заметка</h3>
+        <p>Файл <code>_til/2026-10-29-html-article-count.md</code>.</p>
+        <pre><code>---
+title: Сколько article может быть на странице?
+date: 2026-10-29
+garden: html-article-count   # slug заметки сада
+---
+
+Лимита нет. article должен быть самодостаточной композицией — всё.
+→ [Полное расследование]({{ site.baseurl }}/garden/{{ page.garden }}/)</code></pre>
+        <table>
+            <thead>
+            <tr><th>Переменная</th><th>Обязательна</th><th>Значение</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>title</code></td><td>да</td><td>заголовок</td></tr>
+            <tr><td><code>date</code></td><td>нет</td><td>дата. Берётся из имени файла; если поле указано, приоритет у него</td></tr>
+            <tr><td><code>garden</code></td><td>нет</td><td>slug заметки сада</td></tr>
+            <tr><td><code>topics</code></td><td>этап 3</td><td>список тем</td></tr>
+            </tbody>
+        </table>
+        <p>Вместо <code>{{ site.baseurl }}</code> надёжнее фильтр <code>relative_url</code>. Пока <code>baseurl</code> не задан, результат одинаков.</p>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>4. Макеты</h2>
+        </header>
+
+        <h3>_layouts/til.html: ссылка в сад</h3>
+        <pre><code>{% if page.garden %}
+&lt;a href="{{ site.baseurl }}/garden/{{ page.garden }}/"&gt;Подробности в саду →&lt;/a&gt;
+{% endif %}</code></pre>
+
+        <h3>_layouts/garden.html: статус и ссылка на TIL</h3>
+        <p>
+            Адрес TIL содержит дату, поэтому его нельзя собрать из одного slug. TIL ищется по своему полю <code>garden</code>.
+            Slug заметки сада вычисляется из <code>page.url</code>.
+        </p>
+        <pre><code>&lt;span&gt;{{ page.status }}&lt;/span&gt;
+
+{% if page.status == "evergreen" %}
+  {% assign my_slug = page.url | remove: "/garden/" | remove: "/" %}
+  {% assign short = site.til | where: "garden", my_slug | first %}
+  {% if short %}
+    &lt;a href="{{ short.url | relative_url }}"&gt;Короткий ответ →&lt;/a&gt;
+  {% endif %}
+{% endif %}</code></pre>
+        <p>Поле <code>til</code> в заметке сада при такой схеме необязательно: связь строится по <code>garden</code> у TIL.</p>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>5. Индексы</h2>
+        </header>
+
+        <h3>Индекс сада (/garden/)</h3>
+        <pre><code>{% assign seed = site.garden | where: "status", "seed" %}
+{% assign budding = site.garden | where: "status", "budding" %}
+{% assign evergreen = site.garden | where: "status", "evergreen" %}
+
+&lt;h2&gt;🌱 Семена — вопросы без движения&lt;/h2&gt;
+&lt;ul&gt;
+  {% for note in seed %}
+  &lt;li&gt;&lt;a href="{{ note.url | relative_url }}"&gt;{{ note.title }}&lt;/a&gt;&lt;/li&gt;
+  {% endfor %}
+&lt;/ul&gt;
+
+&lt;h2&gt;🌿 В работе — копаю&lt;/h2&gt;
+&lt;ul&gt;
+  {% for note in budding %}
+  &lt;li&gt;&lt;a href="{{ note.url | relative_url }}"&gt;{{ note.title }}&lt;/a&gt;&lt;/li&gt;
+  {% endfor %}
+&lt;/ul&gt;
+
+&lt;h2&gt;🌲 Вызрело — есть ответ (короткая версия в TIL)&lt;/h2&gt;
+&lt;ul&gt;
+  {% for note in evergreen %}
+  &lt;li&gt;&lt;a href="{{ note.url | relative_url }}"&gt;{{ note.title }}&lt;/a&gt;&lt;/li&gt;
+  {% endfor %}
+&lt;/ul&gt;</code></pre>
+
+        <h3>Главная страница</h3>
+        <p>Ленту TIL и сад по зрелости можно получить так:</p>
+        <pre><code>{% assign til_feed = site.til | sort: "date" | reverse %}
+{% assign garden_groups = site.garden | group_by: "status" %}</code></pre>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>6. Темы (этап 3)</h2>
+        </header>
+        <ul>
+            <li>Одна коллекция плюс поле <code>topics</code>. Коллекции на каждую тему не заводятся.</li>
+            <li><code>topics</code> &mdash; массив. Фильтр <code>where</code> понимает массивы: <code>where: "topics", "html"</code> найдёт заметку, даже если тем у неё несколько.</li>
+            <li>Список тем хранится в <code>_data/topics.yml</code>: <code>slug</code> латиницей (для фильтров и адресов), <code>name</code> для показа.</li>
+        </ul>
+        <p><code>_data/topics.yml</code></p>
+        <pre><code>- slug: html
+  name: HTML
+- slug: css
+  name: CSS
+- slug: javascript
+  name: JavaScript
+- slug: linux-kernel
+  name: Ядро Linux</code></pre>
+        <h3>Индекс сада по темам</h3>
+        <pre><code>{% for topic in site.data.topics %}
+  {% assign notes = site.garden | where: "topics", topic.slug %}
+  {% if notes.size == 0 %}{% continue %}{% endif %}
+
+  &lt;h2&gt;{{ topic.name }}&lt;/h2&gt;
+
+  {% assign seeds = notes | where: "status", "seed" %}
+  {% assign buds  = notes | where: "status", "budding" %}
+  {% assign trees = notes | where: "status", "evergreen" %}
+
+  &lt;ul&gt;
+    {% for n in seeds %}&lt;li&gt;🌱 &lt;a href="{{ n.url | relative_url }}"&gt;{{ n.title }}&lt;/a&gt;&lt;/li&gt;{% endfor %}
+    {% for n in buds %}&lt;li&gt;🌿 &lt;a href="{{ n.url | relative_url }}"&gt;{{ n.title }}&lt;/a&gt;&lt;/li&gt;{% endfor %}
+    {% for n in trees %}&lt;li&gt;🌲 &lt;a href="{{ n.url | relative_url }}"&gt;{{ n.title }}&lt;/a&gt;&lt;/li&gt;{% endfor %}
+  &lt;/ul&gt;
+{% endfor %}</code></pre>
+        <h3>Страницы тем</h3>
+        <p>Для каждой темы создаётся страница-заглушка и используется общий макет <code>topic</code>.</p>
+        <p><code>topics/html.md</code></p>
+        <pre><code>---
+layout: topic
+topic: html
+permalink: /topics/html/
+---</code></pre>
+        <p><code>_layouts/topic.html</code></p>
+        <pre><code>{% assign notes = site.garden | where: "topics", page.topic %}
+{% assign tils  = site.til    | where: "topics", page.topic %}</code></pre>
+        <ul>
+            <li>Тема в адрес заметки не входит. Адрес остаётся <code>/garden/:slug/</code>, тему можно менять правкой front matter.</li>
+            <li>Заметка с темой, которой нет в <code>topics.yml</code>, в индекс по темам не попадает. Такие заметки можно выводить отдельным списком в конце индекса либо искать вручную по <code>topics: [</code>.</li>
+        </ul>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>7. Связь «вырос из» (этап 4)</h2>
+        </header>
+        <p>Поле <code>raised_in</code> связывает заметку с теми, из которых вырос вопрос. Не зависит от <code>topics</code>.</p>
+        <pre><code>---
+title: В какой тег заключать статью — article или section?
+topics: [html]
+raised_in: [html-article-count]
+---</code></pre>
+        <h3>_layouts/garden.html: «выросло из»</h3>
+        <pre><code>{% if page.raised_in %}
+&lt;p&gt;
+  {% for p in page.raised_in %}
+    {% assign purl = "/garden/" | append: p | append: "/" %}
+    {% assign parent = site.garden | where: "url", purl | first %}
+    {% if parent %}🌱 из «&lt;a href="{{ parent.url | relative_url }}"&gt;{{ parent.title }}&lt;/a&gt;»{% endif %}
+  {% endfor %}
+&lt;/p&gt;
+{% endif %}</code></pre>
+        <h3>_layouts/garden.html: «отсюда выросли»</h3>
+        <p>Считается автоматически по полю <code>raised_in</code> у других заметок.</p>
+        <pre><code>{% assign my_slug = page.url | remove: "/garden/" | remove: "/" %}
+{% for n in site.garden %}
+  {% if n.raised_in contains my_slug %}
+    🌿 отсюда выросло: &lt;a href="{{ n.url | relative_url }}"&gt;{{ n.title }}&lt;/a&gt;
+  {% endif %}
+{% endfor %}</code></pre>
+        <ul>
+            <li>Slug вычисляется из <code>page.url</code>, родитель ищется через <code>where: "url", ...</code>.</li>
+            <li>Запись <code>where: "raised_in", page.slug</code> при пустом <code>page.slug</code> молча даёт пустой список. Это самый коварный вид ошибки.</li>
+            <li>Граф связей: в шаблоне <a href="https://github.com/maximevaillancourt/digital-garden-jekyll-template">digital-garden-jekyll-template</a> его рисует include <code>notes_graph.html</code>.</li>
+        </ul>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>8. Что проверить перед внедрением</h2>
+        </header>
+        <table>
+            <thead>
+            <tr><th>Что</th><th>Почему</th></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>{{ page.slug }}</code> у заметок коллекций</td>
+                <td>В исходных заметках утверждалось, что поля нет. Это не подтверждено, по моему знанию Jekyll записывает slug в данные из имени файла. Проверить одной строкой на тестовой заметке, локально и на GitHub</td>
+            </tr>
+            <tr>
+                <td><code>:slug</code> в <code>permalink</code> коллекции</td>
+                <td>GitHub Pages собирает на Jekyll 3.10, локально 4.4.1. Сверить адрес заметки в обоих местах</td>
+            </tr>
+            <tr>
+                <td>Фильтр <code>where</code> по массивам, тег <code>continue</code></td>
+                <td>Должны работать в обеих версиях, проверить на примере</td>
+            </tr>
+            <tr>
+                <td>Адрес этой страницы</td>
+                <td>Выводится как каталог: <code>/pages/theme/digital-garden/</code> (причина &mdash; <code>permalink</code> в конфиге)</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</article>
+
+<article>
+    <section>
+        <header>
+            <h2>9. Открытые вопросы</h2>
+        </header>
+        <ul>
+            <li>Нужен ли четвёртый статус для отложенных вопросов (например, <code>paused</code>). Решение не принято.</li>
+            <li>Названия полей связи: для пары пост&nbsp;&harr;&nbsp;страница это <code>page</code> и <code>post</code>, для пары сад&nbsp;&harr;&nbsp;TIL это <code>til</code> и <code>garden</code>. Возможен переход на общие имена.</li>
+            <li>Ссылки и <code>permalink</code>: разобрать позже.</li>
+        </ul>
+    </section>
+</article>
+{% endraw %}

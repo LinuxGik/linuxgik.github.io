@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Linuxgik" />
     <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}Быстрый помощник в информационном мире. Мы ценим ваше время.{% endif %}" />
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="/assets/css/main.css">
     <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title }}</title>
 </head>
 <body>
 
 <header>
-    <nav>
-        <ul>
-            <li><a href="{{ '/' | relative_url }}">Главная</a></li>
-        </ul>
-    </nav>
+    <h1>{{ page.H1 }}</h1>
+    {% include navigation.html %}
 </header>
 
 <main>
@@ -24,6 +21,7 @@
 
 <footer>
     <p>&copy; {{ site.title }}</p>
+    <p class="service"><a href="{{ '/pages/theme/theme-index/' | relative_url }}">Документация темы</a></p>
 </footer>
 
 </body>

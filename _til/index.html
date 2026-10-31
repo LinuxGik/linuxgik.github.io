@@ -1,0 +1,13 @@
+---
+layout: default
+title: TIL
+---
+<h1>TIL</h1>
+{% assign notes = site.til | sort: "date" | reverse %}
+<ul>
+    {% for note in notes %}
+    <li>
+        <a href="{{ note.url | relative_url }}">{{ note.title }}</a> - {{ note.date | date: "%d.%m.%Y" }}
+    </li>
+    {% endfor %}
+</ul>

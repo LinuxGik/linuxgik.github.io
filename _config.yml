@@ -1,4 +1,17 @@
+exclude: [README.md, LICENSE]
+
 title: LinuxGik
 url: https://linuxgik.ru
 lang: ru
-permalink: /:year/:month/:day/:title/
+
+
+collections:
+  til:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: til
+    values:
+      layout: til
