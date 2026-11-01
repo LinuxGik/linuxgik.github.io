@@ -1,7 +1,6 @@
 ---
 layout: post
-title: "О сертификатах Let's Encrypt: получение через certbot на AlmaLinux 8"
-date: 2026-10-30
+H1: "О сертификатах Let's Encrypt: получение через certbot на AlmaLinux 8"
 tags: [letsencrypt, certbot, apache, ssl, almalinux]
 description: "Что такое Let's Encrypt, как работает проверка домена, как получить сертификат через certbot с плагином Apache на AlmaLinux 8, какие ошибки встретились и как настроить автопродление."
 ---

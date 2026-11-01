@@ -1,6 +1,9 @@
 <nav>
     <ul>
-        <li><a href="{{ '/' | relative_url }}">Главная</a></li>
-        <li><a href="{{ 'til/' | relative_url }}">TIL</a></li>
+        {% for item in site.data.navigation %}
+            <li>
+                <a href="{{ item.link }}">{{ item.name }}</a>
+            </li>
+        {% endfor %}
     </ul>
 </nav>

@@ -1,7 +1,6 @@
 ---
 layout: post
-title: "Настройка ключей OpenSSH в Windows 11"
-date: 2026-10-30
+H1: "Настройка ключей OpenSSH в Windows 11"
 tags: [ssh, windows, ssh-agent, ключи]
 description: "Как в Windows 11 создать SSH-ключ, настроить службу ssh-agent, передать открытый ключ на Linux-сервер и подключаться по ключу, в том числе на нестандартном порту."
 ---

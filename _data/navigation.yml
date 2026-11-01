@@ -1,0 +1,6 @@
+- name: Главная
+  link: /
+- name: TIL
+  link: /til/
+- name: Блог
+  link: /blog.html

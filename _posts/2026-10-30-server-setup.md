@@ -1,7 +1,6 @@
 ---
 layout: post
-title: "Настройка и запуск веб-сервера: AlmaLinux 8 и Debian"
-date: 2026-10-30
+H1: "Настройка и запуск веб-сервера: AlmaLinux 8 и Debian"
 tags: [server, ssh, firewall, apache, nginx, certbot, almalinux, debian]
 description: "Пошаговая настройка нового VPS: DNS, пользователь с sudo, SSH по ключам на нестандартном порту, firewall, Apache или Nginx, сертификат Let's Encrypt. Для AlmaLinux 8 и Debian."
 ---

@@ -1,0 +1,18 @@
+---
+layout: default
+title: Блог
+H1: Блог
+---
+
+<h2>Последние посты</h2>
+
+<ul>
+{% for post in site.posts %}
+    <li>
+        <h3>
+            <a href="{{ post.url }}">{{ post.H1 }}</a>
+        </h3>
+        {{ post.excerpt }}
+    </li>
+{% endfor %}
+</ul>
