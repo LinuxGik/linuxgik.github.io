@@ -5,48 +5,25 @@ pagesH1: Документация Jekyll-темы LinuxGik
 description: "Структура каталогов, конфигурация, макеты, front matter, правила ссылок и оформления команд в теме LinuxGik."
 ---
 
-<section>
-    <header><h2>Дополнения</h2></header>
-    <ul>
-        <li><a href="/pages/theme/digital-garden/">Digital Garden и TIL</a> &mdash; заметки, которые растут</li>
-    </ul>
-</section>
-
 <article>
     <section>
         <header>
             <h2>Структура каталогов и файлов</h2>
         </header>
         <p>
-            Все страницы сайта хранятся в каталоге <code>pages/</code>. При этом блог и его посты хранятся в
-            каталоге <code>_posts/</code>
-        </p>
-        <pre><code>.
-├── _config.yml      настройки сайта
-├── _layouts/        макеты: default.html, post.html, theme.html
-├── _posts/          посты (markdown): ГГГГ-ММ-ДД-имя.md
-├── assets/
-│   ├── css/         main.css подключает остальные файлы через @import
-│   └── js/          copycode.js
-├── pages/           страницы (html), по разделам
-│   ├── theme/       документация этой темы
-│   └── windows/     раздел «Windows»
-├── index.html       главная страница (без макета)
-├── CNAME            домен сайта
-└── Gemfile          зависимости для локальной сборки</code></pre>
-        <p>
-            Имена <code>_layouts</code> и <code>_posts</code> должны быть точными. При опечатке в имени каталога
-            Jekyll ничего не сообщает и просто не видит файлы.
+            Страницы сайта хранятся в каталоге <code>/pages/</code>. Блог и его посты хранятся в
+            каталоге <code>/_posts/</code>. TIL(Today I Learned / Вот что сегодня выяснил) короткие заметки хранятся
+            в каталоге  <code>/til/</code>.
         </p>
         <p>
-            Сайт разделен на <b>разделы</b>. Раздел делится на <b>подразделы</b>. Любой подраздел так же может делиться на
+            Сайт (<code>/pages/</code> разделен на <b>разделы</b>. Раздел делится на <b>подразделы</b>. Любой подраздел так же может делиться на
             дополнительные подразделы, и так по цепочке по мере надобности.
         </p>
         <p>
             Переход по разделам осуществляется через главное меню сайта. Главное меню сайта отображается на любой
             странице сайта.
         </p>
-        <h3>Разделы сайта</h3>
+        <h3>Разделы сайта (то что в <code>/pages/</code></h3>
         <p>Сайт разделен на разделы. Имя каждого раздела отображается в главном меню сайта</p>
         <p>В структуре каталогов, у каждого раздела свой каталог в <code>pages/</code></p>
         <p><i>Каталог раздела</i> содержит главную страницу, которая подключается к главному меню сайта.</p>
@@ -58,10 +35,8 @@ description: "Структура каталогов, конфигурация, �
         <header>
             <h2>Конфигурация: _config.yml</h2>
         </header>
-        <pre><code>title: LinuxGik
-url: https://linuxgik.ru
-lang: ru
-permalink: /:year/:month/:day/:title/</code></pre>
+        <pre><code>title: LinuxGik         #подставляется в <code>head</code>, если у FrontMatter страницы нет своего <cdoe>title</cdoe>
+        </code></pre>
         <table>
             <thead>
             <tr><th>Параметр</th><th>Назначение</th></tr>
@@ -319,7 +294,10 @@ post: /2026/10/30/rsync/
             </tbody>
         </table>
     </section>
-    <footer>
-        <p>Это подвал статьи &lt;article&gt;</p>
-    </footer>
+    <section>
+        <header><h2>Дополнения</h2></header>
+        <ul>
+            <li><a href="/pages/theme/digital-garden/">Digital Garden и TIL</a> &mdash; заметки, которые растут</li>
+        </ul>
+    </section>
 </article>

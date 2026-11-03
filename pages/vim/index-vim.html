@@ -1,0 +1,50 @@
+---
+layout: default
+H1: Скачать конфигурацию для Vim
+description: Скачать конфигурационный файл vimrc
+---
+
+<a href="/pages/vim/resurs/minimal_vimrc.txt" download="minimal_vimrc-linuxgik">Скачать minimal-vimrc</a>
+<article>
+    <header>
+        <h2>Описание файла minimal-vimrc</h2>
+    </header>
+    <p>minimal-vimrc:</p>
+    <pre><code>" НАСТРОЙКА ТАБОВ И ОТСТУПОВ
+set tabstop=3                   " Ширина тубуляции
+set shiftwidth=3                " Ширина отступов для операторов >> и <<. (это когда в командном режиме нажимаем два раза ">" (т.е. получается что ">>")).
+set expandtab                   " Заменяем tab`ы пробелами
+set smarttab
+set softtabstop=3               " 3 пробела в табе
+
+" ПОДСВЕТКА СИНТАКСИСА
+syntax on
+
+" АВТОМАТИЧЕСКИЕ ОТСТУПЫ
+set autoindent                  " Копирует отступы с текущей строки на новую
+set smartindent                 " Добавляет дополнительные отступы для блоков кода (например после "{" в Си)
+set cindent                     " Включаем умные отступы для Си
+
+" НУМЕРАЦИЯ СТРОК
+set nu                          " Включаем нумерацию строк
+
+" ОТКЛЮЧЕНИЕ ПОДСВЕТКИ ПОИСКА
+set nohlsearch
+</code></pre>
+
+    <h3>Быстрая и хорошая настройка .vimrc</h3>
+    <ul>
+        <li>Копируйте (или скачивайте) с сайта конфигурацию</li>
+        <li>Переходите на <a href="https://github.com/tpope/vim-sensible?ysclid=mgprtejg5s708481547#installation">https://github.com/tpope/vim-sensible?ysclid=mgprtejg5s708481547#installation</a>
+            и копируй оттуда команду установки плагина `vim-sensible`.</li>
+        <li>Всё готово.</li>
+    </ul>
+    <p>Привожу тут команду установки плагина `vim-sensible` которая взята из файла README этого плагина:</p>
+    <pre><code> mkdir -p ~/.vim/pack/tpope/start
+ cd ~/.vim/pack/tpope/start
+ git clone https://tpope.io/vim/sensible.git
+    </code>
+    </pre>
+
+
+</article>

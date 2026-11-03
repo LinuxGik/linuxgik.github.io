@@ -1,5 +1,7 @@
 - name: Главная
   link: /
+- name: Vim
+  link: /pages/vim/index-vim.html
 - name: TIL
   link: /til/
 - name: Блог

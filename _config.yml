@@ -1,9 +1,6 @@
 exclude: [README.md, LICENSE]
 
 title: LinuxGik
-url: https://linuxgik.ru
-lang: ru
-
 
 collections:
   til:
